@@ -20,7 +20,13 @@ layout(matrix(1:2 ,1 ,2))
 for (i in 1:1) plot(hoeTree)
 for (i in 1:1) plot(balance(hoeTree))
 
-#date the tree
-datehoeTree <- dateTaxonTreePBDB(hoeTree)
+#add phylopics
+phyloTree <- plotPhylopicTreePBDB(hoeTree, hoeData) #not working
 
-phylodhTree <- plotPhylopicTreePBDB(hoeTree)
+
+bht <- balance(hoeTree)
+
+#date the tree
+datehoeTree <- dateTaxonTreePBDB(bht, hoeData)
+
+plot(datehoeTree, direction = "upwards")
