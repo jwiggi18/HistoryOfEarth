@@ -35,36 +35,25 @@ MaxMa <- c(543,490,443,417,354,290,248,206,144,65,33.7)
 geoage <- data.frame(Period, MinMa, MaxMa)
 
 #GetLatLong(taxon,minage,maxage)
-#want to loop over taxon list inserting each min and max and saving as Period_taxonname
 
-for (taxon_index in seq_along(taxa)) {
-    for (period_index in seq_along(Period)) {
-        storage_thingie <- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
-    }
-}
-
-for (taxon_index in seq_along(taxa5)) {
-    for (period_index in seq_along(Period)) {
-        storage_thingie <- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
-    }
-}
-
-for (taxon_index in seq_along(taxa6)) {
-    for (period_index in seq_along(Period)) {
-        storage_thingie <- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
-    }
-}
-
-#try storing in a data frame
+#store pbdb_data.accepted_name, pbdb_data.lng, pbdb_data.lat, taxon, minage, & maxage in a data frame
 lat_long_df <- data.frame()
 
 for (taxon_index in seq_along(taxa)) {
     for (period_index in seq_along(Period)) {
-        lat_long_df<- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
+          latlong.result <- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
+          latlong.result$taxon=taxa[taxon_index]
+          latlong.result$minage=MinMa[period_index]
+          latlong.result$maxage=MaxMa[period_index]
+          lat_long_df<- rbind(lat_long_df, latlong.result)
     }
 }
 
-
+for (minage_index in seq_along (lat_long_df$minage)) {
+  if minage is greater than 543 then
+  for (maxage_index in seq_along (lat_long_df$maxage)) {
+    if maxage is less than 490 then
+      plug pbdb_data.lng into lon and plug pbdb_data.lat into lat
 
 
 
