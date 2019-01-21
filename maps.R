@@ -1,6 +1,6 @@
 #creating maps
 
-Cambrian	 <- paste(as.character(c(490,543)), collapse=",")
+#Cambrian	 <- paste(as.character(c(490,543)), collapse=",")
 #Ordivician	490-443
 #Sularian	443-417
 #Devonian	417-354
@@ -17,54 +17,29 @@ rm(list=ls())
 source("~/GitHubRepos/HistoryOfEarth/map_libraries.R")
 source("~/packages/functions.R")
 
+#Produce points for plotting
+
 taxa <-c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","araucarioxylon")
 
-taxa5 <- c("Gorilla","Panthera","Homo","Tyto","Dromaius")
+# Produce a dataframe with paleo lat and long for taxa list
+latlong_df <- latlong_age(taxa)
 
-taxa6 <-c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes")
-
-taxa17 <-c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella")
-
-
-Period <- c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo")
-
-MinMa <- c(490,443,417,354,290,248,206,144,65,33.7,1.8)
-
-MaxMa <- c(543,490,443,417,354,290,248,206,144,65,33.7)
-
-geoage <- data.frame(Period, MinMa, MaxMa)
-
-#GetLatLong(taxon,minage,maxage)
-
-#store pbdb_data.accepted_name, pbdb_data.lng, pbdb_data.lat, taxon, minage, & maxage in a data frame
-lat_long_df <- data.frame()
-
-for (taxon_index in seq_along(taxa)) {
-    for (period_index in seq_along(Period)) {
-          latlong.result <- GetLatLong(taxa[taxon_index], minage=MinMa[period_index], maxage=MaxMa[period_index])
-          latlong.result$taxon=taxa[taxon_index]
-          latlong.result$minage=MinMa[period_index]
-          latlong.result$maxage=MaxMa[period_index]
-          lat_long_df<- rbind(lat_long_df, latlong.result)
-    }
-}
-
-for (minage_index in seq_along (lat_long_df$minage)) {
-  if minage is greater than 543 then
-  for (maxage_index in seq_along (lat_long_df$maxage)) {
-    if maxage is less than 490 then
-      plug pbdb_data.lng into lon and plug pbdb_data.lat into lat
+#subset data frame by period
+Cambrian_latlong <- subset_ma(latlong_df, 490, 543)
+Ordivician_latlong <- subset_ma(latlong_df, 443, 490)
+Sularian_latlong <- subset_ma(latlong_df, 417, 443)
+Devonian_latlong <- subset_ma(latlong_df, 354, 417)
+Carboniferous_latlong <- subset_ma(latlong_df, 290, 354)
+Permian_latlong <- subset_ma(latlong_df, 248, 290)
+Triassic_latlong <- subset_ma(latlong_df, 206, 248)
+Jurassic_latlong <- subset_ma(latlong_df, 144, 206)
+Cretacous_latlong <- subset_ma(latlong_df, 65, 144)
+Paleogene_latlong <- subset_ma(latlong_df, 33.7, 65)
+Neogene_latlong <- subset_ma(latlong_df, 1.8, 33.7)
 
 
-
-
-rm(list=ls())
-
-source("~/GitHubRepos/HistoryOfEarth/map_libraries.R")
-source("~/packages/functions.R")
-
-# working
-Cambrian_map <- black_white(490)
+# Produce maps for each period
+Cambrian_map <- black_white(513)
 Ordivician_map <- black_white(443)
 Sularian_map	<- black_white(417)
 Devonian_map	<- black_white(354)
@@ -79,8 +54,5 @@ Neo_map	<- black_white(1.8)
 #The default model reconstruction only goes back 200 Ma
 # GOLONKA goes back to 550 Ma & PALEOMAP to 750 but only has Coastlines available as a layer (no Topological Plate Polygons)
 
-#How to add points of relevant fossils
-#Create an object for each age
-Cambrian	 <- paste(as.character(c(490,543)), collapse=",")
-#Get latitude and longitude from PBDB for taxa of interest
-GetLatLong("tyrannosaurus", 490, 543)
+#add points to map
+Cambrian_map + geom_point(data = Cambrian_latlong, aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, color = "#A6CEE3"))
