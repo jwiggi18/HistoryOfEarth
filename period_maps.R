@@ -34,7 +34,7 @@ MaxMa <- c(541,485,444,419,359,299,252,201,145,65,23,2.58)
 MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
 
 
-age_df <- data.frame(Period, MinMa, MaxMa, MidMa)
+age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
 
 #create map list
 maplist <- lapply(age_df$MidMa, black_white)
