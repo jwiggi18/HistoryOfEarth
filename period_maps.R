@@ -1,17 +1,5 @@
 #creating maps
 
-#Cambrian	 <- paste(as.character(c(490,543)), collapse=",")
-#Ordivician	490-443
-#Sularian	443-417
-#Devonian	417-354
-#Carboniferous	354-290
-#Permian	290-248
-#Triassic	248-206
-#Jurassic	206-144
-#Cretacous	144-65
-#Paleogene	65-33.7
-#Neo	33.7-1.8
-
 rm(list=ls())
 
 source("~/GitHubRepos/HistoryOfEarth/map_libraries.R")
@@ -21,10 +9,6 @@ source("~/Functions/functions.R")
 
 taxa <-c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","araucarioxylon")
 
-# Produce a dataframe with paleo lat and long for taxa list
-latlong_df <- latlong_age(taxa)
-
-################ CREATE MAPS FOR EACH PERIOD WITH ALL FOSSILS FROM THAT PERIOD #################
 Period <- c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary")
 
 MinMa <- c(485,444,419,359,299,252,201,145,65,23,2.58, 0)
@@ -32,6 +16,14 @@ MinMa <- c(485,444,419,359,299,252,201,145,65,23,2.58, 0)
 MaxMa <- c(541,485,444,419,359,299,252,201,145,65,23,2.58)
 
 MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
+
+geoage <- data.frame(Period, MinMa, MaxMa)
+
+# Produce a dataframe with paleo lat and long for taxa list
+latlong_df <- latlong_age(taxa)
+
+################ CREATE MAPS FOR EACH PERIOD WITH ALL FOSSILS FROM THAT PERIOD #################
+
 
 
 age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
@@ -59,18 +51,20 @@ maplist[["Ordivician"]]
 #Paleogene_latlong <- subset_ma(latlong_df, 33.7, 65)
 #Neogene_latlong <- subset_ma(latlong_df, 1.8, 33.7)
 
-#Subsetting data frame by period "automated"
-period_df <- data.frame()
+#Subsetting data frame and putting them into a list by period "automated"
+period_list <- list() #create empty list
 
   for (period_index in seq_along(Period)) {
-    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index])
+    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index]) #subset by each min and max age
     period.result$minage=MinMa[period_index]
     period.result$maxage=MaxMa[period_index]
-    period_df <- rbind(period_df, period.result)
+    period_list[[period_index]] <- period.result
+    names(period_list)[length(period_list)] <- Period[period_index]
   }
 
 #The default model reconstruction only goes back 200 Ma
 # GOLONKA goes back to 550 Ma & PALEOMAP to 750 but only has Coastlines available as a layer (no Topological Plate Polygons). Paleobiodb uses GOLONKA.
+
 
 #add points to map
 # Colorblind friendly pallete produced by RColorBrewer
@@ -87,6 +81,10 @@ period_df <- data.frame()
 # Neogene "#FFFF99"
 # Present_day "#B15928"
 
+maplist <- lapply(age_df$MidMa, black_white)
+
+#name maplist according to period
+names(maplist) <- age_df$Period
 
 Cambrian_points <- add_points(Cambrian_map, Cambrian_latlong, "#A6CEE3")
 Ordivician_points <- add_points(Ordivician_map, Ordivician_latlong, "#1F78B4")
