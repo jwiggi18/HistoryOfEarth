@@ -1,11 +1,13 @@
 #' Run the interactive website
 #'
+#' Uses example from https://deanattali.com/2015/04/21/r-package-shiny-app/
+#'
 #' In R, just do HistoryOfEarth::runSite()
 #' @export
 runSite <- function() {
-  appDir <- system.file("shiny", "mainapp", package = "HistoryOfEarth")
+  appDir <- system.file("shiny-examples", "mainapp", package = "HistoryOfEarth")
   if (appDir == "") {
-    stop("Could not find example directory. Try re-installing `mypackage`.", call. = FALSE)
+    stop("Could not find example directory. Try re-installing `HistoryOfEarth`.", call. = FALSE)
   }
 
   shiny::runApp(appDir, display.mode = "normal")
