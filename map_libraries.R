@@ -1,6 +1,0 @@
-library(devtools)
-devtools::install_github("LunaSare/gplatesr")
-library(gplatesr)
-library(ggplot2)
-library(ggthemes)
-library(sp)
