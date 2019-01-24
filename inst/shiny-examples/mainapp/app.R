@@ -47,15 +47,17 @@ server <- function(input, output) {
   #  library(paleotree)
 
     data(chronogram, package="HistoryOfEarth")
-    paleotree::plotPhylopicTreePBDB(tree = HistoryOfEarth::GetTree())
+    ape::plot.phylo(chronogram)
+    #paleotree::plotPhylopicTreePBDB(tree = chronogram)
     ape::axisPhylo()
   })
-  
+
   data(paleomaps, package="HistoryOfEarth")
 
   chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
-  output$map <- renderPlot({paleomaps[[chosen_period()]]})
+  #output$map <- renderPlot({paleomaps[[chosen_period()]]})
   #error in [[: attempt to select less than one element in integerOneIndex
+  output$map <- renderPlot({paleomaps[["Cambrian"]]})
 
 
 }
