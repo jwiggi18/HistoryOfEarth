@@ -13,7 +13,7 @@ ui <- fluidPage(
           shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
              choices = HistoryOfEarth::GetAgeDF()$Period,
-             multiple = FALSE)))),
+             multiple = FALSE, selected="Cambrian")))),
 
     shinydashboard::dashboardBody(
       tags$head(tags$style(HTML('
@@ -31,7 +31,8 @@ ui <- fluidPage(
             shinydashboard::box(plotOutput("tree"))),
 
             column(7,
-              h4("Map"),
+              h4("period_name"),
+            #  h4("Map"),
               shinydashboard::box(plotOutput("map")))
       )
 
@@ -54,10 +55,13 @@ server <- function(input, output) {
 
   data(paleomaps, package="HistoryOfEarth")
 
-  chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
+#  chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
+chosen_period <- reactive({c(HistoryOfEarth::GetAgeDF()$Period) == input$period})
+  output$period_name <- renderText({input$period})
   #output$map <- renderPlot({paleomaps[[chosen_period()]]})
   #error in [[: attempt to select less than one element in integerOneIndex
-  output$map <- renderPlot({paleomaps[["Cambrian"]]})
+  #output$map <- renderPlot({paleomaps[["Cambrian"]]})
+  output$map <- renderPlot({paleomaps[[chosen_period]]})
 
 
 }

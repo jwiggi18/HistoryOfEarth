@@ -51,7 +51,7 @@ GetLatLongAnytime <- function(taxon){
 #' @return a data.frame of Periods, min, max, and mid points
 #' @export
 GetAgeDF <- function() {
-  Period <- c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary")
+  Period <- c("Cambrian","Ordivician","Silurian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary")
 
   MinMa <- c(485,444,419,359,299,252,201,145,65,23,2.58, 0)
 
