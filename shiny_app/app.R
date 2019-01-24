@@ -43,8 +43,8 @@ latlong_age <- function(taxa){
 
 taxa <-c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","Araucarioxylon")
 
-Period <- c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary")
 
+## Map plotting
 age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
 
 #create map list
@@ -52,6 +52,59 @@ maplist <- lapply(age_df$MidMa, black_white)
 
 #name maplist according to period
 names(maplist) <- age_df$Period
+
+##Point plotting
+# Produce a dataframe with paleo lat and long for taxa list
+latlong_df <- latlong_age(taxa) #produces list with many empty or NA pbdb_data.late_interval entries
+
+#filtering out pbdb_data.early_interval & pbdb_data.late_interval so that complete_cases wont remove taxa
+latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon))
+
+#Subsetting data frame to get pbdb_data.paleolng and pbdb_data.paleolat for each period and putting them into a list
+period_list <- list() #create empty list
+
+  for (period_index in seq_along(Period)) {
+    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index]) #subset by each min and max age
+    period.result$minage=MinMa[period_index]
+    period.result$maxage=MaxMa[period_index]
+    period_list[[period_index]] <- period.result
+    names(period_list)[length(period_list)] <- Period[period_index]
+  }
+
+  #add points to map
+  # Colorblind friendly pallete produced by RColorBrewer
+  # Cambrian "#A6CEE3"
+  # Ordivician "#1F78B4"
+  # Sularian "#B2DF8A"
+  # Devonian "#33A02C"
+  # Carboniferous "#FB9A99"
+  # Permian "#E31A1C"
+  # Triassic "#FDBF6F"
+  # Jurassic "#FF7F00"
+  # Cretacous "#CAB2D6"
+  # Paleogene "#6A3D9A"
+  # Neogene "#FFFF99"
+  # Quaternary "#B15928"
+
+point_colors <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
+
+#maps are in maplist[["period_name"]], points are in period_list[["period_name"]], colors = point_colors vector
+
+#create a list of maps with points for each period
+#not working
+points_list <- list() #create empty list
+
+    for (map_index in seq_along(maplist)) {
+      for (points_index in seq_along(period_list)){
+        for (color_index in seq_along(point_colors)){
+      points.result <- add_points(map=Period[map_index], df=Period[points_index], ptcolor=color_index)
+      points_list[[points_index]] <- points.result
+      names(points_list)[length(points_list)] <- Period[points_index]
+      }
+    }
+  }
+
+
 
 
 ui <- fluidPage(
@@ -112,7 +165,7 @@ server <- function(input, output) {
       "Tyrannosaurus,Velociraptor,Triceratops,Diplodocus,",
       "Brachiosaurus,Quetzalcoatlus,Smilodon,Megalonyx,Mammuthus,",
       "Meganeura,Eldredgeops,Exaeretodon,Redondasaurus,Araucarioxylon"))
-      #error in scan: scan() expected 'a real'...
+
     tree <- makePBDBtaxonTree(data, rank = "genus")
     #plotPhylopicTreePBDB(tree = tree)
     timeTree <- dateTaxonTreePBDB(tree)
