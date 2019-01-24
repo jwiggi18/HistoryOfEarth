@@ -31,6 +31,17 @@ CacheMaps <- function(age_df=GetAgeDF()) {
   usethis::use_data(paleomaps,   overwrite=TRUE)
 }
 
+#' Cache specimen information
+#'
+#' Localities of fossils from PBDB
+#
+#' @param taxa vector of taxa
+#' @export
+CacheSpecimenAges <- function(taxa=GetTaxa()) {
+  specimens <- latlong_age(taxa)
+  usethis::use_data(specimens,   overwrite=TRUE)
+}
+
 #' Get information on specimens from pbdb
 #'
 #' @param taxon a string with a taxon name
@@ -58,8 +69,11 @@ GetAgeDF <- function() {
   MaxMa <- c(541,485,444,419,359,299,252,201,145,65,23,2.58)
 
   MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
+
+  Color <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
+
   ## Map plotting
-  age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
+  age_df <- data.frame(Period, MinMa, MaxMa, MidMa, Color, stringsAsFactors=FALSE) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
   return(age_df)
 }
 
@@ -161,7 +175,6 @@ period_list <- list() #create empty list
   # Neogene "#FFFF99"
   # Quaternary "#B15928"
 
-point_colors <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
 
 #maps are in maplist[["period_name"]], points are in period_list[["period_name"]], colors = point_colors vector
 
