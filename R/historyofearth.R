@@ -27,8 +27,8 @@ CacheTree <- function(taxa=GetTaxa()) {
 #' @param age_df output of GetAgeDF()
 #' @export
 CacheMaps <- function(age_df=GetAgeDF()) {
-  maplist <- CreateMapList(age_df)
-  usethis::use_data(maplist, overwrite=TRUE)
+  paleomaps <- CreateMapList(age_df)
+  usethis::use_data(paleomaps,   overwrite=TRUE)
 }
 
 #' Get information on specimens from pbdb
