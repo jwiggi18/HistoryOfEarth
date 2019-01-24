@@ -8,6 +8,8 @@ library(gplatesr)
 library(ggplot2)
 library(ggthemes)
 library(sp)
+devtools::install_github("dwbapst/paleotree", ref="developmentBranch")
+library(paleotree)
 
 GetLatLongAnytime <- function(taxon){
   pbdb_data <- read.csv(paste0("http://paleobiodb.org/",
@@ -61,7 +63,7 @@ ui <- fluidPage(
       # Setting id makes input$tabs give the tabName of currently-selected tab
       #  id = "tabs",
         selectInput("genus", "Choose a genus:",
-             choices = c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","Araucarioxylon"),
+             choices = taxa,
              multiple = TRUE)),
 
           menuItem(
@@ -110,6 +112,7 @@ server <- function(input, output) {
       "Tyrannosaurus,Velociraptor,Triceratops,Diplodocus,",
       "Brachiosaurus,Quetzalcoatlus,Smilodon,Megalonyx,Mammuthus,",
       "Meganeura,Eldredgeops,Exaeretodon,Redondasaurus,Araucarioxylon"))
+      #error in scan: scan() expected 'a real'...
     tree <- makePBDBtaxonTree(data, rank = "genus")
     #plotPhylopicTreePBDB(tree = tree)
     timeTree <- dateTaxonTreePBDB(tree)
@@ -119,6 +122,7 @@ server <- function(input, output) {
 
   chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
   output$map <- renderPlot({maplist[[chosen_period()]]})
+  #error in [[: attempt to select less than one element in integerOneIndex
 
 
 }

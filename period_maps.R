@@ -19,14 +19,15 @@ MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
 
 geoage <- data.frame(Period, MinMa, MaxMa)
 
+age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
+
 # Produce a dataframe with paleo lat and long for taxa list
-latlong_df <- latlong_age(taxa)
+latlong_df <- latlong_age(taxa) #produces list with many empty or NA pbdb_data.late_interval entries
+
+#filtering out pbdb_data.early_interval & pbdb_data.late_interval
+latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon))
 
 ################ CREATE MAPS FOR EACH PERIOD WITH ALL FOSSILS FROM THAT PERIOD #################
-
-
-
-age_df <- data.frame(Period, MinMa, MaxMa, MidMa) #have to create this df because latlong_age pulls from the GetLatLong fn, which calls the paleobiodb API that doesn't use MidMa
 
 #create map list
 maplist <- lapply(age_df$MidMa, black_white)
@@ -51,7 +52,7 @@ maplist[["Ordivician"]]
 #Paleogene_latlong <- subset_ma(latlong_df, 33.7, 65)
 #Neogene_latlong <- subset_ma(latlong_df, 1.8, 33.7)
 
-#Subsetting data frame and putting them into a list by period "automated"
+#Subsetting data frame to get pbdb_data.paleolng and pbdb_data.paleolat for each period and putting them into a list "automated"
 period_list <- list() #create empty list
 
   for (period_index in seq_along(Period)) {
@@ -79,12 +80,27 @@ period_list <- list() #create empty list
 # Cretacous "#CAB2D6"
 # Paleogene "#6A3D9A"
 # Neogene "#FFFF99"
-# Present_day "#B15928"
+# Quaternary "#B15928"
 
-maplist <- lapply(age_df$MidMa, black_white)
+point_colors <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
 
-#name maplist according to period
-names(maplist) <- age_df$Period
+#maps are in maplist[["period_name"]], points are in period_list[["period_name"]], colors = point_colors vector
+
+#create a list of maps with points for each period
+points_list <- list() #create empty list
+
+  for (map_index in seq_along(maplist)) {
+    for (points_index in seq_along(period_list)){
+      for (color_index in seq_along(point_colors)){
+    points.result <- add_points(map=Period[map_index], df=Period[points_index], ptcolor=color_index)
+    points_list[[points_index]] <- points.result
+    names(points_list)[length(points_list)] <- Period[points_index]
+    }
+  }
+}
+
+mapply(add_points, map = maplist[["Cambrian"]], df = period_list[["Cambrian"]], ptcolor = "#A6CEE3")
+
 
 Cambrian_points <- add_points(Cambrian_map, Cambrian_latlong, "#A6CEE3")
 Ordivician_points <- add_points(Ordivician_map, Ordivician_latlong, "#1F78B4")
