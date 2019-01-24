@@ -19,7 +19,7 @@ runSite <- function() {
 #' @export
 CacheTree <- function(taxa=GetTaxa()) {
   chronogram <- GetTree(taxa=taxa)
-  usethis::use_data(chronogram, internal=TRUE, overwrite=TRUE)
+  usethis::use_data(chronogram, overwrite=TRUE)
 }
 
 #' Cache map information
@@ -28,7 +28,7 @@ CacheTree <- function(taxa=GetTaxa()) {
 #' @export
 CacheMaps <- function(age_df=GetAgeDF()) {
   maplist <- CreateMapList(age_df)
-  usethis::use_data(maplist, internal=TRUE, overwrite=TRUE)
+  usethis::use_data(maplist, overwrite=TRUE)
 }
 
 #' Get information on specimens from pbdb
