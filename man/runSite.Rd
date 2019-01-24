@@ -7,5 +7,8 @@
 runSite()
 }
 \description{
+Uses example from https://deanattali.com/2015/04/21/r-package-shiny-app/
+}
+\details{
 In R, just do HistoryOfEarth::runSite()
 }

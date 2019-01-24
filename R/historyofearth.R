@@ -13,6 +13,24 @@ runSite <- function() {
   shiny::runApp(appDir, display.mode = "normal")
 }
 
+#' Cache tree information
+#'
+#' @param taxa vector of taxa
+#' @export
+CacheTree <- function(taxa=GetTaxa()) {
+  chronogram <- GetTree(taxa=taxa)
+  usethis::use_data(chronogram, internal=TRUE, overwrite=TRUE)
+}
+
+#' Cache map information
+#'
+#' @param age_df output of GetAgeDF()
+#' @export
+CacheMaps <- function(age_df=GetAgeDF()) {
+  maplist <- CreateMapList(age_df)
+  usethis::use_data(maplist, internal=TRUE, overwrite=TRUE)
+}
+
 #' Get information on specimens from pbdb
 #'
 #' @param taxon a string with a taxon name
@@ -77,7 +95,7 @@ GetTaxa <- function() {
 #' @export
 CreateMapList <- function(age_df=GetAgeDF()) {
   #create map list
-  maplist <- lapply(age_df$MidMa, black_white)
+  maplist <- lapply(age_df$MidMa, gplatesr::black_white)
 
   #name maplist according to period
   names(maplist) <- age_df$Period

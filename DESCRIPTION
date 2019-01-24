@@ -13,7 +13,10 @@ Imports:
     devtools,
     ggplot2,
     ggthemes,
-    sp
+    sp,
+    usethis,
+    gplatesr,
+    paleotree
 Remotes:
     LunaSare/gplatesr,
     dwbapst/paleotree@developmentBranch

@@ -1,21 +1,21 @@
 ui <- fluidPage(
-  dashboardPage(
-    dashboardHeader(title= "History of Earth"),
-    dashboardSidebar(width = 175,
-      sidebarMenu(
-        menuItem(
+  shinydashboard::dashboardPage(
+    shinydashboard::dashboardHeader(title= "History of Earth"),
+    shinydashboard::dashboardSidebar(width = 175,
+      shinydashboard::sidebarMenu(
+        shinydashboard::menuItem(
       # Setting id makes input$tabs give the tabName of currently-selected tab
       #  id = "tabs",
         selectInput("genus", "Choose a genus:",
              choices = HistoryOfEarth::GetTaxa(),
              multiple = TRUE)),
 
-          menuItem(
+          shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
              choices = HistoryOfEarth::GetAgeDF()$Period,
              multiple = FALSE)))),
 
-    dashboardBody(
+    shinydashboard::dashboardBody(
       tags$head(tags$style(HTML('
                                 /* body */
                                 .content-wrapper, .right-side {
@@ -28,11 +28,11 @@ ui <- fluidPage(
 
           column(5,
             h4("Tree"),
-            box(plotOutput("tree"))),
+            shinydashboard::box(plotOutput("tree"))),
 
             column(7,
               h4("Map"),
-              box(plotOutput("map")))
+              shinydashboard::box(plotOutput("map")))
       )
 
     )
