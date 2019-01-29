@@ -77,12 +77,20 @@ GetAgeDF <- function() {
   return(age_df)
 }
 
+#' Return vector of taxa
+#'
+#' @return vector of names
+#' @export
+GetTaxa <- function() {
+  return(c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","Araucarioxylon"))
+}
+
 #' Get information on specimens from pbdb
 #'
 #' @param taxa a vector of taxon names
 #' @return a data.frame with information on all these taxa
 #' @export
-latlong_age <- function(taxa){
+latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
   #store pbdb_data.accepted_name, pbdb_data.lng, pbdb_data.lat, taxon, pbdb_data.early_interval, pbdb_data.late_interval, pbdb_data.max_ma, pbdb_data.min_ma
   lat_long_df <- data.frame()
 
@@ -91,16 +99,15 @@ latlong_age <- function(taxa){
             latlong.result$taxon=taxa[taxon_index]
             lat_long_df<- rbind(lat_long_df, latlong.result)
         }
+  #create empty column called Period
+  lat_long_df$Period <- NA
+
+  for (period_index in seq_along(age_df$Period)){
+          lat_long_df$Period[which(lat_long_df$pbdb_data.min_ma>=age_df$MinMa[period_index] & lat_long_df$pbdb_data.max_ma <= age_df$MaxMa[period_index])] <- age_df$Period[period_index]
+        }
   return(lat_long_df)
 }
 
-#' Return vector of taxa
-#'
-#' @return vector of names
-#' @export
-GetTaxa <- function() {
-  return(c("Gorilla","Panthera","Homo","Tyto","Dromaius","Aedes","Solenopsis","Caretta","Crocodylus","Solanum","Prunus","Rosa","Climacograptus","Anomalocaris","Dunkleosteus","Halysites","Histiodella","Agathiceras","Archaeopteryx","Juramaia","Hylonomus","Elginerpeton","Rhyniognatha","Dunkleosteus","Aculeisporites","Canadaspis","Arandaspis","Tyrannosaurus","Velociraptor","Triceratops","Diplodocus","Brachiosaurus","Quetzalcoatlus","Smilodon","Megalonyx","Mammuthus","Meganeura","Eldredgeops","Exaeretodon","Redondasaurus","Araucarioxylon"))
-}
 
 #' Make a list of maps for all periods
 #'
@@ -145,31 +152,13 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 PlotPoints <- function(taxa = GetTaxa(), age_df=GetAgeDF()) {
 ##Point plotting
 # Produce a dataframe with paleo lat and long for taxa list
-latlong_df <- latlong_age(taxa) #produces list with many empty or NA pbdb_data.late_interval entries
+latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
 
-#filtering out pbdb_data.early_interval & pbdb_data.late_interval so that complete_cases wont remove taxa
-latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon))
+#filtering out pbdb_data.early_interval & pbdb_data.late_interval so that na.omit wont remove taxa
+latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon, Period))
 
-#Subsetting data frame to get pbdb_data.paleolng and pbdb_data.paleolat for each period and putting them into a list
-#period_list <- list() #create empty list
-
-#  for (period_index in seq_along(Period)) {
-#    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index]) #subset by each min and max age
-#    period.result$minage=MinMa[period_index]
-#    period.result$maxage=MaxMa[period_index]
-#    period_list[[period_index]] <- period.result
-#    names(period_list)[length(period_list)] <- Period[period_index]
-  }
-
-#Add Period column to latlong_df
-#not working yet
-
-  latlong_df$Period <- NA
-
-  for (period_index in seq_along(age_df$Period)){
-    latlong_df$Period[which(latlong_df$pbdb_data.min_ma>=age_df$MinMa[period_index] & latlong_df$pbdb_data.max_ma <= age_df$MaxMa[period_index])] <- Period[period_index]
-  }
-
+#get rid of taxa with no fossils
+latlong_df <- na.omit(latlong_df)
 
 
   #add points to map
@@ -187,19 +176,20 @@ latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma,
   # Neogene "#FFFF99"
   # Quaternary "#B15928"
 
+#maps are in maplist[["period_name"]], points are in latlong_df$Period, colors = point_colors vector
 
-#maps are in maplist[["period_name"]], points are in period_list[["period_name"]], colors = point_colors vector
+maplist <- CreateMapList()
 
-#create a list of maps with points for each period
-#not working
 points_list <- list() #create empty list
 
+
     for (map_index in seq_along(maplist)) {
-      for (points_index in seq_along(period_list)){
-        for (color_index in seq_along(point_colors)){
-      points.result <- add_points(map=Period[map_index], df=Period[[points_index]], ptcolor=color_index)
+      for (points_index in seq_along(latlong_df$Period)){
+        for (period_index in seq_along(age_df$Period)){
+      points <- latlong_df$Period == age_df$Period[period_index]
+      points.result <- add_points(map=Period[map_index], df=points)#error object 'Period' not found
       points_list[[points_index]] <- points.result
-      names(points_list)[length(points_list)] <- Period[points_index]
+      names(points_list)[length(points_list)] <- latlong_df$Period[points_index]
       }
     }
   }
