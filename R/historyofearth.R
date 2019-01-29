@@ -186,8 +186,9 @@ points_list <- list() #create empty list
     for (map_index in seq_along(maplist)) {
       for (points_index in seq_along(latlong_df$Period)){
         for (period_index in seq_along(age_df$Period)){
-      points <- latlong_df$Period == age_df$Period[period_index]
-      points.result <- add_points(map=Period[map_index], df=points)#error object 'Period' not found
+      map <- maplist == age_df$Period[period_index]
+      latlong_df_periodname <- latlong_df[latlong_df$Period == age_df$Period[period_index],]
+      points.result <- add_points(map=map, df=latlong_df_periodname)
       points_list[[points_index]] <- points.result
       names(points_list)[length(points_list)] <- latlong_df$Period[points_index]
       }
