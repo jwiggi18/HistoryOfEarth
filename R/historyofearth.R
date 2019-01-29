@@ -150,15 +150,31 @@ latlong_df <- latlong_age(taxa) #produces list with many empty or NA pbdb_data.l
 latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon))
 
 #Subsetting data frame to get pbdb_data.paleolng and pbdb_data.paleolat for each period and putting them into a list
-period_list <- list() #create empty list
+#period_list <- list() #create empty list
 
-  for (period_index in seq_along(Period)) {
-    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index]) #subset by each min and max age
-    period.result$minage=MinMa[period_index]
-    period.result$maxage=MaxMa[period_index]
-    period_list[[period_index]] <- period.result
-    names(period_list)[length(period_list)] <- Period[period_index]
+#  for (period_index in seq_along(Period)) {
+#    period.result <- subset_latlongdf(minage=MinMa[period_index], maxage=MaxMa[period_index]) #subset by each min and max age
+#    period.result$minage=MinMa[period_index]
+#    period.result$maxage=MaxMa[period_index]
+#    period_list[[period_index]] <- period.result
+#    names(period_list)[length(period_list)] <- Period[period_index]
   }
+
+#Add Period column to latlong_df
+#not working yet
+
+  for (period_index in seq_along(Period)){
+    for (data_index in seq_along(latlong_df)){
+
+  period.result <- if ((pbdb_data.min_ma[data_index] >=MinMa[period_index]) & (pbdb_data.max_ma[data_index] <= MaxMa[period_index])) {
+    Period[period_index]
+  }
+  period_df <- cbind(latlong_df, period.result)
+    }
+  }
+}
+
+
 
   #add points to map
   # Colorblind friendly pallete produced by RColorBrewer
@@ -185,7 +201,7 @@ points_list <- list() #create empty list
     for (map_index in seq_along(maplist)) {
       for (points_index in seq_along(period_list)){
         for (color_index in seq_along(point_colors)){
-      points.result <- add_points(map=Period[map_index], df=Period[points_index], ptcolor=color_index)
+      points.result <- add_points(map=Period[map_index], df=Period[[points_index]], ptcolor=color_index)
       points_list[[points_index]] <- points.result
       names(points_list)[length(points_list)] <- Period[points_index]
       }
