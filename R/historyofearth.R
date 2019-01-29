@@ -166,7 +166,7 @@ latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma,
 
   latlong_df$Period <- NA
 
-  for (period_index in seq_along(Period)){
+  for (period_index in seq_along(age_df$Period)){
     latlong_df$Period[which(latlong_df$pbdb_data.min_ma>=age_df$MinMa[period_index] & latlong_df$pbdb_data.max_ma <= age_df$MaxMa[period_index])] <- Period[period_index]
   }
 
