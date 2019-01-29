@@ -163,16 +163,11 @@ latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma,
 #Add Period column to latlong_df
 #not working yet
 
-  for (period_index in seq_along(Period)){
-    for (data_index in seq_along(latlong_df)){
+  latlong_df$Period <- NA
 
-  period.result <- if ((pbdb_data.min_ma[data_index] >=MinMa[period_index]) & (pbdb_data.max_ma[data_index] <= MaxMa[period_index])) {
-    Period[period_index]
+  for (period_index in seq_along(Period)){
+    latlong_df$Period[which(latlong_df$pbdb_data.min_ma>=MinMa[period_index] & latlong_df$pbdb_data.max_ma <= MaxMa[period_index])] <- Period[period_index]
   }
-  period_df <- cbind(latlong_df, period.result)
-    }
-  }
-}
 
 
 
