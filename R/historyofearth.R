@@ -168,6 +168,7 @@ latlong_df <- na.omit(latlong_df)
 return(latlong_df)
 }
 
+#recreates the maplist everytime the package loads - where should this go?
 maplist <- CreateMapList()
 
 #' Plot points
@@ -200,9 +201,10 @@ points_list <- list() #create empty list
     for (map_index in seq_along(maplist)) {
       for (points_index in seq_along(latlong_df$Period)){
         for (period_index in seq_along(age_df$Period)){
-      map <- maplist == age_df$Period[period_index]
+      #map <- maplist == age_df$Period[period_index] #trying to "pull" the correct map from the list of maps, so the map that corresponds to the current Period in seq_along(age_df$Period)
+      map <- maplist[map_index]
       latlong_df_periodname <- latlong_df[latlong_df$Period == age_df$Period[period_index],]
-      points.result <- add_points(map=map, df=latlong_df_periodname)
+      map <- map + add_points(map=map, df=latlong_df_periodname)
       points_list[[period_index]] <- period.result
       names(points_list)[length(points_list)] <- Period[period_index]
       }
