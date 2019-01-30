@@ -124,6 +124,16 @@ CreateMapList <- function(age_df=GetAgeDF()) {
   return(maplist)
 }
 
+#' function to add pbdb paleo data points (lat and long) to gplatesr created maps
+#'@param map a map created using gplatesr plot_gplates or black_white functions
+#'@param df a data frame containing pbdb_data.paleolng and pbdb_data.paleolat
+#'@param ptcolor a character vector indicating the desired color of added data points
+#'@return a map with points
+#'@export
+add_points <- function(map, df) {
+  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
+}
+
 #' Get tree
 #'
 #' @param taxa Vector of taxon names
@@ -142,15 +152,10 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
   return(timeTree)
 }
 
-
-#' Plot points
-#'
-#' @param taxa vector of taxon names
-#' @param age_df Output of GetAgeDF()
-#' @return I have no idea
-#' @export
-PlotPoints <- function(taxa = GetTaxa(), age_df=GetAgeDF()) {
-##Point plotting
+#' filter data frame produced by latong_age() exclude pbdb_data.early_interval & pbdb_data.late_interval (due to large # of NAs) and then remaining NAs (taxa with no lat long)
+#'@return filtered data frame
+#'@export
+FilterDF <- function() {
 # Produce a dataframe with paleo lat and long for taxa list
 latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
 
@@ -160,6 +165,18 @@ latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma,
 #get rid of taxa with no fossils
 latlong_df <- na.omit(latlong_df)
 
+return(latlong_df)
+}
+
+maplist <- CreateMapList()
+
+#' Plot points
+#' @param taxa vector of taxon names, default is GetTaxa()
+#' @param age_df dataframe with Period, MinMa, MaxMa, MidMa, default is GetAgeDF()
+#' @return a list of period maps with points for fossils from that period
+#' @export
+PlotPoints <- function(taxa = GetTaxa(), age_df=GetAgeDF(), latlong_df=FilterDF()) {
+##Point plotting
 
   #add points to map
   # Colorblind friendly pallete produced by RColorBrewer
@@ -176,12 +193,9 @@ latlong_df <- na.omit(latlong_df)
   # Neogene "#FFFF99"
   # Quaternary "#B15928"
 
-#maps are in maplist[["period_name"]], points are in latlong_df$Period, colors = point_colors vector
-
-maplist <- CreateMapList()
+#maps are in maplist[["period_name"]], points are in latlong_df$Period
 
 points_list <- list() #create empty list
-
 
     for (map_index in seq_along(maplist)) {
       for (points_index in seq_along(latlong_df$Period)){
@@ -194,4 +208,6 @@ points_list <- list() #create empty list
       }
     }
   }
+
+  return(points_list)
 }
