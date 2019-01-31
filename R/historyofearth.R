@@ -181,8 +181,8 @@ FilterDF <- function() {
 PutPointsOnMap <- function(taxa = GetTaxa(), specimen_df=specimens, age_df=GetAgeDF(), maps=paleomaps) {
   specimen_df <- specimen_df[specimen_df$searched_taxon %in% taxa,] # subset of the taxa we want
   points_maplist <- maps
-  for (map_index in seq_along(maplist)) {
-    chosen_period <- names(maplist)[map_index]
+  for (map_index in seq_along(points_maplist)) {
+    chosen_period <- names(points_maplist)[map_index]
     local_df <- specimen_df[specimen_df$Period==chosen_period,]
     if (nrow(local_df)>0) {
       points_maplist[[map_index]] <- add_points(map=points_maplist[[map_index]], df=local_df)
