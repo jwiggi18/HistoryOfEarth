@@ -42,6 +42,19 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
   usethis::use_data(specimens,   overwrite=TRUE)
 }
 
+#' Cache everything
+#'
+#' Just to save typing, run all the caching functions
+#'
+#' @param taxa vector of taxa
+#' @param age_df output of GetAgeDF()
+#' @export
+CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
+  CacheSpecimenAges(taxa)
+  CacheMaps(age_df)
+  CacheTree(taxa)
+}
+
 #' Get information on specimens from pbdb
 #'
 #' @param taxon a string with a taxon name
@@ -62,7 +75,7 @@ GetLatLongAnytime <- function(taxon){
 #' @return a data.frame of Periods, min, max, and mid points
 #' @export
 GetAgeDF <- function() {
-  Period <- c("Cambrian","Ordivician","Silurian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary")
+  Period <- c("Cambrian","Ordivician","Silurian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretaceous","Paleogene","Neogene","Quaternary")
 
   MinMa <- c(485,444,419,359,299,252,201,145,65,23,2.58, 0)
 
@@ -131,7 +144,7 @@ CreateMapList <- function(age_df=GetAgeDF()) {
 #'@return a map with points
 #'@export
 add_points <- function(map, df) {
-  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
+  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, colour=Color))
 }
 
 #' Get tree
@@ -152,21 +165,21 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
   return(timeTree)
 }
 
-#' filter data frame produced by latong_age() exclude pbdb_data.early_interval & pbdb_data.late_interval (due to large # of NAs) and then remaining NAs (taxa with no lat long)
-#'@return filtered data frame
-#'@export
-FilterDF <- function() {
-  # Produce a dataframe with paleo lat and long for taxa list
-  latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
-
-  #filtering out pbdb_data.early_interval & pbdb_data.late_interval so that na.omit won't remove taxa
-  latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon, Period))
-
-  #get rid of taxa with no fossils
-  latlong_df <- na.omit(latlong_df)
-
-  return(latlong_df)
-}
+# #' filter data frame produced by latong_age() exclude pbdb_data.early_interval & pbdb_data.late_interval (due to large # of NAs) and then remaining NAs (taxa with no lat long)
+# #'@return filtered data frame
+# #'@export
+# FilterDF <- function() {
+#   # Produce a dataframe with paleo lat and long for taxa list
+#   latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
+#
+#   #filtering out pbdb_data.early_interval & pbdb_data.late_interval so that na.omit won't remove taxa
+#   latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon, Period))
+#
+#   #get rid of taxa with no fossils
+#   latlong_df <- na.omit(latlong_df)
+#
+#   return(latlong_df)
+# }
 
 #recreates the maplist everytime the package loads - where should this go?
 # maplist <- CreateMapList()
@@ -184,9 +197,11 @@ PutPointsOnMap <- function(taxa = GetTaxa(), specimen_df=specimens, age_df=GetAg
   for (map_index in seq_along(points_maplist)) {
     chosen_period <- names(points_maplist)[map_index]
     local_df <- specimen_df[specimen_df$Period==chosen_period,]
+    local_df$Color <- age_df$Color[age_df$Period==chosen_period]
     if (nrow(local_df)>0) {
       points_maplist[[map_index]] <- add_points(map=points_maplist[[map_index]], df=local_df)
     }
+    points_maplist[[map_index]] <- points_maplist[[map_index]] + ggplot2::theme(legend.position="none")
   }
   return(points_maplist)
 }
