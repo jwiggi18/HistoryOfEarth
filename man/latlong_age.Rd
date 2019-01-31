@@ -4,7 +4,7 @@
 \alias{latlong_age}
 \title{Get information on specimens from pbdb}
 \usage{
-latlong_age(taxa)
+latlong_age(taxa = GetTaxa(), age_df = GetAgeDF())
 }
 \arguments{
 \item{taxa}{a vector of taxon names}

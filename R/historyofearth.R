@@ -156,60 +156,37 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 #'@return filtered data frame
 #'@export
 FilterDF <- function() {
-# Produce a dataframe with paleo lat and long for taxa list
-latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
+  # Produce a dataframe with paleo lat and long for taxa list
+  latlong_df <- latlong_age() #produces list with many empty or NA pbdb_data.late_interval entries
 
-#filtering out pbdb_data.early_interval & pbdb_data.late_interval so that na.omit wont remove taxa
-latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon, Period))
+  #filtering out pbdb_data.early_interval & pbdb_data.late_interval so that na.omit won't remove taxa
+  latlong_df <- subset(latlong_df, select = c(pbdb_data.paleolng:pbdb_data.min_ma, searched_taxon, Period))
 
-#get rid of taxa with no fossils
-latlong_df <- na.omit(latlong_df)
+  #get rid of taxa with no fossils
+  latlong_df <- na.omit(latlong_df)
 
-return(latlong_df)
+  return(latlong_df)
 }
 
 #recreates the maplist everytime the package loads - where should this go?
-maplist <- CreateMapList()
+# maplist <- CreateMapList()
 
-#' Plot points
+#' Put points on a map
 #' @param taxa vector of taxon names, default is GetTaxa()
+#' @param specimen_df data.frame of specimen info
 #' @param age_df dataframe with Period, MinMa, MaxMa, MidMa, default is GetAgeDF()
+#' @param maps paleomaps list of maps (stored internally)
 #' @return a list of period maps with points for fossils from that period
 #' @export
-PlotPoints <- function(taxa = GetTaxa(), age_df=GetAgeDF(), latlong_df=FilterDF()) {
-##Point plotting
-
-  #add points to map
-  # Colorblind friendly pallete produced by RColorBrewer
-  # Cambrian "#A6CEE3"
-  # Ordivician "#1F78B4"
-  # Sularian "#B2DF8A"
-  # Devonian "#33A02C"
-  # Carboniferous "#FB9A99"
-  # Permian "#E31A1C"
-  # Triassic "#FDBF6F"
-  # Jurassic "#FF7F00"
-  # Cretacous "#CAB2D6"
-  # Paleogene "#6A3D9A"
-  # Neogene "#FFFF99"
-  # Quaternary "#B15928"
-
-#maps are in maplist[["period_name"]], points are in latlong_df$Period
-
-points_list <- list() #create empty list
-
-    for (map_index in seq_along(maplist)) {
-      for (points_index in seq_along(latlong_df$Period)){
-        for (period_index in seq_along(age_df$Period)){
-      #map <- maplist == age_df$Period[period_index] #trying to "pull" the correct map from the list of maps, so the map that corresponds to the current Period in seq_along(age_df$Period)
-      map <- maplist[map_index]
-      latlong_df_periodname <- latlong_df[latlong_df$Period == age_df$Period[period_index],]
-      map <- map + add_points(map=map, df=latlong_df_periodname)
-      points_list[[period_index]] <- period.result
-      names(points_list)[length(points_list)] <- Period[period_index]
-      }
+PutPointsOnMap <- function(taxa = GetTaxa(), specimen_df=specimens, age_df=GetAgeDF(), maps=paleomaps) {
+  specimen_df <- specimen_df[specimen_df$searched_taxon %in% taxa,] # subset of the taxa we want
+  points_maplist <- maps
+  for (map_index in seq_along(maplist)) {
+    chosen_period <- names(maplist)[map_index]
+    local_df <- specimen_df[specimen_df$Period==chosen_period,]
+    if (nrow(local_df)>0) {
+      points_maplist[[map_index]] <- add_points(map=points_maplist[[map_index]], df=local_df)
     }
   }
-
-  return(points_list)
+  return(points_maplist)
 }
