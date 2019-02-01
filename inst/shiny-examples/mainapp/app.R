@@ -13,7 +13,7 @@ ui <- fluidPage(
           shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
              choices = HistoryOfEarth::GetAgeDF()$Period,
-             multiple = FALSE, selected="Cambrian")))),
+             multiple = FALSE, selected="Quaternary")))),
 
     shinydashboard::dashboardBody(
       tags$head(tags$style(HTML('
