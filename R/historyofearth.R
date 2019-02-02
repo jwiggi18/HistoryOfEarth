@@ -188,11 +188,42 @@ CreateMapList <- function(age_df=GetAgeDF()) {
   return(maplist)
 }
 
+#' Fixes error in adding phylopics to maps
+#'
+#' Get this error:
+#' Error: annotation_custom only works with Cartesian coordinates
+#' Using rphylopic::add_phylopic
+#' This follows the advice of https://github.com/oswaldosantos/ggsn/issues/19
+#' And just uses ggmap::inset instead
+add_phylopic_to_map <- function(img, alpha = 0.2, x = NULL, y = NULL, ysize = NULL,
+    color = NULL)
+{
+    mat <- rphylopic::recolor_phylopic(img, alpha, color)
+    if (!is.null(x) && !is.null(y) && !is.null(ysize)) {
+        aspratio <- nrow(mat)/ncol(mat)
+        ymin <- y - ysize/2
+        ymax <- y + ysize/2
+        xmin <- x - ysize/aspratio/2
+        xmax <- x + ysize/aspratio/2
+    }
+    else {
+        ymin <- -Inf
+        ymax <- Inf
+        xmin <- -Inf
+        xmax <- Inf
+    }
+    imgGrob <- rasterGrob(mat)
+    return(ggmap::inset(xmin = xmin, ymin = ymin, xmax = xmax,
+        ymax = ymax, imgGrob))
+}
+
 #' Create an animated gif of a map
 #'
 #' This can work with or without taxa.
 #'
 #' The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 600 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
+#'
+#' a <- AnimatePlot(use_cached_maps_only=TRUE, step_size=1, taxa=GetTaxa())
 #'
 #' @param start_time The time of the first frame of the animation
 #' @param stop_time The time of the last frame of the animation before it starts looping back
@@ -253,7 +284,8 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
           for (taxon_to_add in sequence(nrow(taxon_df))) {
-            try(my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.2))
+          #  my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
+            my_plot <-  my_plot + add_phylopic_to_map(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
           }
         }
       }
