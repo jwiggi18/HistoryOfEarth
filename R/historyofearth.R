@@ -202,10 +202,10 @@ CreateMapList <- function(age_df=GetAgeDF()) {
 #' @param age_df Data.frame of ages, typically from GetAgeDF()
 #' @param specimen_df Cached fossil localities and times
 #' @param interval How many seconds per frame
-#' @param use_cached_maps If TRUE, only uses the maps already in the package, rather than pulling from gplates
+#' @param use_cached_maps_only If TRUE, only uses the maps already in the package, rather than pulling from gplates
 #' @return An animated gif
 #' @export
-AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps=FALSE) {
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE) {
   plotlist <- list()
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps, "[[", "labels"), "[[", "title")))))
   names(paleomap_info) <- names(paleomaps)
@@ -232,43 +232,43 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
   ages<-seq(from=start_time, to=stop_time, by=step_size)
   for (i in seq_along(ages)) {
     my_plot <- NULL
-    if(!use_cached_maps) {
+    if(!use_cached_maps_only) {
       try(my_plot <- gplatesr::land_sea(ages[i]))
     }
     if(is.null(my_plot)) { #as a backup, go to the cache
       matching_map_index <- which(paleomap_info==ages[i])
       if(length(matching_map_index)>0) {
-        my_plot <- paleomaps[[matching_map_ndex]]
+        my_plot <- paleomaps[[matching_map_index]]
       }
     }
     if(!is.null(my_plot)) {
       if(!is.null(taxa)) {
         for(taxon_index in seq_along(taxa)) {
           img <- NULL
-          try(img <- taxonimages[taxa(taxon_index)])
+          try(img <- taxonimages[taxa[taxon_index]])
           if(is.null(img)) {
             img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
           }
-          taxon_df <- specimen_df[specimen_df$searched_taxon==taxa(taxon_index),]
+          taxon_df <- specimen_df[specimen_df$searched_taxon==taxa[taxon_index],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
           for (taxon_to_add in sequence(nrow(taxon_df))) {
-            my_plot <-  rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
+            my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
           }
         }
       }
-      plotlist[[i]] <- my_plot
+      plotlist[[length(plotlist)+1]] <- my_plot
     }
   }
   animation::ani.options(interval = interval, loop=TRUE)
 
   movie.name <- tempfile(pattern="animation", fileext="gif")
   animation::saveGIF({
-    for (i in seq_along(ages)) {
+    for (i in seq_along(plotlist)) {
       anim <- plotlist[[i]]
       plot(anim)
     }
-    for (i in (length(ages)-1):1) {
+    for (i in (length(plotlist)-1):1) {
       anim <- plotlist[[i]]
       plot(anim)
     }
