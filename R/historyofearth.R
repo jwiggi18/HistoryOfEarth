@@ -18,8 +18,11 @@ runSite <- function() {
 #' @param taxa vector of taxa
 #' @export
 CacheTree <- function(taxa=GetTaxa()) {
-  chronogram <- GetTree(taxa=taxa)
-  usethis::use_data(chronogram, overwrite=TRUE)
+  chronogram <- NULL
+  try(chronogram <- GetTree(taxa=taxa))
+  if(!is.null(chronogram)) {
+    usethis::use_data(chronogram, overwrite=TRUE)
+  }
 }
 
 #' Cache map information
@@ -27,8 +30,11 @@ CacheTree <- function(taxa=GetTaxa()) {
 #' @param age_df output of GetAgeDF()
 #' @export
 CacheMaps <- function(age_df=GetAgeDF()) {
-  paleomaps <- CreateMapList(age_df)
-  usethis::use_data(paleomaps,   overwrite=TRUE)
+  paleomaps <- NULL
+  try(paleomaps <- CreateMapList(age_df))
+  if(!is.null(chronogram)) {
+    usethis::use_data(paleomaps,   overwrite=TRUE)
+  }
 }
 
 #' Cache specimen information
@@ -38,8 +44,11 @@ CacheMaps <- function(age_df=GetAgeDF()) {
 #' @param taxa vector of taxa
 #' @export
 CacheSpecimenAges <- function(taxa=GetTaxa()) {
-  specimens <- latlong_age(taxa)
-  usethis::use_data(specimens,   overwrite=TRUE)
+  specimens <- NULL
+  try(specimens <- latlong_age(taxa))
+  if(is.null(specimens)) {
+    usethis::use_data(specimens,   overwrite=TRUE)
+  }
 }
 
 #' Cache taxon information
@@ -85,6 +94,7 @@ CacheTaxonImages <- function(taxa=GetTaxa()) {
 #' Cache everything
 #'
 #' Just to save typing, run all the caching functions
+#' For all but the images, this won't overwrite if the new object is empty
 #'
 #' @param taxa vector of taxa
 #' @param age_df output of GetAgeDF()
@@ -136,7 +146,7 @@ GetAgeDF <- function() {
 #' @return vector of names
 #' @export
 GetTaxa <- function() {
-  return(c("Attercopus", "Gorilla", "Panthera", "Homo", "Tyto", "Dromaius", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Solanum", "Prunus", "Rosa", "Climacograptus", "Anomalocaris", "Dunkleosteus", "Halysites", "Histiodella", "Agathiceras", "Archaeopteryx", "Juramaia", "Hylonomus", "Elginerpeton", "Rhyniognatha", "Aculeisporites", "Canadaspis", "Arandaspis", "Tyrannosaurus", "Velociraptor", "Triceratops", "Diplodocus", "Brachiosaurus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Exaeretodon", "Redondasaurus", "araucarioxylon", "Pelagiella", "Burgessia", "Naraoia", "Hallucigenia", "Pikaia", "Cameroceras", "Acanthostega", "Tulerpeton", "Pareiasaurus", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Herrerasaurus", "Eudimorphodon", "Plesiosaurus", "Lesothosaurus", "Stegosaurus", "Kulindadromeus", "Megazostrodon", "Anchiornis", "Allosaurus", "Giraffatitan", "Teleoceras", "Diceratherium", "Nimravus", "Enhydrocyon", "Sahelanthropus"))
+  return(c("Attercopus", "Gorilla", "Panthera", "Homo", "Tyto", "Dromaius", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Solanum", "Prunus", "Rosa", "Climacograptus", "Anomalocaris", "Dunkleosteus", "Halysites", "Histiodella", "Agathiceras", "Archaeopteryx", "Juramaia", "Hylonomus", "Elginerpeton", "Rhyniognatha", "Aculeisporites", "Canadaspis", "Arandaspis", "Tyrannosaurus", "Velociraptor", "Triceratops", "Diplodocus", "Brachiosaurus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Exaeretodon", "Redondasaurus", "Araucarioxylon", "Pelagiella", "Burgessia", "Naraoia", "Hallucigenia", "Pikaia", "Cameroceras", "Acanthostega", "Tulerpeton", "Pareiasaurus", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Herrerasaurus", "Eudimorphodon", "Plesiosaurus", "Lesothosaurus", "Stegosaurus", "Kulindadromeus", "Megazostrodon", "Anchiornis", "Allosaurus", "Giraffatitan", "Teleoceras", "Diceratherium", "Nimravus", "Enhydrocyon", "Sahelanthropus"))
 }
 
 #' Get information on specimens from pbdb
@@ -192,10 +202,13 @@ CreateMapList <- function(age_df=GetAgeDF()) {
 #' @param age_df Data.frame of ages, typically from GetAgeDF()
 #' @param specimen_df Cached fossil localities and times
 #' @param interval How many seconds per frame
+#' @param use_cached_maps If TRUE, only uses the maps already in the package, rather than pulling from gplates
 #' @return An animated gif
 #' @export
-AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5) {
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps=FALSE) {
   plotlist <- list()
+  paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps, "[[", "labels"), "[[", "title")))))
+  names(paleomap_info) <- names(paleomaps)
   if(!is.null(taxa)) {
     specimen_df <- specimen_df[specimen_df$searched_taxon %in% taxa,] # subset of the taxa we want
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.paleolng),]
@@ -218,23 +231,34 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
   }
   ages<-seq(from=start_time, to=stop_time, by=step_size)
   for (i in seq_along(ages)) {
-    my_plot <- gplatesr::land_sea(ages[i])
-    if(!is.null(taxa)) {
-      for(taxon_index in seq_along(taxa)) {
-        img <- NULL
-        try(img <- taxonimages[taxa(taxon_index)])
-        if(is.null(img)) {
-          img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
-        }
-        taxon_df <- specimen_df[specimen_df$searched_taxon==taxa(taxon_index),]
-        taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
-        taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
-        for (taxon_to_add in sequence(nrow(taxon_df))) {
-          my_plot <-  rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
-        }
+    my_plot <- NULL
+    if(!use_cached_maps) {
+      try(my_plot <- gplatesr::land_sea(ages[i]))
+    }
+    if(is.null(my_plot)) { #as a backup, go to the cache
+      matching_map_index <- which(paleomap_info==ages[i])
+      if(length(matching_map_index)>0) {
+        my_plot <- paleomaps[[matching_map_ndex]]
       }
     }
-    plotlist[[i]] <- my_plot
+    if(!is.null(my_plot)) {
+      if(!is.null(taxa)) {
+        for(taxon_index in seq_along(taxa)) {
+          img <- NULL
+          try(img <- taxonimages[taxa(taxon_index)])
+          if(is.null(img)) {
+            img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
+          }
+          taxon_df <- specimen_df[specimen_df$searched_taxon==taxa(taxon_index),]
+          taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
+          taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
+          for (taxon_to_add in sequence(nrow(taxon_df))) {
+            my_plot <-  rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
+          }
+        }
+      }
+      plotlist[[i]] <- my_plot
+    }
   }
   animation::ani.options(interval = interval, loop=TRUE)
 

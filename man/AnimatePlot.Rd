@@ -6,7 +6,7 @@
 \usage{
 AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
   taxa = NULL, step_size = 10, age_df = GetAgeDF(),
-  specimen_df = specimens, interval = 0.5)
+  specimen_df = specimens, interval = 0.5, use_cached_maps = FALSE)
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -24,6 +24,8 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{specimen_df}{Cached fossil localities and times}
 
 \item{interval}{How many seconds per frame}
+
+\item{use_cached_maps}{If TRUE, only uses the maps already in the package, rather than pulling from gplates}
 }
 \value{
 An animated gif
