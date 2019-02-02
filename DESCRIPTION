@@ -16,7 +16,10 @@ Imports:
     sp,
     usethis,
     gplatesr,
-    paleotree
+    paleotree,
+    rphylopic,
+    animation,
+    magick
 Remotes:
     LunaSare/gplatesr,
     dwbapst/paleotree@developmentBranch

@@ -42,6 +42,46 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
   usethis::use_data(specimens,   overwrite=TRUE)
 }
 
+#' Cache taxon information
+#'
+#' Mainly to store images. If an image isn't found for a taxon, an image of DNA is used instead
+#'
+#' @param taxa vector of taxa
+#' @export
+CacheTaxonImages <- function(taxa=GetTaxa()) {
+  taxonimages <- list()
+  for (taxon.index in seq_along(taxa)) {
+    taxon_id <- NULL
+    found_image <- NULL
+    try(taxon_id <- rphylopic::name_search(taxa[taxon.index]))
+    if(class(taxon_id)=="data.frame") {
+      if(nrow(taxon_id)>0) {
+        picture_data <- rphylopic::name_images(taxon_id[1,1])
+        if(length(picture_data$same)>0) {
+          found_image <- rphylopic::image_data(picture_data$same[[1]]$uid,size=128)[[1]]
+        } else {
+          if(length(picture_data$subtaxa)>0) {
+            found_image <- rphylopic::image_data(picture_data$subtaxa[[1]]$uid,size=128)[[1]]
+          } else {
+            if(length(picture_data$supertaxa)>0) {
+              found_image <- rphylopic::image_data(picture_data$supertaxa[[1]]$uid,size=128)[[1]]
+            }
+          }
+        }
+      }
+    }
+    if(!is.null(found_image)) {
+      taxonimages[[taxon.index]] <- found_image
+      print(paste0("Cached image for ", taxa[taxon.index]))
+    } else {
+      taxonimages[[taxon.index]] <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]] #just DNA
+      print(paste0("Cached just a placeholder (DNA) for ", taxa[taxon.index]))
+    }
+  }
+  names(taxonimages) <- taxa
+  usethis::use_data(taxonimages, overwrite=TRUE)
+}
+
 #' Cache everything
 #'
 #' Just to save typing, run all the caching functions
@@ -53,6 +93,7 @@ CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
   CacheSpecimenAges(taxa)
   CacheMaps(age_df)
   CacheTree(taxa)
+  CacheTaxonImages(taxa)
 }
 
 #' Get information on specimens from pbdb
@@ -135,6 +176,80 @@ CreateMapList <- function(age_df=GetAgeDF()) {
   names(maplist) <- age_df$Period
 
   return(maplist)
+}
+
+#' Create an animated gif of a map
+#'
+#' This can work with or without taxa.
+#'
+#' The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 600 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
+#'
+#' @param start_time The time of the first frame of the animation
+#' @param stop_time The time of the last frame of the animation before it starts looping back
+#' @param periods A vector of period names, capitalized properly (can be left blank)
+#' @param taxa A vector of taxon names (can be left blank)
+#' @param step_size How many million years to take in a single step
+#' @param age_df Data.frame of ages, typically from GetAgeDF()
+#' @param specimen_df Cached fossil localities and times
+#' @param interval How many seconds per frame
+#' @return An animated gif
+#' @export
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5) {
+  plotlist <- list()
+  if(!is.null(taxa)) {
+    specimen_df <- specimen_df[specimen_df$searched_taxon %in% taxa,] # subset of the taxa we want
+    specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.paleolng),]
+    specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.paleolat),]
+    specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.max_ma),]
+    specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.min_ma),]
+    start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
+    stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
+  }
+  if(!is.null(periods)) {
+    relevant_periods <- age_df[age_df$Period %in% periods,]
+    start_time <- min(relevant_periods$MinMa, na.rm=TRUE)
+    stop_time <- max(relevant_periods$MaxMa, na.rm=TRUE)
+  }
+  if(is.null(start_time)) {
+    start_time <- 0
+  }
+  if(is.null(stop_time)) {
+    stop_time <- 600
+  }
+  ages<-seq(from=start_time, to=stop_time, by=step_size)
+  for (i in seq_along(ages)) {
+    my_plot <- gplatesr::land_sea(ages[i])
+    if(!is.null(taxa)) {
+      for(taxon_index in seq_along(taxa)) {
+        img <- NULL
+        try(img <- taxonimages[taxa(taxon_index)])
+        if(is.null(img)) {
+          img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
+        }
+        taxon_df <- specimen_df[specimen_df$searched_taxon==taxa(taxon_index),]
+        taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
+        taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
+        for (taxon_to_add in sequence(nrow(taxon_df))) {
+          my_plot <-  rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
+        }
+      }
+    }
+    plotlist[[i]] <- my_plot
+  }
+  animation::ani.options(interval = interval, loop=TRUE)
+
+  movie.name <- tempfile(pattern="animation", fileext="gif")
+  animation::saveGIF({
+    for (i in seq_along(ages)) {
+      anim <- plotlist[[i]]
+      plot(anim)
+    }
+    for (i in (length(ages)-1):1) {
+      anim <- plotlist[[i]]
+      plot(anim)
+    }
+  }, movie.name=movie.name)
+  return(magick::image_read(movie.name))
 }
 
 #' function to add pbdb paleo data points (lat and long) to gplatesr created maps
