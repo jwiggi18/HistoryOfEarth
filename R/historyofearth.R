@@ -245,7 +245,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
       if(!is.null(taxa)) {
         for(taxon_index in seq_along(taxa)) {
           img <- NULL
-          try(img <- taxonimages[taxa[taxon_index]])
+          try(img <- taxonimages[taxa[taxon_index]][[1]])
           if(is.null(img)) {
             img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
           }
@@ -253,7 +253,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
           for (taxon_to_add in sequence(nrow(taxon_df))) {
-            my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.3)
+            try(my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_to_add$pbdb_data.paleolng[taxon_df], taxon_to_add$pbdb_data.paleolat[taxon_df] , ysize = 0.2))
           }
         }
       }
