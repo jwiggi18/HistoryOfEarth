@@ -46,7 +46,7 @@ CacheMaps <- function(age_df=GetAgeDF()) {
 CacheSpecimenAges <- function(taxa=GetTaxa()) {
   specimens <- NULL
   try(specimens <- latlong_age(taxa))
-  if(is.null(specimens)) {
+  if(!is.null(specimens)) {
     usethis::use_data(specimens,   overwrite=TRUE)
   }
 }
