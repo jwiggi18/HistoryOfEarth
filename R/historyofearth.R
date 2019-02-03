@@ -194,11 +194,11 @@ CreateMapList <- function(age_df=GetAgeDF()) {
 #' Error: annotation_custom only works with Cartesian coordinates
 #' Using rphylopic::add_phylopic
 #' This follows the advice of https://github.com/oswaldosantos/ggsn/issues/19
-#' And just uses ggmap::inset instead
+#' And just uses ggmap::inset instead; otherwise, it's identical to rphylopic::add_phylopic
 add_phylopic_to_map <- function(img, alpha = 0.2, x = NULL, y = NULL, ysize = NULL,
     color = NULL)
 {
-    mat <- rphylopic::recolor_phylopic(img, alpha, color)
+    mat <- recolor_phylopic_for_map(img, alpha, color)
     if (!is.null(x) && !is.null(y) && !is.null(ysize)) {
         aspratio <- nrow(mat)/ncol(mat)
         ymin <- y - ysize/2
@@ -212,9 +212,30 @@ add_phylopic_to_map <- function(img, alpha = 0.2, x = NULL, y = NULL, ysize = NU
         xmin <- -Inf
         xmax <- Inf
     }
-    imgGrob <- rasterGrob(mat)
+    imgGrob <- grid::rasterGrob(mat)
     return(ggmap::inset(xmin = xmin, ymin = ymin, xmax = xmax,
         ymax = ymax, imgGrob))
+}
+
+#' Fixes error in adding phylopics to maps
+#'
+#' Just copying recolor_phylopic_for_map for now from the rphylopic package
+recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
+{
+    if (is.null(color)) {
+        mat <- matrix(rgb(img[, , 1], img[, , 2], img[, , 3],
+            img[, , 4] * alpha), nrow = dim(img)[1])
+    }
+    else {
+        cols <- grDevices::col2rgb(color)
+        imglen <- length(img[, , 1])
+        mat <- matrix(ifelse(img[, , 4] > 0, rgb(rep(cols[1,
+            1], imglen), rep(cols[2, 1], imglen), rep(cols[3,
+            1], imglen), img[, , 4] * 255 * alpha, maxColorValue = 255),
+            rgb(rep(1, imglen), rep(1, imglen), rep(1, imglen),
+                img[, , 4] * alpha)), nrow = dim(img)[1])
+    }
+    return(mat)
 }
 
 #' Create an animated gif of a map
@@ -234,7 +255,7 @@ add_phylopic_to_map <- function(img, alpha = 0.2, x = NULL, y = NULL, ysize = NU
 #' @param specimen_df Cached fossil localities and times
 #' @param interval How many seconds per frame
 #' @param use_cached_maps_only If TRUE, only uses the maps already in the package, rather than pulling from gplates
-#' @return An animated gif
+#' @return Path to animated gif and the list of ggplo2 objects
 #' @export
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE) {
   plotlist <- list()
@@ -285,7 +306,8 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
           for (taxon_to_add in sequence(nrow(taxon_df))) {
           #  my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
-            my_plot <-  my_plot + add_phylopic_to_map(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
+            my_plot <-  my_plot + add_phylopic_to_map(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2, color="red")
+            my_plot
           }
         }
       }
@@ -305,7 +327,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
       plot(anim)
     }
   }, movie.name=movie.name)
-  return(magick::image_read(movie.name))
+  return(list(gif=magick::image_read(movie.name), plots=plotlist))
 }
 
 #' function to add pbdb paleo data points (lat and long) to gplatesr created maps

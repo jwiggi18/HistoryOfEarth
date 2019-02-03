@@ -29,7 +29,7 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{use_cached_maps_only}{If TRUE, only uses the maps already in the package, rather than pulling from gplates}
 }
 \value{
-An animated gif
+Path to animated gif and the list of ggplo2 objects
 }
 \description{
 This can work with or without taxa.
