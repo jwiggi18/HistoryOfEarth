@@ -113,6 +113,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   animatedmaps[["all"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa)
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period)-1)) {
+    print(paste("Making map for all taxa, ", age_df$Period[period_index]))
     animatedmaps[["all"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index])
   }
 
@@ -121,15 +122,19 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL)
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period)-1)) {
+    print(paste("Making map for no taxa, ", age_df$Period[period_index]))
     animatedmaps[["none"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index])
   }
 
   #third do single taxa, all periods
 
   for (taxon_index in seq_along(taxa)) {
+    print(paste("Making map for taxon ",  taxa[taxon_index], " all periods"))
+
     animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index])
     # now loop over periods, all taxa
     for (period_index in sequence(length(age_df$Period)-1)) {
+      print(paste("Making map for taxon ",  taxa[taxon_index], ", period ", age_df$Period[period_index]))
       animatedmaps[[taxon_index+2]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=age_df$Period[period_index])
     }
   }
