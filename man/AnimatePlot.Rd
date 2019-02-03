@@ -8,7 +8,7 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
   taxa = NULL, step_size = 1, age_df = GetAgeDF(),
   specimen_df = specimens, interval = 0.5,
   use_cached_maps_only = FALSE, use_phylopics = TRUE,
-  point_color = "red")
+  point_color = "red", gif_name = NULL)
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -32,9 +32,11 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{use_phylopics}{If TRUE, use phylopic images; otherwise, use dots}
 
 \item{point_color}{If just plotting points, what color}
+
+\item{gif_name}{Path to gif, including its name}
 }
 \value{
-Path to animated gif and the list of ggplo2 objects
+Animated gif and the list of ggplo2 objects
 }
 \description{
 This can work with or without taxa.

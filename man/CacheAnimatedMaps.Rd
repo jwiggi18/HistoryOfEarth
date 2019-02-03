@@ -8,7 +8,7 @@ CacheAnimatedMaps(start_time = NULL, stop_time = NULL,
   periods = NULL, taxa = GetTaxa(), step_size = 1,
   age_df = GetAgeDF(), specimen_df = specimens, interval = 0.5,
   use_cached_maps_only = TRUE, use_phylopics = FALSE,
-  point_color = "red")
+  point_color = "red", gif_name = NULL)
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -32,6 +32,8 @@ CacheAnimatedMaps(start_time = NULL, stop_time = NULL,
 \item{use_phylopics}{If TRUE, use phylopic images; otherwise, use dots}
 
 \item{point_color}{If just plotting points, what color}
+
+\item{gif_name}{Path to gif, including its name}
 }
 \description{
 Create an array of animated maps, where the rows are taxa and the columns periods. "all" and "none" are possible taxa, and "all" is a possible period

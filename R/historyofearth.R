@@ -96,7 +96,7 @@ CacheTaxonImages <- function(taxa=GetTaxa()) {
 #' Create an array of animated maps, where the rows are taxa and the columns periods. "all" and "none" are possible taxa, and "all" is a possible period
 #' @inheritParams AnimatePlot
 #' @export
-CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=GetTaxa(), step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=TRUE, use_phylopics=FALSE, point_color="red") {
+CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=GetTaxa(), step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=TRUE, use_phylopics=FALSE, point_color="red", gif_name=NULL) {
 
   all_taxa <- c("all", "none", taxa)
   all_periods <- c("all", age_df$Period)
@@ -110,20 +110,20 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   #animatedmaps <- array(list(), c(2+length(taxa), 1+nrow(age_df)))
 
   #first do all taxa, all periods
-  animatedmaps[["all"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa)
+  animatedmaps[["all"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_all.gif")))
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period)-1)) {
     print(paste("Making map for all taxa, ", age_df$Period[period_index]))
-    animatedmaps[["all"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index])
+    animatedmaps[["all"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_", age_df$Period[period_index], ".gif")))
   }
 
 
   #second do no taxa, all periods
-  animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL)
+  animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif")))
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period)-1)) {
     print(paste("Making map for no taxa, ", age_df$Period[period_index]))
-    animatedmaps[["none"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index])
+    animatedmaps[["none"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_", age_df$Period[period_index], ".gif")))
   }
 
   #third do single taxa, all periods
@@ -131,16 +131,21 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   for (taxon_index in seq_along(taxa)) {
     print(paste("Making map for taxon ",  taxa[taxon_index], " all periods"))
 
-    animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index])
+    animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",taxa[taxon_index], "_all.gif")))
     # now loop over periods, all taxa
     for (period_index in sequence(length(age_df$Period)-1)) {
       print(paste("Making map for taxon ",  taxa[taxon_index], ", period ", age_df$Period[period_index]))
-      animatedmaps[[taxon_index+2]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=age_df$Period[period_index])
+      animatedmaps[[taxon_index+2]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",taxa[taxon_index], "_", age_df$Period[period_index], ".gif")))
     }
   }
 
 
   if(!is.null(animatedmaps)) {
+    for (t_index in seq_along(all_taxa)) {
+      for (p_index in seq_along(all_periods)) {
+        #try(magick::image_write(animatedmaps[[all_taxa[t_index]]][[all_periods[p_index]]], gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",all_taxa[t_index], "_", all_periods[p_index], ".gif"))))
+      }
+    }
     usethis::use_data(animatedmaps, overwrite=TRUE)
   }
 }
@@ -311,9 +316,10 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @param use_cached_maps_only If TRUE, only uses the maps already in the package, rather than pulling from gplates
 #' @param use_phylopics If TRUE, use phylopic images; otherwise, use dots
 #' @param point_color If just plotting points, what color
-#' @return Path to animated gif and the list of ggplo2 objects
+#' @param gif_name Path to gif, including its name
+#' @return Animated gif and the list of ggplo2 objects
 #' @export
-AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red") {
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red", gif_name=NULL) {
   plotlist <- list()
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps, "[[", "labels"), "[[", "title")))))
   names(paleomap_info) <- names(paleomaps)
@@ -384,6 +390,9 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     animation::ani.options(interval = interval, loop=TRUE)
 
     movie.name <- tempfile(pattern="animation", fileext="gif")
+    if(!is.null(gif_name)) {
+      movie.name <- gif_name
+    }
     animation::saveGIF({
       for (i in seq_along(plotlist)) {
         anim <- plotlist[[i]]
@@ -396,7 +405,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
         }
       }
     }, movie.name=movie.name)
-    return(list(gif=magick::image_read(movie.name), plots=plotlist))
+    return(list(gif=movie.name, plots=plotlist))
   } else {
     return(list(gif=NA, plots=NA))
   }
