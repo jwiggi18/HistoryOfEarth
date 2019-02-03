@@ -7,7 +7,8 @@
 AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
   taxa = NULL, step_size = 10, age_df = GetAgeDF(),
   specimen_df = specimens, interval = 0.5,
-  use_cached_maps_only = FALSE)
+  use_cached_maps_only = FALSE, use_phylopics = TRUE,
+  point_color = "red")
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -27,6 +28,10 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{interval}{How many seconds per frame}
 
 \item{use_cached_maps_only}{If TRUE, only uses the maps already in the package, rather than pulling from gplates}
+
+\item{use_phylopics}{If TRUE, use phylopic images; otherwise, use dots}
+
+\item{point_color}{If just plotting points, what color}
 }
 \value{
 Path to animated gif and the list of ggplo2 objects

@@ -255,9 +255,11 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @param specimen_df Cached fossil localities and times
 #' @param interval How many seconds per frame
 #' @param use_cached_maps_only If TRUE, only uses the maps already in the package, rather than pulling from gplates
+#' @param use_phylopics If TRUE, use phylopic images; otherwise, use dots
+#' @param point_color If just plotting points, what color
 #' @return Path to animated gif and the list of ggplo2 objects
 #' @export
-AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE) {
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=10, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red") {
   plotlist <- list()
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps, "[[", "labels"), "[[", "title")))))
   names(paleomap_info) <- names(paleomaps)
@@ -267,8 +269,10 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.paleolat),]
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.max_ma),]
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.min_ma),]
-    start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
-    stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
+    if(nrow(specimen_df)>0) {
+      start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
+      stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
+    }
   }
   if(!is.null(periods)) {
     relevant_periods <- age_df[age_df$Period %in% periods,]
@@ -304,10 +308,18 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- specimen_df[specimen_df$searched_taxon==taxa[taxon_index],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
-          for (taxon_to_add in sequence(nrow(taxon_df))) {
-          #  my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
-            my_plot <-  my_plot + add_phylopic_to_map(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2, color="red")
-            my_plot
+          if(use_phylopics) {
+
+            for (taxon_to_add in sequence(nrow(taxon_df))) {
+            #  my_plot <-  my_plot + rphylopic::add_phylopic(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
+                my_plot <-  my_plot + add_phylopic_to_map(img, 1, taxon_df$pbdb_data.paleolng[taxon_to_add], taxon_df$pbdb_data.paleolat[taxon_to_add] , ysize = 0.2)
+            }
+          } else {
+            if(nrow(taxon_df)>0) {
+              taxon_df$Color <- point_color
+              my_plot <- add_points(my_plot, taxon_df)
+              my_plot <- my_plot + ggplot2::theme(legend.position="none")
+            }
           }
         }
       }
