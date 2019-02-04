@@ -286,12 +286,14 @@ CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/')
 #' @param start_age How many MYA to start making the map
 #' @param stop_age How many MYA to stop making the map
 #' @param step_size How many MY between maps
+#' @param age_df Output of GetAgeDF()
 #' @param base_url What URL to use for gplates
 #' @return list of maps, with names for periods
 #' @export
-CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=1, base_url='http://gws.gplates.org/') {
+CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
-  ages <- seq(from=start_age, to=stop_age, by=step_size)
+  ages <- sort(unique(c(seq(from=start_age, to=stop_age, by=step_size), age_df$MinMa, age_df$MaxMa, age_df$MidMa)))
+  ages <- ages[ages<=540] # Cannot reconstruct that long ago
   maplist <- vector("list", length(ages))
   for (i in seq_along(ages)) {
     maplist[[i]] <- gplatesr::land_sea(mya=ages[i], base_url=base_url)
@@ -377,8 +379,8 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @export
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red", gif_name=NULL) {
   plotlist <- list()
-  paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps, "[[", "labels"), "[[", "title")))))
-  names(paleomap_info) <- names(paleomaps)
+  paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps_allages, "[[", "labels"), "[[", "title")))))
+  #names(paleomap_info) <- names(paleomaps)
   if(!is.null(taxa)) {
     specimen_df <- specimen_df[specimen_df$searched_taxon %in% taxa,] # subset of the taxa we want
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.paleolng),]
@@ -410,7 +412,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     if(is.null(my_plot)) { #as a backup, go to the cache
       matching_map_index <- which(paleomap_info==ages[i])
       if(length(matching_map_index)>0) {
-        my_plot <- paleomaps[[matching_map_index]]
+        my_plot <- paleomaps_allages[[matching_map_index]]
       }
     }
     if(!is.null(my_plot)) {

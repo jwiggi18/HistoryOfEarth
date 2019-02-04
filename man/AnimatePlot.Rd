@@ -42,7 +42,7 @@ Animated gif and the list of ggplo2 objects
 This can work with or without taxa.
 }
 \details{
-The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 600 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
+The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 540 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
 
 a <- AnimatePlot(use_cached_maps_only=TRUE, step_size=1, taxa=GetTaxa())
 }
