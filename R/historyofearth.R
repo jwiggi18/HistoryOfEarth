@@ -276,7 +276,7 @@ CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/')
 #' @param base_url What URL to use for gplates
 #' @return list of maps, with names for periods
 #' @export
-CreateMapListAllTimes <- function(start_age=600, stop_age=0, step_size=1, base_url='http://gws.gplates.org/') {
+CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=1, base_url='http://gws.gplates.org/') {
   #create map list
   ages <- seq(from=start_age, to=stop_age, by=step_size)
   maplist <- vector("list", length(ages))
@@ -344,7 +344,7 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #'
 #' This can work with or without taxa.
 #'
-#' The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 600 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
+#' The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 540 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
 #'
 #' a <- AnimatePlot(use_cached_maps_only=TRUE, step_size=1, taxa=GetTaxa())
 #'
@@ -386,7 +386,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     start_time <- 0
   }
   if(is.null(stop_time)) {
-    stop_time <- 600
+    stop_time <- 540
   }
   ages<-seq(from=start_time, to=stop_time, by=step_size)
   for (i in seq_along(ages)) {
