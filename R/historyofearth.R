@@ -32,8 +32,20 @@ CacheTree <- function(taxa=GetTaxa()) {
 CacheMaps <- function(age_df=GetAgeDF()) {
   paleomaps <- NULL
   try(paleomaps <- CreateMapList(age_df))
-  if(!is.null(chronogram)) {
+  if(!is.null(paleomaps)) {
     usethis::use_data(paleomaps,   overwrite=TRUE)
+  }
+}
+
+#' Cache map information all ages
+#'
+#' @param base_url What URL to use for gplates
+#' @export
+CacheMapsAllAges <- function(base_url='http://gws.gplates.org/') {
+  paleomaps_allages <- NULL
+  try(paleomaps_allages <- CreateMapListAllTimes(base_url=base_url))
+  if(!is.null(paleomaps_allages)) {
+    usethis::use_data(paleomaps_allages,   overwrite=TRUE)
   }
 }
 
@@ -234,15 +246,46 @@ latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
 
 #' Make a list of maps for all periods
 #'
+#' By default, uses, gws.gplates.org
+#'
+#' However, you can do gplatesr::launch_docker() if you are on a machine with docker running, then use base_url="http://localhost:8888/" to use an instance running locally
+#'
 #' @param age_df Output of GetAgeDF()
+#' @param base_url What URL to use for gplates
 #' @return list of maps, with names for periods
 #' @export
-CreateMapList <- function(age_df=GetAgeDF()) {
+CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
-  maplist <- lapply(age_df$MidMa, gplatesr::black_white)
+  maplist <- lapply(age_df$MidMa, gplatesr::land_sea(base_url=base_url))
 
   #name maplist according to period
   names(maplist) <- age_df$Period
+
+  return(maplist)
+}
+
+#' Make a list of maps for all times
+#'
+#' By default, uses, gws.gplates.org
+#'
+#' However, you can do gplatesr::launch_docker() if you are on a machine with docker running, then use base_url="http://localhost:8888/" to use an instance running locally
+#'
+#' @param start_age How many MYA to start making the map
+#' @param stop_age How many MYA to stop making the map
+#' @param step_size How many MY between maps
+#' @param base_url What URL to use for gplates
+#' @return list of maps, with names for periods
+#' @export
+CreateMapListAllTimes <- function(start_age=600, stop_age=0, step_size=1, base_url='http://gws.gplates.org/') {
+  #create map list
+  ages <- seq(from=start_age, to=stop_age, by=step_size)
+  maplist <- vector("list", length(ages))
+  for (i in seq_along(ages)) {
+    maplist[[i]] <- gplatesr::land_sea(mya=ages[i], base_url=base_url)
+  }
+
+  #name maplist according to age
+  names(maplist) <- ages
 
   return(maplist)
 }

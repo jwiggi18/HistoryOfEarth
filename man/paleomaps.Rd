@@ -11,4 +11,7 @@ data(paleomaps)
 \description{
 Cached maps using LunaSare/gplatesr and gplates, based on example code from https://github.com/GPlates/gplates_web_service_doc by Michael Chin. It uses the https://www.gplates.org/ for its source.
 }
+\details{
+Returns one map per period
+}
 \keyword{datasets}
