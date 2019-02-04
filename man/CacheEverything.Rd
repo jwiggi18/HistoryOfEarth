@@ -13,4 +13,5 @@ CacheEverything(taxa = GetTaxa(), age_df = GetAgeDF())
 }
 \description{
 Just to save typing, run all the caching functions
+For all but the images, this won't overwrite if the new object is empty
 }

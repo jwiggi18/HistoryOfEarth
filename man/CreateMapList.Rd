@@ -4,14 +4,20 @@
 \alias{CreateMapList}
 \title{Make a list of maps for all periods}
 \usage{
-CreateMapList(age_df = GetAgeDF())
+CreateMapList(age_df = GetAgeDF(),
+  base_url = "http://gws.gplates.org/")
 }
 \arguments{
 \item{age_df}{Output of GetAgeDF()}
+
+\item{base_url}{What URL to use for gplates}
 }
 \value{
 list of maps, with names for periods
 }
 \description{
-Make a list of maps for all periods
+By default, uses, gws.gplates.org
+}
+\details{
+However, you can do gplatesr::launch_docker() if you are on a machine with docker running, then use base_url="http://localhost:8888/" to use an instance running locally
 }
