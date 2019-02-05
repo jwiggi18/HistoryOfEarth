@@ -289,7 +289,7 @@ CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/')
 #' @export
 CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
-  ages <- sort(unique(c(seq(from=start_age, to=stop_age, by=step_size), age_df$MinMa, age_df$MaxMa, age_df$MidMa)))
+  ages <- sort(unique(c(seq(from=start_age, to=stop_age, by=step_size), age_df$MinMa, age_df$MaxMa, age_df$MidMa, 0, 1, 2, 3, 4, 5)))
   ages <- ages[ages<=540] # Cannot reconstruct that long ago
   maplist <- vector("list", length(ages))
   for (i in seq_along(ages)) {

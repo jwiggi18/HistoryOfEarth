@@ -12,8 +12,8 @@ ui <- fluidPage(
 
           shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
-             choices = HistoryOfEarth::GetAgeDF()$Period,
-             multiple = FALSE, selected="Quaternary")))),
+             choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
+             multiple = FALSE, selected="all")))),
 
     shinydashboard::dashboardBody(
       tags$head(tags$style(HTML('
@@ -53,7 +53,7 @@ server <- function(input, output) {
     ape::axisPhylo()
   })
 
-  data(paleomaps, package="HistoryOfEarth")
+  #data(paleomaps, package="HistoryOfEarth")
 
 #  chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
 #chosen_period <- reactive({c(HistoryOfEarth::GetAgeDF()$Period) == input$period})
@@ -62,7 +62,16 @@ chosen_period <- reactive({input$period})
   #output$map <- renderPlot({paleomaps[[chosen_period()]]})
   #error in [[: attempt to select less than one element in integerOneIndex
   #output$map <- renderPlot({paleomaps[["Cambrian"]]})
-  output$map <- renderPlot({paleomaps[[chosen_period()]]})
+
+#  output$map <- renderPlot({paleomaps[[chosen_period()]]})
+  output$map <- renderImage({
+    # When input$n is 1, filename is ./images/image1.jpeg
+    filename <- normalizePath(file.path('./www/',
+                              paste('map_all_', input$period, '.gif', sep='')))
+
+    # Return a list containing the filename
+    list(src = filename)
+  }, deleteFile = FALSE)
 
 
 }
