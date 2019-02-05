@@ -219,6 +219,7 @@ GetAgeDF <- function() {
 GetTaxa <- function() {
   return(c("Attercopus", "Gorilla", "Panthera", "Homo", "Tyto", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Solanum", "Prunus", "Rosa", "Climacograptus", "Anomalocaris", "Dunkleosteus", "Halysites", "Agathiceras", "Archaeopteryx", "Juramaia", "Hylonomus", "Elginerpeton", "Rhyniognatha", "Aculeisporites", "Canadaspis", "Arandaspis", "Tyrannosaurus", "Triceratops", "Diplodocus", "Brachiosaurus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Exaeretodon", "Redondasaurus", "araucarioxylon", "Pelagiella", "Burgessia", "Hallucigenia", "Pikaia", "Cameroceras", "Acanthostega", "Tulerpeton", "Pareiasaurus", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Herrerasaurus", "Eudimorphodon", "Plesiosaurus", "Lesothosaurus", "Stegosaurus", "Kulindadromeus", "Megazostrodon", "Anchiornis", "Allosaurus", "Giraffatitan", "Teleoceras", "Diceratherium", "Nimravus", "Enhydrocyon", "Sahelanthropus", "Phidippus", "Tusoteuthis"))
 }
+#small change to see if taxa change
 #removed:
 #Plants: "Rosa","Aculeisporites","Solanum", "Prunus","araucarioxylon"
 #Dinsaurs: "Dromaius", "Velociraptor"
