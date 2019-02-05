@@ -28,12 +28,12 @@ ui <- fluidPage(
 
           column(5,
             h4("Tree"),
-            shinydashboard::box(plotOutput("tree"))),
+            plotOutput("tree")),
 
             column(7,
               textOutput("period_name"),
             #  h4("Map"),
-              shinydashboard::box(plotOutput("map")))
+              plotOutput("map"))
       )
 
     )
