@@ -25,6 +25,19 @@ CacheTree <- function(taxa=GetTaxa()) {
   }
 }
 
+#' Cache phylotree tree information
+#'
+#' @param taxa vector of taxa
+#' @export
+cache_pictree <- function(tree=GetTree()) {
+  pictree <- NULL
+  try(pictree <- get_pictree(tree = tree))
+  if(!is.null(pictree)) {
+    usethis::use_data(pictree, overwrite=TRUE)
+  }
+}
+
+
 #' Cache map information
 #'
 #' @param age_df output of GetAgeDF()
@@ -493,6 +506,15 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 #plotPhylopicTreePBDB(tree = tree)
   timeTree <- paleotree::dateTaxonTreePBDB(tree)
   return(timeTree)
+}
+
+#' Get phylopic tree
+#'
+#' @param taxa Vector of taxon names, default is GetTree()
+#' @return a plotted tree with phylopics
+#' @export
+get_pictree <- function(tree = GetTree()) {
+  plotPhylopicTreePBDB(tree = tree)
 }
 
 #' flips the direction of the tree at each node
