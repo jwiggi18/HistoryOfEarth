@@ -4,7 +4,7 @@
 \alias{CreateMapListAllTimes}
 \title{Make a list of maps for all times}
 \usage{
-CreateMapListAllTimes(start_age = 0, stop_age = 540, step_size = 5,
+CreateMapListAllTimes(start_age = 0, stop_age = 540, step_size = 10,
   age_df = GetAgeDF(), base_url = "http://gws.gplates.org/")
 }
 \arguments{
