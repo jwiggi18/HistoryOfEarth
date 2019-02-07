@@ -51,7 +51,7 @@ server <- function(input, output) {
     #ape::plot.phylo(chronogram)
     #ape::axisPhylo()
 
-    
+
     #to plot phylopic tree
     get_pictree()
   })

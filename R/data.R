@@ -46,16 +46,16 @@ NULL
 #' @format A data.frame with info on specimens
 NULL
 
-#' Taxon Images
-#'
-#' Images of taxa from phylopic
-#'
-#' @docType data
-#' @keywords datasets
-#' @name taxonimages
-#' @usage data(taxonimages)
-#' @format A list of images with names equal to the taxon names
-NULL
+# #' Taxon Images
+# #'
+# #' Images of taxa from phylopic
+# #'
+# #' @docType data
+# #' @keywords datasets
+# #' @name taxonimages
+# #' @usage data(taxonimages)
+# #' @format A list of images with names equal to the taxon names
+# NULL
 
 # #' Animated maps
 # #'

@@ -105,15 +105,16 @@ CacheTaxonImages <- function(taxa=GetTaxa()) {
       }
     }
     if(!is.null(found_image)) {
-      taxonimages[[taxon.index]] <- found_image
-      print(paste0("Cached image for ", taxa[taxon.index]))
-    } else {
-      taxonimages[[taxon.index]] <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]] #just DNA
-      print(paste0("Cached just a placeholder (DNA) for ", taxa[taxon.index]))
+      rphylopic::save_png(found_image, paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/taxon_", gsub(" ", "_", taxa[taxon.index]),".png"))
+    #  taxonimages[[taxon.index]] <- found_image
+    #  print(paste0("Cached image for ", taxa[taxon.index]))
+  #  } else {
+  #    taxonimages[[taxon.index]] <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]] #just DNA
+  #    print(paste0("Cached just a placeholder (DNA) for ", taxa[taxon.index]))
     }
   }
-  names(taxonimages) <- taxa
-  usethis::use_data(taxonimages, overwrite=TRUE)
+  #names(taxonimages) <- taxa
+  #usethis::use_data(taxonimages, overwrite=TRUE)
 }
 
 #' Cache animated maps
@@ -516,6 +517,7 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 #' @export
 get_pictree <- function(tree = NULL) {
   if(is.null(tree)) {
+    data(chronogram)
     tree <- chronogram
   }
   paleotree::plotPhylopicTreePBDB(tree = tree)
