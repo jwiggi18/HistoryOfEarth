@@ -4,7 +4,7 @@
 \alias{get_pictree}
 \title{Get phylopic tree}
 \usage{
-get_pictree(tree = GetTree())
+get_pictree(tree = NULL)
 }
 \arguments{
 \item{tree}{phylo object}
@@ -13,5 +13,5 @@ get_pictree(tree = GetTree())
 a plotted tree with phylopics
 }
 \description{
-Get phylopic tree
+If no tree is provided, will use the cached tree
 }

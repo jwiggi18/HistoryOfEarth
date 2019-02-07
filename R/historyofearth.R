@@ -510,11 +510,16 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 
 #' Get phylopic tree
 #'
+#' If no tree is provided, will use the cached tree
+#'
 #' @param tree phylo object
 #' @return a plotted tree with phylopics
 #' @export
-get_pictree <- function(tree = GetTree()) {
-  plotPhylopicTreePBDB(tree = tree)
+get_pictree <- function(tree = NULL) {
+  if(is.null(tree)) {
+    tree <- chronogram
+  }
+  paleotree::plotPhylopicTreePBDB(tree = tree)
 }
 
 #' flips the direction of the tree at each node
