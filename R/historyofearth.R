@@ -171,7 +171,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
         #try(magick::image_write(animatedmaps[[all_taxa[t_index]]][[all_periods[p_index]]], gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",all_taxa[t_index], "_", all_periods[p_index], ".gif"))))
       }
     }
-    usethis::use_data(animatedmaps, overwrite=TRUE)
+    #usethis::use_data(animatedmaps, overwrite=TRUE)
   }
 }
 
@@ -510,7 +510,7 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 
 #' Get phylopic tree
 #'
-#' @param taxa Vector of taxon names, default is GetTree()
+#' @param tree phylo object
 #' @return a plotted tree with phylopics
 #' @export
 get_pictree <- function(tree = GetTree()) {

@@ -7,7 +7,7 @@
 get_pictree(tree = GetTree())
 }
 \arguments{
-\item{taxa}{Vector of taxon names, default is GetTree()}
+\item{tree}{phylo object}
 }
 \value{
 a plotted tree with phylopics
