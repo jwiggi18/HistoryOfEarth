@@ -385,7 +385,6 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @param use_phylopics If TRUE, use phylopic images; otherwise, use dots
 #' @param point_color If just plotting points, what color
 #' @param gif_name Path to gif, including its name
-#' @return Animated gif and the list of ggplo2 objects
 #' @export
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red", gif_name=NULL) {
   plotlist <- list()
@@ -473,9 +472,9 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
         }
       }
     }, movie.name=movie.name)
-    return(list(gif=movie.name, plots=plotlist))
-  } else {
-    return(list(gif=NA, plots=NA))
+  #  return(list(gif=movie.name, plots=plotlist))
+#  } else {
+  #  return(list(gif=NA, plots=NA))
   }
 }
 

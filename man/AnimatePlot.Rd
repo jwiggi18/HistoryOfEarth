@@ -35,9 +35,6 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 
 \item{gif_name}{Path to gif, including its name}
 }
-\value{
-Animated gif and the list of ggplo2 objects
-}
 \description{
 This can work with or without taxa.
 }
