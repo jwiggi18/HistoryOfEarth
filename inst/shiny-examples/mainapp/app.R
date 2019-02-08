@@ -48,12 +48,12 @@ server <- function(input, output) {
   #  library(paleotree)
 
     data(chronogram, package="HistoryOfEarth")
-    ape::plot.phylo(chronogram)
-    ape::axisPhylo()
+    #ape::plot.phylo(chronogram)
+    #ape::axisPhylo()
 
 
     #to plot phylopic tree
-    #get_pictree()
+    get_pictree()
   })
 
   #data(paleomaps, package="HistoryOfEarth")

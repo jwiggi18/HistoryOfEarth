@@ -76,13 +76,23 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
   }
 }
 
+#' Cache taxon images from phylopic
+#'
+#' @param tree Tree from dateTaxonTreePBDB
+#' @param cacheDir Where to store trees
+#' @export
+CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www") {
+  paleotree::cachePhyloPicPNG(tree, cacheDir)
+  print("Remember to add these using git")
+}
+
 #' Cache taxon information
 #'
 #' Mainly to store images. If an image isn't found for a taxon, an image of DNA is used instead
 #'
-#' @param taxa vector of taxa
+#' @param taxa Vector of taxon names
 #' @export
-CacheTaxonImages <- function(taxa=GetTaxa()) {
+CacheTaxonImagesByName <- function(taxa=GetTaxa()) {
   taxonimages <- list()
   for (taxon.index in seq_along(taxa)) {
     taxon_id <- NULL
@@ -188,7 +198,7 @@ CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
   CacheSpecimenAges(taxa)
   CacheMaps(age_df)
   CacheTree(taxa)
-  CacheTaxonImages(taxa)
+  #CacheTaxonImages(taxa)
 }
 
 #' Get information on specimens from pbdb
@@ -513,14 +523,15 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 #' If no tree is provided, will use the cached tree
 #'
 #' @param tree phylo object
+#' @param cacheDir where to load images from if they exist
 #' @return a plotted tree with phylopics
 #' @export
-get_pictree <- function(tree = NULL) {
+get_pictree <- function(tree = NULL, cacheDir='./www/') {
   if(is.null(tree)) {
     data(chronogram)
     tree <- chronogram
   }
-  paleotree::plotPhylopicTreePBDB(tree = tree)
+  paleotree::plotPhylopicTreePBDB(tree = tree, cacheDir=cacheDir)
 }
 
 #' flips the direction of the tree at each node
