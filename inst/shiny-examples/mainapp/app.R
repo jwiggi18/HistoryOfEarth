@@ -47,13 +47,13 @@ server <- function(input, output) {
   output$tree <- renderPlot({
   #  library(paleotree)
 
-    #data(chronogram, package="HistoryOfEarth")
-    #ape::plot.phylo(chronogram)
-    #ape::axisPhylo()
+    data(chronogram, package="HistoryOfEarth")
+    ape::plot.phylo(chronogram)
+    ape::axisPhylo()
 
 
     #to plot phylopic tree
-    get_pictree()
+    #get_pictree()
   })
 
   #data(paleomaps, package="HistoryOfEarth")
