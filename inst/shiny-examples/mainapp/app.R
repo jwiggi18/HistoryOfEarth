@@ -8,7 +8,7 @@ ui <- fluidPage(
       #  id = "tabs",
         selectInput("genus", "Choose a genus:",
              choices = HistoryOfEarth::GetTaxa(),
-             multiple = TRUE)),
+             multiple = FALSE)),
 
           shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
@@ -53,7 +53,7 @@ server <- function(input, output) {
 
 
     #to plot phylopic tree
-    get_pictree()
+    HistoryOfEarth::get_pictree(height=800)
   })
 
   #data(paleomaps, package="HistoryOfEarth")

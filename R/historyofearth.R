@@ -31,7 +31,7 @@ CacheTree <- function(taxa=GetTaxa()) {
 #' @export
 cache_pictree <- function(tree=GetTree()) {
   pictree <- NULL
-  try(pictree <- get_pictree(tree = tree))
+  try(pictree <- ctree(tree = tree))
   if(!is.null(pictree)) {
     usethis::use_data(pictree, overwrite=TRUE)
   }
@@ -524,14 +524,15 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 #'
 #' @param tree phylo object
 #' @param cacheDir where to load images from if they exist
+#' @param ... additional arguments to pass
 #' @return a plotted tree with phylopics
 #' @export
-get_pictree <- function(tree = NULL, cacheDir='./www/') {
+get_pictree <- function(tree = NULL, cacheDir='./www/', ...) {
   if(is.null(tree)) {
     data(chronogram)
     tree <- chronogram
   }
-  paleotree::plotPhylopicTreePBDB(tree = tree, cacheDir=cacheDir)
+  paleotree::plotPhylopicTreePBDB(tree = tree, cacheDir=cacheDir, ...)
 }
 
 #' flips the direction of the tree at each node

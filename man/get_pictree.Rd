@@ -4,12 +4,14 @@
 \alias{get_pictree}
 \title{Get phylopic tree}
 \usage{
-get_pictree(tree = NULL, cacheDir = "./www/")
+get_pictree(tree = NULL, cacheDir = "./www/", ...)
 }
 \arguments{
 \item{tree}{phylo object}
 
 \item{cacheDir}{where to load images from if they exist}
+
+\item{...}{additional arguments to pass}
 }
 \value{
 a plotted tree with phylopics
