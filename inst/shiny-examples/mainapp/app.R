@@ -43,7 +43,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-
+  library(HistoryOfEarth)
   output$tree <- renderPlot({
   #  library(paleotree)
 
@@ -53,8 +53,8 @@ server <- function(input, output) {
 
 
     #to plot phylopic tree
-    HistoryOfEarth::get_pictree(height=800)
-  })
+    HistoryOfEarth::get_pictree()
+  }, height=1000)
 
   #data(paleomaps, package="HistoryOfEarth")
 
