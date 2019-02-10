@@ -15,12 +15,10 @@ Imports:
     ggthemes,
     sp,
     usethis,
-    gplatesr,
-    paleotree,
     rphylopic,
     animation,
     magick
 Remotes:
     LunaSare/gplatesr,
-    dwbapst/paleotree@developmentBranch
+    bomeara/paleotree@developmentBranch
 RoxygenNote: 6.1.1
