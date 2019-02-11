@@ -516,6 +516,45 @@ add_points <- function(map, df) {
   map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, colour=Color))
 }
 
+#' function to add axis to a tree plot
+#'
+#' It can highlight chosen periods
+#'
+#' @param focalPeriod The period to highlight, using names form GetAgeDF()
+#' @param age_df Return from GetAgeDF(), which has colors
+#' @return modifies current plot
+#' @export
+AddAxis <- function(focalPeriod=NULL, age_df=GetAgeDF()) {
+  lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
+  focal_index <- 0
+  if(!is.null(focalPeriod)) {
+    if(focalPeriod != "all") {
+        focal_index <- which(age_df$Period==focalPeriod)
+    }
+  }
+  for (i in sequence(nrow(age_df))) {
+      if(i%%2==0 & i!=focal_index) {
+          rect(xleft=max(lastPP$xx)-age_df$MaxMa[i], ybottom=min(lastPP$yy), xright=max(lastPP$xx)-age_df$MinMa[i], ytop=max(lastPP$yy), col=rgb(0,0,0,.2), border=NA)
+      }
+      if(focal_index>0) {
+          rect(xleft=max(lastPP$xx)-age_df$MaxMa[focal_index], ybottom=min(lastPP$yy), xright=max(lastPP$xx)-age_df$MinMa[focal_index], ytop=max(lastPP$yy), col=grDevices::adjustcolor(age_df$Color[focal_index],alpha.f=0.1), border=NA)
+      }
+      abline(v=max(lastPP$xx)-age_df$MaxMa[i], col=rgb(0,0,0,.1))
+      abline(v=max(lastPP$xx)-age_df$MinMa[i], col=rgb(0,0,0,.1))
+  }
+  boundaries <- sort(unique(c(age_df$MaxMa, age_df$MinMa)))
+  boundary_positions <- max(lastPP$xx) - boundaries
+
+  axis(side=1, at=boundary_positions, labels=round(boundaries), lwd=0, lwd.ticks=1, cex.axis=0.7, col.axis="darkgray", col.ticks="darkgray")
+
+  positions <- sequence(nrow(age_df))
+  axis(side=3, at=max(lastPP$xx) - age_df$MidMa[positions%%2==0], labels=age_df$Period[positions%%2==0], lwd=0, cex.axis=0.7, padj=0, col.axis="black")
+  axis(side=3, at=max(lastPP$xx) - age_df$MidMa[positions%%2==1], labels=age_df$Period[positions%%2==1], lwd=0, cex.axis=0.7, padj=1, col.axis="black")
+  if(focal_index>0) {
+     axis(side=3, at=max(lastPP$xx) - age_df$MidMa[focal_index], labels=age_df$Period[focal_index], col.axis=age_df$Color[focal_index], cex.axis=0.7, lwd=0, padj=ifelse(focal_index%%2==0,0,1))
+  }
+}
+
 #' Get tree
 #'
 #' @param taxa Vector of taxon names
