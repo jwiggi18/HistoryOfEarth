@@ -17,7 +17,8 @@ Imports:
     usethis,
     rphylopic,
     animation,
-    magick
+    magick,
+    plotrix
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
