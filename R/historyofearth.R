@@ -526,7 +526,7 @@ add_points <- function(map, df) {
 #' @return modifies current plot
 #' @export
 AddAxis <- function(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv), focalPeriod=NULL, age_df=GetAgeDF()) {
-  lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
+#  lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
   focal_index <- 0
   if(!is.null(focalPeriod)) {
     if(focalPeriod != "all") {
