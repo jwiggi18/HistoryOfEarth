@@ -241,18 +241,9 @@ GetAgeDF <- function() {
 #' @return vector of names
 #' @export
 GetTaxa <- function() {
-  return(c("Attercopus", "Gorilla", "Panthera", "Homo", "Tyto", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Climacograptus", "Anomalocaris", "Dunkleosteus", "Halysites", "Agathiceras", "Archaeopteryx", "Juramaia", "Hylonomus", "Elginerpeton", "Rhyniognatha", "Canadaspis", "Arandaspis", "Tyrannosaurus", "Triceratops", "Diplodocus", "Brachiosaurus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Exaeretodon", "Redondasaurus", "Pelagiella", "Burgessia", "Hallucigenia", "Pikaia", "Cameroceras", "Acanthostega", "Tulerpeton", "Pareiasaurus", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Herrerasaurus", "Eudimorphodon", "Plesiosaurus", "Lesothosaurus", "Stegosaurus", "Kulindadromeus", "Megazostrodon", "Anchiornis", "Allosaurus", "Giraffatitan", "Teleoceras", "Diceratherium", "Nimravus", "Enhydrocyon", "Sahelanthropus", "Phidippus", "Tusoteuthis"))
+  return(c("Attercopus", "Gorilla", "Homo", "Tyto", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Climacograptus","Anomalocaris", "Dunkleosteus", "Archaeopteryx", "Juramaia", "Hylonomus", "Rhyniognatha", "Arandaspis", "Tyrannosaurus", "Triceratops", "Diplodocus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Redondasaurus", "Pelagiella", "Cameroceras", "Acanthostega", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Eudimorphodon", "Plesiosaurus", "Stegosaurus", "Megazostrodon", "Anchiornis", "Giraffatitan", "Teleoceras", "Nimravus", "Enhydrocyon", "Sahelanthropus", "Phidippus", "Tusoteuthis"))
 }
-#small change to see if taxa change
-#removed:
-#Plants: "Rosa","Aculeisporites","Solanum", "Prunus","araucarioxylon"
-#Dinsaurs: "Dromaius", "Velociraptor"
-#"Histiodella",
-#"Naraoia",
 
-#added:
-#Phidippus - spider
-#Tusotheuthis - squid
 
 #' Get information on specimens from pbdb
 #'
@@ -533,6 +524,8 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
   data <-paleotree::getSpecificTaxaPBDB(taxa)
 
   tree <- paleotree::makePBDBtaxonTree(data, rank = rank)
+
+  tree <- amb(tree)
 #plotPhylopicTreePBDB(tree = tree)
   timeTree <- paleotree::dateTaxonTreePBDB(tree)
   return(timeTree)
