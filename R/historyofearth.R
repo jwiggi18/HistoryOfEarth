@@ -50,16 +50,20 @@ CacheMaps <- function(age_df=GetAgeDF()) {
   }
 }
 
-#' Cache map information all ages
+#' Create map information all ages
+#'
+#' It used to store inside the package, but it's too huge
 #'
 #' @param base_url What URL to use for gplates
+#' @return paleomaps_allages
 #' @export
 CacheMapsAllAges <- function(base_url='http://gws.gplates.org/') {
   paleomaps_allages <- NULL
   try(paleomaps_allages <- CreateMapListAllTimes(base_url=base_url))
-  if(!is.null(paleomaps_allages)) {
-    usethis::use_data(paleomaps_allages,   overwrite=TRUE)
-  }
+#  if(!is.null(paleomaps_allages)) {
+#    usethis::use_data(paleomaps_allages,   overwrite=TRUE)
+#  }
+  return(CacheMapsAllAges)
 }
 
 #' Cache specimen information
@@ -133,7 +137,7 @@ CacheTaxonImagesByName <- function(taxa=GetTaxa()) {
 #' @inheritParams AnimatePlot
 #' @export
 CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=GetTaxa(), step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=TRUE, use_phylopics=FALSE, point_color="red", gif_name=NULL) {
-
+  paleomaps_allages <-  CreateMapListAllTimes()
   all_taxa <- c("all", "none", taxa)
   all_periods <- c("all", age_df$Period)
   all_periods_liststub <- vector("list",length(all_periods))
@@ -196,7 +200,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 #' @export
 CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
   CacheSpecimenAges(taxa)
-  CacheMaps(age_df)
+#  CacheMaps(age_df)
   CacheTree(taxa)
   #CacheTaxonImages(taxa)
 }
@@ -317,7 +321,7 @@ CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/')
 #' @param base_url What URL to use for gplates
 #' @return list of maps, with names for periods
 #' @export
-CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=1, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
+CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
   ages <- sort(unique(c(seq(from=start_age, to=stop_age, by=step_size), age_df$MinMa, age_df$MaxMa, age_df$MidMa, 0, 1, 2, 3, 4, 5)))
   ages <- ages[ages<=540] # Cannot reconstruct that long ago
@@ -405,6 +409,9 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @export
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=FALSE, point_color="red", gif_name=NULL) {
   plotlist <- list()
+  if(!exists(paleomaps_allages)) {
+    paleomaps_allages <-CreateMapListAllTimes()
+  }
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps_allages, "[[", "labels"), "[[", "title")))))
   #names(paleomap_info) <- names(paleomaps)
   if(!is.null(taxa)) {
@@ -480,7 +487,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
   }
   if(length(plotlist)>0) {
-    animation::ani.options(interval = interval, loop=TRUE, ani.height=240, ani.width=480, interval=0.5)
+    animation::ani.options(interval = interval, loop=TRUE, ani.height=240, ani.width=480, interval=1)
 
     movie.name <- tempfile(pattern="animation", fileext="gif")
     if(!is.null(gif_name)) {

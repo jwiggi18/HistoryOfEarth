@@ -2,13 +2,16 @@
 % Please edit documentation in R/historyofearth.R
 \name{CacheMapsAllAges}
 \alias{CacheMapsAllAges}
-\title{Cache map information all ages}
+\title{Create map information all ages}
 \usage{
 CacheMapsAllAges(base_url = "http://gws.gplates.org/")
 }
 \arguments{
 \item{base_url}{What URL to use for gplates}
 }
+\value{
+paleomaps_allages
+}
 \description{
-Cache map information all ages
+It used to store inside the package, but it's too huge
 }
