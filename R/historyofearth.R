@@ -326,7 +326,7 @@ CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/')
 #' @param base_url What URL to use for gplates
 #' @return list of maps, with names for periods
 #' @export
-CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
+CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=1, age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
   ages <- sort(unique(c(seq(from=start_age, to=stop_age, by=step_size), age_df$MinMa, age_df$MaxMa, age_df$MidMa, 0, 1, 2, 3, 4, 5)))
   ages <- ages[ages<=540] # Cannot reconstruct that long ago
@@ -441,10 +441,15 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
   ages<-seq(from=start_time, to=stop_time, by=step_size)
   for (i in seq_along(ages)) {
     period_color <- NULL
-    period_color <- age_df[ ages[i]<=age_df$MinMa & ages[i]>age_df$MaxMa,]$Color
-    if(is.null(period_color)) {
-      point_color <- plotrix::color.id(period_color)
+    period_color <- age_df[ ages[i]>=age_df$MinMa & ages[i]<age_df$MaxMa,]$Color
+    if(!is.null(period_color)) {
+      if(length(period_color)>0) {
+        point_color <- plotrix::color.id(period_color)
+        #point_color <- period_color
+    #  print(point_color)
+      }
     }
+    print(point_color)
     my_plot <- NULL
     if(!use_cached_maps_only) {
       try(my_plot <- gplatesr::land_sea(ages[i]))
@@ -466,6 +471,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- specimen_df[specimen_df$searched_taxon==taxa[taxon_index],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
+          print(dim(taxon_df))
           if(use_phylopics) {
 
             for (taxon_to_add in sequence(nrow(taxon_df))) {
