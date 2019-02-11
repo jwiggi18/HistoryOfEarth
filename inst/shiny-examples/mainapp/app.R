@@ -33,7 +33,9 @@ ui <- fluidPage(
             column(7,
               textOutput("period_name"),
             #  h4("Map"),
-              plotOutput("map"))
+              plotOutput("map"),
+              h4("Picture"),
+              plotOutput("thumbnail"))
       )
 
     )
@@ -75,6 +77,10 @@ chosen_period <- reactive({input$period})
     # Return a list containing the filename
     list(src = filename)
   }, deleteFile = FALSE)
+
+  output$thumbnail <- renderImage({
+    src=HistoryOfEarth::GetWikipediaThumbnail(input$genus)
+  })
 
 
 }

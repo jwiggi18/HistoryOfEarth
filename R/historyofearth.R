@@ -278,6 +278,21 @@ latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
 }
 
 
+#' Get an image from Wikipedia
+#'
+#' @param taxon Taxon to get
+#' @param size Size of larger dimension
+#' @return URL of the image
+#' @export
+GetWikipediaThumbnail <- function(taxon, size=200) {
+  if(taxon=="all") {
+    return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
+  }
+  url <- paste0('https://en.wikipedia.org/w/api.php?action=query&titles=', utils::URLencode(taxon), '&prop=pageimages&format=json&pithumbsize=', size)
+  json <- jsonlite::fromJSON(url)
+  return(json$query$pages[[1]]$thumbnail$source)
+}
+
 #' Make a list of maps for all periods
 #'
 #' By default, uses, gws.gplates.org
