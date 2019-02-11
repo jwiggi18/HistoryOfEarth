@@ -577,7 +577,7 @@ GetTree <- function(taxa = GetTaxa(), rank="genus") {
 
   tree <- paleotree::makePBDBtaxonTree(data, rank = rank)
 
-  tree <- amb(tree)
+#  tree <- amb(tree)
 #plotPhylopicTreePBDB(tree = tree)
   timeTree <- paleotree::dateTaxonTreePBDB(tree)
   return(timeTree)
