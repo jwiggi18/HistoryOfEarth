@@ -403,7 +403,7 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @param point_color If just plotting points, what color
 #' @param gif_name Path to gif, including its name
 #' @export
-AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=TRUE, point_color="red", gif_name=NULL) {
+AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=FALSE, point_color="red", gif_name=NULL) {
   plotlist <- list()
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps_allages, "[[", "labels"), "[[", "title")))))
   #names(paleomap_info) <- names(paleomaps)
@@ -440,7 +440,6 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     #  print(point_color)
       }
     }
-    print(point_color)
     my_plot <- NULL
     if(!use_cached_maps_only) {
       try(my_plot <- gplatesr::land_sea(ages[i]))
@@ -462,7 +461,6 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
           taxon_df <- specimen_df[specimen_df$searched_taxon==taxa[taxon_index],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.min_ma<ages[i],]
-          print(dim(taxon_df))
           if(use_phylopics) {
 
             for (taxon_to_add in sequence(nrow(taxon_df))) {
@@ -482,7 +480,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
   }
   if(length(plotlist)>0) {
-    animation::ani.options(interval = interval, loop=TRUE, ani.height=240, ani.width=480)
+    animation::ani.options(interval = interval, loop=TRUE, ani.height=240, ani.width=480, interval=0.5)
 
     movie.name <- tempfile(pattern="animation", fileext="gif")
     if(!is.null(gif_name)) {
@@ -513,7 +511,8 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
 #'@return a map with points
 #'@export
 add_points <- function(map, df) {
-  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, colour=Color))
+#  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, colour=df$Color))
+map + ggplot2::geom_point(data = df, colour=df$Color, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
 }
 
 #' function to add axis to a tree plot
