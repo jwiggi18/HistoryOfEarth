@@ -63,7 +63,7 @@ CacheMapsAllAges <- function(base_url='http://gws.gplates.org/') {
 #  if(!is.null(paleomaps_allages)) {
 #    usethis::use_data(paleomaps_allages,   overwrite=TRUE)
 #  }
-  return(CacheMapsAllAges)
+  return(paleomaps_allages)
 }
 
 #' Cache specimen information
