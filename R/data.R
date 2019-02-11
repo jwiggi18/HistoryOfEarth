@@ -9,31 +9,31 @@
 #' @format A phylo object
 NULL
 
-#' Paleomaps
-#'
-#' Cached maps using LunaSare/gplatesr and gplates, based on example code from https://github.com/GPlates/gplates_web_service_doc by Michael Chin. It uses the https://www.gplates.org/ for its source.
-#'
-#' Returns one map per period
-#'
-#' @docType data
-#' @keywords datasets
-#' @name paleomaps
-#' @usage data(paleomaps)
-#' @format A list of map objects
-NULL
+# #' Paleomaps
+# #'
+# #' Cached maps using LunaSare/gplatesr and gplates, based on example code from https://github.com/GPlates/gplates_web_service_doc by Michael Chin. It uses the https://www.gplates.org/ for its source.
+# #'
+# #' Returns one map per period
+# #'
+# #' @docType data
+# #' @keywords datasets
+# #' @name paleomaps
+# #' @usage data(paleomaps)
+# #' @format A list of map objects
+# NULL
 
-#' Paleomaps All Ages
-#'
-#' Cached maps using LunaSare/gplatesr and gplates, based on example code from https://github.com/GPlates/gplates_web_service_doc by Michael Chin. It uses the https://www.gplates.org/ for its source.
-#'
-#' Returns one map per 1 MY interval
-#'
-#' @docType data
-#' @keywords datasets
-#' @name paleomaps_allages
-#' @usage data(paleomaps_allages)
-#' @format A list of map objects
-NULL
+# #' Paleomaps All Ages
+# #'
+# #' Cached maps using LunaSare/gplatesr and gplates, based on example code from https://github.com/GPlates/gplates_web_service_doc by Michael Chin. It uses the https://www.gplates.org/ for its source.
+# #'
+# #' Returns one map per 1 MY interval
+# #'
+# #' @docType data
+# #' @keywords datasets
+# #' @name paleomaps_allages
+# #' @usage data(paleomaps_allages)
+# #' @format A list of map objects
+# NULL
 
 #' Specimens
 #'
