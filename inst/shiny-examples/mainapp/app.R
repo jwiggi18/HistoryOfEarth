@@ -45,24 +45,24 @@
 
 ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(
-        column(6,
+        column(6, align="center",
             selectInput("genus", "Choose an organism:",
                 choices = c("all", HistoryOfEarth::GetTaxa()),
                 multiple = FALSE, selected="all")
         ),
-        column(6,
+        column(6, align="center",
             selectInput("period", "Choose a period:",
                 choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
                 multiple = FALSE, selected="all")
         )
     ),
     fluidRow(
-        column(6,
+        column(6, align="center",
+               uiOutput("img") 
+        ),
+        column(6, align="center",
                textOutput("period_name"),
                plotOutput("map")
-        ),
-        column(6,
-               uiOutput("img")
         )
     ),
     fluidRow(plotOutput("tree"))
