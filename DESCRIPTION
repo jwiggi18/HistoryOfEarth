@@ -19,7 +19,8 @@ Imports:
     animation,
     magick,
     plotrix,
-    shinythemes
+    shinythemes,
+    paleotree
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
