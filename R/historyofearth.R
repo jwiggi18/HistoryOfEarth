@@ -440,6 +440,11 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
   }
   ages<-seq(from=start_time, to=stop_time, by=step_size)
   for (i in seq_along(ages)) {
+    period_color <- NULL
+    period_color <- age_df[ ages[i]<=age_df$MinMa & ages[i]>age_df$MaxMa,]$Color
+    if(is.null(period_color)) {
+      point_color <- period_color
+    }
     my_plot <- NULL
     if(!use_cached_maps_only) {
       try(my_plot <- gplatesr::land_sea(ages[i]))
