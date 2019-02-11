@@ -6,9 +6,9 @@ ui <- fluidPage(
         shinydashboard::menuItem(
       # Setting id makes input$tabs give the tabName of currently-selected tab
       #  id = "tabs",
-        selectInput("genus", "Choose a genus:",
-             choices = HistoryOfEarth::GetTaxa(),
-             multiple = FALSE)),
+        selectInput("genus", "Choose an organism:",
+             choices = c("all", HistoryOfEarth::GetTaxa()),
+             multiple = FALSE, selected="all")),
 
           shinydashboard::menuItem(
         selectInput("period", "Choose a period:",
@@ -53,7 +53,7 @@ server <- function(input, output) {
 
 
     #to plot phylopic tree
-    HistoryOfEarth::get_pictree()
+    HistoryOfEarth::get_pictree(focalTaxon=input$genus)
   }, height=1000)
 
   #data(paleomaps, package="HistoryOfEarth")
@@ -61,7 +61,7 @@ server <- function(input, output) {
 #  chosen_period <- reactive({c("Cambrian","Ordivician","Sularian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretacous","Paleogene","Neo","Quaternary") == input$period})
 #chosen_period <- reactive({c(HistoryOfEarth::GetAgeDF()$Period) == input$period})
 chosen_period <- reactive({input$period})
-  output$period_name <- renderText({input$period})
+  output$period_name <- renderText(paste0("Organism: ", {input$genus}, ", Period: ",{input$period}))
   #output$map <- renderPlot({paleomaps[[chosen_period()]]})
   #error in [[: attempt to select less than one element in integerOneIndex
   #output$map <- renderPlot({paleomaps[["Cambrian"]]})
@@ -70,7 +70,7 @@ chosen_period <- reactive({input$period})
   output$map <- renderImage({
     # When input$n is 1, filename is ./images/image1.jpeg
     filename <- normalizePath(file.path('./www/',
-                              paste('map_all_', input$period, '.gif', sep='')))
+                              paste('map_',input$genus,'_', input$period, '.gif', sep='')))
 
     # Return a list containing the filename
     list(src = filename)
