@@ -8,7 +8,7 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
   taxa = NULL, step_size = 1, age_df = GetAgeDF(),
   specimen_df = specimens, interval = 0.5,
   use_cached_maps_only = FALSE, use_phylopics = FALSE,
-  point_color = "red", gif_name = NULL)
+  point_color = "red", gif_name = NULL, paleomaps_allages = NULL)
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -34,6 +34,8 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{point_color}{If just plotting points, what color}
 
 \item{gif_name}{Path to gif, including its name}
+
+\item{paleomaps_allages}{Cache of maps}
 }
 \description{
 This can work with or without taxa.
