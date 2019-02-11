@@ -4,9 +4,12 @@
 \alias{AddAxis}
 \title{function to add axis to a tree plot}
 \usage{
-AddAxis(focalPeriod = NULL, age_df = GetAgeDF())
+AddAxis(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv),
+  focalPeriod = NULL, age_df = GetAgeDF())
 }
 \arguments{
+\item{lastPP}{The output of plotting functions}
+
 \item{focalPeriod}{The period to highlight, using names form GetAgeDF()}
 
 \item{age_df}{Return from GetAgeDF(), which has colors}

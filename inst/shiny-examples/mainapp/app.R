@@ -82,8 +82,8 @@ server <- function(input, output) {
 
 
     #to plot phylopic tree
-    HistoryOfEarth::get_pictree(focalTaxon=input$genus)
-    HistoryOfEarth::AddAxis(focalPeriod=input$period)
+    lastPP <- HistoryOfEarth::get_pictree(focalTaxon=input$genus)
+    HistoryOfEarth::AddAxis(lastPP, focalPeriod=input$period)
   }, height=1000)
 
   #data(paleomaps, package="HistoryOfEarth")

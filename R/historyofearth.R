@@ -520,11 +520,12 @@ add_points <- function(map, df) {
 #'
 #' It can highlight chosen periods
 #'
+#' @param lastPP The output of plotting functions
 #' @param focalPeriod The period to highlight, using names form GetAgeDF()
 #' @param age_df Return from GetAgeDF(), which has colors
 #' @return modifies current plot
 #' @export
-AddAxis <- function(focalPeriod=NULL, age_df=GetAgeDF()) {
+AddAxis <- function(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv), focalPeriod=NULL, age_df=GetAgeDF()) {
   lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
   focal_index <- 0
   if(!is.null(focalPeriod)) {
