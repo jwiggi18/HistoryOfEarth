@@ -35,8 +35,8 @@ ui <- fluidPage(
             #  h4("Map"),
               plotOutput("map"),
               h4("Picture"),
-              plotOutput("thumbnail"))
-      )
+              uiOutput("img"))
+      ) 
 
     )
 
@@ -78,8 +78,9 @@ chosen_period <- reactive({input$period})
     list(src = filename)
   }, deleteFile = FALSE)
 
-  output$thumbnail <- renderImage({
-    src=HistoryOfEarth::GetWikipediaThumbnail(input$genus)
+  output$img <- renderUI({
+      tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus))
+     # list(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   })
 
 
