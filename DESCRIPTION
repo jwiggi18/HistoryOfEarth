@@ -18,7 +18,8 @@ Imports:
     rphylopic,
     animation,
     magick,
-    plotrix
+    plotrix,
+    shinythemes
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
