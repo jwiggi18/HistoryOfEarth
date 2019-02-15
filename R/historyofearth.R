@@ -227,9 +227,9 @@ GetLatLongAnytime <- function(taxon){
 GetAgeDF <- function() {
   Period <- c("Cambrian","Ordivician","Silurian","Devonian","Carboniferous","Permian","Triassic","Jurassic","Cretaceous","Paleogene","Neogene","Quaternary")
 
-  MinMa <- c(485,444,419,359,299,252,201,145,65,23,2.58, 0)
+  MinMa <- c(485,444,419,359,299,252,201,145,66,23,2.58, 0)
 
-  MaxMa <- c(541,485,444,419,359,299,252,201,145,65,23,2.58)
+  MaxMa <- c(541,485,444,419,359,299,252,201,145,66,23,2.58)
 
   MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
 
@@ -307,6 +307,7 @@ get_genuslink <- function(taxon) {
   #usethis::use_data(taxa_links)
 }
 
+#not creating the .rda??
 period_links <- read.csv("~/period_links.csv")
 usethis::use_data(period_links)
 
