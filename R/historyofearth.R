@@ -245,7 +245,7 @@ GetAgeDF <- function() {
 #' @return vector of names
 #' @export
 GetTaxa <- function() {
-  return(c("Attercopus", "Gorilla", "Homo", "Tyto", "Aedes", "Solenopsis", "Caretta", "Crocodylus", "Climacograptus","Anomalocaris", "Dunkleosteus", "Archaeopteryx", "Juramaia", "Hylonomus", "Rhyniognatha", "Arandaspis", "Tyrannosaurus", "Triceratops", "Diplodocus", "Quetzalcoatlus", "Smilodon", "Megalonyx", "Mammuthus", "Meganeura", "Eldredgeops", "Redondasaurus", "Pelagiella", "Cameroceras", "Acanthostega", "Dimetrodon", "Estemmenosuchus", "Cartorhynchus", "Ichthyosaurus", "Gracilisuchus", "Nyasasaurus", "Eoraptor", "Eudimorphodon", "Plesiosaurus", "Stegosaurus", "Megazostrodon", "Anchiornis", "Giraffatitan", "Teleoceras", "Nimravus", "Enhydrocyon", "Sahelanthropus", "Phidippus", "Tusoteuthis"))
+  return(c("Acanthostega", "Aedes", "Anchiornis", "Anomalocaris", "Arandaspis", "Archaeopteryx", "Attercopus", "Cameroceras", "Caretta", "Cartorhynchus", "Climacograptus", "Crocodylus", "Dimetrodon", "Diplodocus", "Dunkleosteus", "Eldredgeops", "Enhydrocyon", "Eoraptor", "Estemmenosuchus", "Eudimorphodon", "Giraffatitan", "Gorilla", "Gracilisuchus", "Homo", "Hylonomus", "Ichthyosaurus", "Juramaia", "Mammuthus", "Megalonyx", "Meganeura", "Megazostrodon", "Nimravus", "Nyasasaurus", "Pelagiella", "Phidippus", "Plesiosaurus", "Quetzalcoatlus", "Redondasaurus", "Rhyniognatha", "Sahelanthropus", "Smilodon", "Solenopsis", "Stegosaurus", "Teleoceras", "Triceratops", "Tusoteuthis", "Tyrannosaurus", "Tyto"))
 }
 
 
