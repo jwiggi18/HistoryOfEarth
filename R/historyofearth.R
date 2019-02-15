@@ -296,7 +296,7 @@ GetWikipediaThumbnail <- function(taxon, size=200) {
 #' @export
 get_genuslink <- function(taxon) {
   if(taxon=="all") {
-    return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
+    return("http://www.onezoom.org/life/@cellular_organisms=93302#x257,y533,w1.0764")
   }
   for (genus_index in seq_along(taxa_links$Genus)) {
       if(taxon==taxa_links$Genus[genus_index]) {
@@ -341,7 +341,7 @@ get_periodlink <- function(period) {
 #' @export
 CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
-  maplist <- lapply(age_df$MidMa, gplatesr::land_sea(base_url=base_url))
+  maplist <- lapply(age_df$MidMa, gplatesr::black_white(base_url=base_url))
 
   #name maplist according to period
   names(maplist) <- age_df$Period
@@ -368,7 +368,7 @@ CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_d
   ages <- ages[ages<=540] # Cannot reconstruct that long ago
   maplist <- vector("list", length(ages))
   for (i in seq_along(ages)) {
-    maplist[[i]] <- gplatesr::land_sea(mya=ages[i], base_url=base_url)
+    maplist[[i]] <- gplatesr::black_white(mya=ages[i], base_url=base_url)
   }
 
   #name maplist according to age
@@ -491,7 +491,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
     my_plot <- NULL
     if(!use_cached_maps_only) {
-      try(my_plot <- gplatesr::land_sea(ages[i]))
+      try(my_plot <- gplatesr::black_white(ages[i]))
     }
     if(is.null(my_plot)) { #as a backup, go to the cache
       matching_map_index <- which(paleomap_info==ages[i])

@@ -45,6 +45,20 @@
 
 ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(
+        column(4, align="center",
+            actionButton("paleozoic_button", "The Paleozoic Era",
+                          onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')")
+        ),
+        column(4, align="center",
+            actionButton("mesozoic_button", "The Mesozoic Era",
+                          onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')")
+        ),
+        column(4, align="center",
+            actionButton("cenozoic_button", "The Cenozoic Era",
+                          onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')")
+        )
+      ),
+    fluidRow(
         column(6, align="center",
             selectInput("genus", "Choose an organism:",
                 choices = c("all", HistoryOfEarth::GetTaxa()),
@@ -59,12 +73,14 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(
         column(6, align="center",
                uiOutput("img"),
-               uiOutput("taxon_link")
+               uiOutput("taxon_link"),
+               tags$style("#taxon_link{font-size: 25px;}")
         ),
         column(6, align="center",
                textOutput("period_name"),
                plotOutput("map"),
-               uiOutput("period_link")
+               uiOutput("period_link"),
+               tags$style("#period_link{font-size: 25px;}")
         )
     ),
     fluidRow(plotOutput("tree"))
@@ -114,11 +130,11 @@ chosen_period <- reactive({input$period})
   })
 
   output$taxon_link <- renderUI({
-    tags$a(href=HistoryOfEarth::get_genuslink(input$genus), paste0("Click here to learn about ", {input$genus}))
+    tags$a(href=HistoryOfEarth::get_genuslink(input$genus), paste0("Learn about ", {input$genus}))
   })
 
   output$period_link <- renderUI({
-    tags$a(href=HistoryOfEarth::get_periodlink(input$period), paste0("Click here to learn about the ", {input$period}), "period")
+    tags$a(href=HistoryOfEarth::get_periodlink(input$period), paste0("Learn about the ", {input$period}), "period")
   })
 
 
