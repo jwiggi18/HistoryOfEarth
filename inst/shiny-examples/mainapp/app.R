@@ -117,6 +117,10 @@ chosen_period <- reactive({input$period})
     tags$a(href=HistoryOfEarth::get_genuslink(input$genus), paste0("Click here to learn about ", {input$genus}))
   })
 
+  output$period_link <- renderUI({
+    tags$a(href=HistoryOfEarth::get_periodlink(input$period), paste0("Click here to learn about the ", {input$period}), "period")
+  })
+
 
 }
 

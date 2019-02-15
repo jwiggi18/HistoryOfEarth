@@ -2,7 +2,7 @@
 % Please edit documentation in R/historyofearth.R
 \name{AddAxis}
 \alias{AddAxis}
-\title{function to add axis to a tree plot}
+\title{function to getPhyloPicIDNum axis to a tree plot}
 \usage{
 AddAxis(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv),
   focalPeriod = NULL, age_df = GetAgeDF())

@@ -307,6 +307,27 @@ get_genuslink <- function(taxon) {
   #usethis::use_data(taxa_links)
 }
 
+period_links <- read.csv("~/period_links.csv")
+usethis::use_data(period_links)
+
+#' get link for each period
+#'
+#' @param period which period to return a url for
+#' @return URL
+#' @export
+get_periodlink <- function(period) {
+  if(period=="all") {
+    return("https://youtu.be/rWp5ZpJAIAE")
+  }
+  for (per_index in seq_along(period_links$Period)) {
+      if(period==period_links$Period[per_index]) {
+        return(period_links$Link[per_index])
+      }
+    }
+    period_links <- read.csv("~/period_links.csv")
+    usethis::use_data(period_links)
+}
+
 #' Make a list of maps for all periods
 #'
 #' By default, uses, gws.gplates.org
