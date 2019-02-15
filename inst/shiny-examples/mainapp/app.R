@@ -58,11 +58,13 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     ),
     fluidRow(
         column(6, align="center",
-               uiOutput("img")
+               uiOutput("img"),
+               uiOutput("taxon_link")
         ),
         column(6, align="center",
                textOutput("period_name"),
-               plotOutput("map")
+               plotOutput("map"),
+               uiOutput("period_link")
         )
     ),
     fluidRow(plotOutput("tree"))
@@ -109,6 +111,10 @@ chosen_period <- reactive({input$period})
   output$img <- renderUI({
       tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus), width='50%')
      # list(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
+  })
+
+  output$taxon_link <- renderUI({
+    tags$a(href=HistoryOfEarth::get_genuslink(input$genus), paste0("Click here to learn about ", {input$genus}))
   })
 
 

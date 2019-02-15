@@ -288,6 +288,25 @@ GetWikipediaThumbnail <- function(taxon, size=200) {
   return(json$query$pages[[1]]$thumbnail$source)
 }
 
+
+#' get link for each genus
+#'
+#' @param taxon which genus to return a url for
+#' @return URL
+#' @export
+get_genuslink <- function(taxon) {
+  if(taxon=="all") {
+    return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
+  }
+  for (genus_index in seq_along(taxa_links$Genus)) {
+      if(taxon==taxa_links$Genus[genus_index]) {
+        return(taxa_links$Link[genus_index])
+      }
+    }
+  #taxa_links <- read.csv("~/taxa_links.csv")
+  #usethis::use_data(taxa_links)
+}
+
 #' Make a list of maps for all periods
 #'
 #' By default, uses, gws.gplates.org
@@ -523,7 +542,7 @@ add_points <- function(map, df) {
 map + ggplot2::geom_point(data = df, colour=df$Color, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
 }
 
-#' function to add axis to a tree plot
+#' function to getPhyloPicIDNum axis to a tree plot
 #'
 #' It can highlight chosen periods
 #'
