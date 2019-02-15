@@ -307,9 +307,6 @@ get_genuslink <- function(taxon) {
   #usethis::use_data(taxa_links)
 }
 
-#not creating the .rda??
-period_links <- read.csv("~/period_links.csv")
-usethis::use_data(period_links)
 
 #' get link for each period
 #'
@@ -325,8 +322,8 @@ get_periodlink <- function(period) {
         return(period_links$Link[per_index])
       }
     }
-    period_links <- read.csv("~/period_links.csv")
-    usethis::use_data(period_links)
+    #period_links <- read.csv("~/period_links.csv")
+    #usethis::use_data(period_links)
 }
 
 #' Make a list of maps for all periods
