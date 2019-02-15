@@ -449,7 +449,7 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=FALSE, point_color="red", gif_name=NULL, paleomaps_allages = NULL) {
   plotlist <- list()
   if(is.null(paleomaps_allages)) {
-    paleomaps_allages <-CreateMapListAllTimes()
+    paleomaps_allages <-CreateMapListAllTimes(start_age=ifelse(is.null(start_time),0,start_time), stop_age=ifelse(is.null(stop_time),0,stop_time), step_size=step_size)
   }
   paleomap_info <- as.numeric(gsub("Ma", "", gsub("Time = ", "", unlist(lapply(lapply(paleomaps_allages, "[[", "labels"), "[[", "title")))))
   #names(paleomap_info) <- names(paleomaps)
@@ -500,9 +500,11 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
       if(!is.null(taxa)) {
         for(taxon_index in seq_along(taxa)) {
           img <- NULL
-          try(img <- taxonimages[taxa[taxon_index]][[1]])
-          if(is.null(img)) {
-            img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
+          if(use_phylopics) {
+            try(img <- taxonimages[taxa[taxon_index]][[1]])
+            if(is.null(img)) {
+              img <- rphylopic::image_data("5d646d5a-b2dd-49cd-b450-4132827ef25e",size=128)[[1]]
+            }
           }
           taxon_df <- specimen_df[specimen_df$searched_taxon==taxa[taxon_index],]
           taxon_df <- taxon_df[taxon_df$pbdb_data.max_ma>ages[i],]
