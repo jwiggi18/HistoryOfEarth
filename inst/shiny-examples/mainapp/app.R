@@ -44,20 +44,25 @@
 # )
 
 ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
-    fluidRow(
-        column(4, align="center",
-            actionButton("paleozoic_button", "The Paleozoic Era",
-                          onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')")
+    fluidRow(class = "Eras",
+        column(4, style = "background-color:#FFFF99", align = "center",
+            actionButton("paleozoic_button", "The Paleozoic Era", #yellow
+                          onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')",
+                          style = "color: #000000; background-color:#FFFF99; border-color:#FFFF99")
         ),
-        column(4, align="center",
-            actionButton("mesozoic_button", "The Mesozoic Era",
-                          onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')")
+        column(4, style = "background-color:#1F78B4", align = "center",
+            actionButton("mesozoic_button", "The Mesozoic Era", #blue
+                          onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')",
+                          style = "background-color:#1F78B4; border-color:#1F78B4")
         ),
-        column(4, align="center",
-            actionButton("cenozoic_button", "The Cenozoic Era",
-                          onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')")
+        column(4, style = "background-color:#B2DF8A", align = "center",
+            actionButton("cenozoic_button", "The Cenozoic Era", #green
+                          onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')",
+                          style = "color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
         )
       ),
+      br(),
+      br(),
     fluidRow(
         column(6, align="center",
             selectInput("genus", "Choose an organism:",
