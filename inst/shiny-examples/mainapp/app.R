@@ -129,24 +129,24 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
       br(),
       br(),
     fluidRow(
-        column(6, align="center",
+        column(4, align="center",
             selectInput("genus", "Choose an organism:",
                 choices = c("all", HistoryOfEarth::GetTaxa()),
                 multiple = FALSE, selected="all")
         ),
-        column(6, align="center",
+        column(8, align="center",
             selectInput("period", "Choose a period:",
                 choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
                 multiple = FALSE, selected="all")
         )
     ),
     fluidRow(
-        column(6, align="center",
+        column(4, align="center",
                uiOutput("img"),
                uiOutput("taxon_link"),
                tags$style("#taxon_link{font-size: 25px;}")
         ),
-        column(6, align="center",
+        column(8, align="center",
                textOutput("period_name"),
                plotOutput("map")
                #uiOutput("period_link"),
@@ -195,7 +195,7 @@ chosen_period <- reactive({input$period})
   }, deleteFile = FALSE)
 
   output$img <- renderUI({
-      tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus), width='50%', alt="Thumbnail from wikipedia")
+      tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus), width='75%', alt="Thumbnail from wikipedia")
      # list(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   })
 
