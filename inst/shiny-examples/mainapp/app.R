@@ -191,11 +191,11 @@ chosen_period <- reactive({input$period})
                               paste('map_',input$genus,'_', input$period, '.gif', sep='')))
 
     # Return a list containing the filename
-    list(src = filename)
+    list(src = filename, alt="Animated map of plates moving", onerror='./www/map_none_all.gif')
   }, deleteFile = FALSE)
 
   output$img <- renderUI({
-      tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus), width='50%')
+      tags$img(src=HistoryOfEarth::GetWikipediaThumbnail(input$genus), width='50%', alt="Thumbnail from wikipedia")
      # list(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   })
 
