@@ -45,21 +45,83 @@
 
 ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(class = "Eras",
-        column(4, style = "background-color:#FFFF99", align = "center",
+        column(6, style = "background-color:#FFFF99", align = "center",
             actionButton("paleozoic_button", "The Paleozoic Era", #yellow
                           onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')",
                           style = "color: #000000; background-color:#FFFF99; border-color:#FFFF99")
         ),
-        column(4, style = "background-color:#1F78B4", align = "center",
+        column(3, style = "background-color:#1F78B4", align = "center",
             actionButton("mesozoic_button", "The Mesozoic Era", #blue
                           onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')",
                           style = "background-color:#1F78B4; border-color:#1F78B4")
         ),
-        column(4, style = "background-color:#B2DF8A", align = "center",
+        column(3, style = "background-color:#B2DF8A", align = "center",
             actionButton("cenozoic_button", "The Cenozoic Era", #green
                           onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')",
                           style = "color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
         )
+      ),
+    fluidRow(class = "Periods",
+        column(1, style = "background-color:#A6CEE3", align = "center",
+            actionButton("cambrian_button", "Cambrian",
+            onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/cambrian/', '_blank')",
+            style = "color: #000000; background-color:#A6CEE3; border-color:#A6CEE3")
+          ),
+        column(1, style = "background-color:#1F78B4", align = "center",
+            actionButton("ordovician_button", "Ordovician",
+            onclick = "window.open('https://youtu.be/yQhlUqLFDxQ', '_blank')",
+            style = "background-color:#1F78B4; border-color:#1F78B4")
+          ),
+        column(1, style = "background-color:#B2DF8A", align = "center",
+            actionButton("silurian_button", "Silurian",
+            onclick = "window.open('http://www.ucmp.berkeley.edu/silurian/silurian.php', '_blank')",
+            style = "color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
+          ),
+        column(1, style = "background-color:#33A02C", align = "center",
+            actionButton("devonian_button", "Devonian",
+            onclick = "window.open('https://youtu.be/6Fr8vL9-j2Q', '_blank')",
+            style = "background-color:#33A02C; border-color:#33A02C")
+          ),
+        column(1, style = "background-color:#FB9A99", align = "center",
+            actionButton("carboniferous_button", "Carboniferous",
+            onclick = "window.open('http://www.ucmp.berkeley.edu/carboniferous/carboniferous.php', '_blank')",
+            style = "color: #000000; background-color:#FB9A99; border-color:#FB9A99")
+          ),
+        column(1, style = "background-color:#E31A1C", align = "center",
+            actionButton("permian_button", "Permian",
+            onclick = "window.open('https://youtu.be/FlEC6tp36nw', '_blank')",
+            style = "background-color:#E31A1C; border-color:#E31A1C")
+          ),
+        column(1, style = "background-color:#FDBF6F", align = "center",
+            actionButton("triassic_button", "Triassic",
+            onclick = "window.open('https://youtu.be/moxu_uTemNg', '_blank')",
+            style = "color: #000000; background-color:#FDBF6F; border-color:#FDBF6F")
+          ),
+        column(1, style = "background-color:#FF7F00", align = "center",
+            actionButton("jurassic_button", "Jurassic",
+            onclick = "window.open('https://youtu.be/OYUwrA-jZok', '_blank')",
+            style = "background-color:#FF7F00; border-color:#FF7F00")
+          ),
+        column(1, style = "background-color:#CAB2D6", align = "center",
+            actionButton("cretaceous_button", "Cretaceous",
+            onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/cretaceous/', '_blank')",
+            style = "color: #000000; background-color:#CAB2D6; border-color:#CAB2D6")
+          ),
+        column(1, style = "background-color:#6A3D9A", align = "center",
+            actionButton("paleogene_button", "Paleogene",
+            onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/paleogene/', '_blank')",
+            style = "background-color:#6A3D9A; border-color:#6A3D9A")
+          ),
+        column(1, style = "background-color:#FFFF99", align = "center",
+            actionButton("neogene_button", "Neogene",
+            onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/neogene/', '_blank')",
+            style = "color: #000000; background-color:#FFFF99; border-color:#FFFF99")
+          ),
+        column(1, style = "background-color:#B15928", align = "center",
+            actionButton("quaternary_button", "Quaternary",
+            onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/quaternary/', '_blank')",
+            style = "background-color:#B15928; border-color:#B15928")
+          )
       ),
       br(),
       br(),
@@ -83,9 +145,9 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
         ),
         column(6, align="center",
                textOutput("period_name"),
-               plotOutput("map"),
-               uiOutput("period_link"),
-               tags$style("#period_link{font-size: 25px;}")
+               plotOutput("map")
+               #uiOutput("period_link"),
+               #tags$style("#period_link{font-size: 25px;}")
         )
     ),
     fluidRow(plotOutput("tree"))
@@ -138,9 +200,9 @@ chosen_period <- reactive({input$period})
     tags$a(href=HistoryOfEarth::get_genuslink(input$genus), paste0("Learn about ", {input$genus}))
   })
 
-  output$period_link <- renderUI({
-    tags$a(href=HistoryOfEarth::get_periodlink(input$period), paste0("Learn about the ", {input$period}), "period")
-  })
+  #output$period_link <- renderUI({
+    #tags$a(href=HistoryOfEarth::get_periodlink(input$period), paste0("Learn about the ", {input$period}), "period")
+  #})
 
 
 }
