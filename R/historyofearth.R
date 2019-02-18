@@ -152,17 +152,31 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 
   #first do all taxa, all periods
   animatedmaps[["all"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+
+
+  #second do no taxa, all periods
+  animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+
+  # Now for backup copy this everywhere in case they don't generate elsewhere
+  for (period_index in sequence(length(age_df$Period))) {
+      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_", age_df$Period[period_index], ".gif"))
+      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_", age_df$Period[period_index], ".gif"))
+      for (taxon_index in seq_along(taxa)) {
+        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_", taxa[taxon_index], "_", age_df$Period[period_index], ".gif"))
+        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_", taxa[taxon_index], "_all.gif"))
+      }
+  }
+
+
   # now loop over periods, all taxa
-  for (period_index in sequence(length(age_df$Period)-1)) {
+  for (period_index in sequence(length(age_df$Period))) {
     print(paste("Making map for all taxa, ", age_df$Period[period_index]))
     animatedmaps[["all"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
   }
 
 
-  #second do no taxa, all periods
-  animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_none_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
   # now loop over periods, all taxa
-  for (period_index in sequence(length(age_df$Period)-1)) {
+  for (period_index in sequence(length(age_df$Period))) {
     print(paste("Making map for no taxa, ", age_df$Period[period_index]))
     animatedmaps[["none"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_all_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
   }
@@ -481,21 +495,25 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     stop_time <- 540
   }
   if(single_frame) {
+    start_time <- 0
+    stop_time <- 0
+    specimen_df_local <- specimen_df
     if(!is.null(periods)) {
       relevant_period <- age_df[age_df$Period %in% periods,][1]
       start_time <- min(relevant_periods$MidMa, na.rm=TRUE)
       stop_time <- max(relevant_periods$MidMa, na.rm=TRUE)
-    } else {
-      start_time <- 0
-      stop_time <- 0
-      if(nrow(specimen_df)>0) {
-        median_start <- median(specimen_df$MinMa, na.rm=TRUE)
-        median_stop <- median(specimen_df$MaxMa, na.rm=TRUE)
-        start_time <- median(c(0, rep(median(c(median_start, median_stop), na.rm=TRUE), 2)), na.rm=TRUE) # so that if there are no dates, it uses 0, otherwise, it uses the dates
-        start_time <- round(start_time,0)
-        stop_time <- start_time
-        use_cached_maps_only <- FALSE #so we get plot of the right time
+      if(nrow(specimen_df_local)>0) {
+        specimen_df_local <- specimen_df_local[specimen_df_local$pbdb_data.max_ma<=relevant_periods$MaxMa & specimen_df_local$pbdb_data.max_ma>=relevant_periods$MinMa,]
       }
+    }
+    if(nrow(specimen_df_local)>0) {
+
+      median_start <- median(specimen_df_local$MinMa, na.rm=TRUE)
+      median_stop <- median(specimen_df_local$MaxMa, na.rm=TRUE)
+      start_time <- median(c(0, rep(median(c(median_start, median_stop), na.rm=TRUE), 2)), na.rm=TRUE) # so that if there are no dates, it uses 0, otherwise, it uses the dates
+      start_time <- round(start_time,0)
+      stop_time <- start_time
+      use_cached_maps_only <- FALSE #so we get plot of the right time
     }
   }
   ages<-seq(from=start_time, to=stop_time, by=step_size)
