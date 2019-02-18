@@ -44,6 +44,9 @@
 # )
 
 ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
+
+    titlePanel("History of Earth"),
+    
     fluidRow(class = "Eras",
         column(6, style = "background-color:#FFFF99", align = "center",
             actionButton("paleozoic_button", "The Paleozoic Era", #yellow
