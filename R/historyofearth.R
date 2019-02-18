@@ -171,7 +171,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   for (taxon_index in seq_along(taxa)) {
     print(paste("Making map for taxon ",  taxa[taxon_index], " all periods"))
 
-    animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",taxa[taxon_index], "_all.gif")), paleomaps_allages=paleomaps_allages)
+    animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/inst/shiny-examples/mainapp/www/map_",taxa[taxon_index], "_all.gif")), paleomaps_allages=paleomaps_allages)
     # now loop over periods, all taxa
     for (period_index in sequence(length(age_df$Period)-1)) {
       print(paste("Making map for taxon ",  taxa[taxon_index], ", period ", age_df$Period[period_index]))
@@ -460,8 +460,12 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.max_ma),]
     specimen_df <- specimen_df[!is.na(specimen_df$pbdb_data.min_ma),]
     if(nrow(specimen_df)>0) {
-      start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
-      stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
+      possible_start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
+      possible_stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
+      if(possible_stop_time - possible_start_time > 40) { #otherwise, not enough intervals
+        stop_time <- possible_stop_time
+        start_time <- possible_start_time
+      }
     }
   }
   if(!is.null(periods)) {
