@@ -8,7 +8,8 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
   taxa = NULL, step_size = 1, age_df = GetAgeDF(),
   specimen_df = specimens, interval = 0.5,
   use_cached_maps_only = FALSE, use_phylopics = FALSE,
-  point_color = "red", gif_name = NULL, paleomaps_allages = NULL)
+  point_color = "red", gif_name = NULL, paleomaps_allages = NULL,
+  single_frame = FALSE)
 }
 \arguments{
 \item{start_time}{The time of the first frame of the animation}
@@ -36,6 +37,8 @@ AnimatePlot(start_time = NULL, stop_time = NULL, periods = NULL,
 \item{gif_name}{Path to gif, including its name}
 
 \item{paleomaps_allages}{Cache of maps}
+
+\item{single_frame}{If TRUE, just does a single frame. It picks the best time.}
 }
 \description{
 This can work with or without taxa.
