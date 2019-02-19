@@ -569,7 +569,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
   }
   if(length(plotlist)>0) {
-    animation::ani.options(interval = interval, loop=TRUE, ani.height=315, ani.width=650, interval=1)
+    animation::ani.options(interval = interval, loop=TRUE, ani.height=315, ani.width=650, interval=1, autobrowse = FALSE)
 
     movie.name <- tempfile(pattern="animation", fileext="gif")
     if(!is.null(gif_name)) {
