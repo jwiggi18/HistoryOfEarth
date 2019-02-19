@@ -444,7 +444,7 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #'
 #' The age range to plot can be set by the periods, the taxa, or fixed ages (which by default go from 0 to 540 MY). If taxa are specified, it uses the times those are found. If periods are specified, it uses the start and stop of those periods. If both periods and taxa are specified, it defaults to using the periods.
 #'
-#' a <- AnimatePlot(use_cached_maps_only=TRUE, step_size=1, taxa=GetTaxa())
+#' a <- ot(use_cached_maps_only=TRUE, step_size=1, taxa=GetTaxa())
 #'
 #' @param start_time The time of the first frame of the animation
 #' @param stop_time The time of the last frame of the animation before it starts looping back
@@ -499,11 +499,11 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     stop_time <- 0
     specimen_df_local <- specimen_df
     if(!is.null(periods)) {
-      relevant_period <- age_df[age_df$Period %in% periods,][1]
-      start_time <- min(relevant_period$MidMa, na.rm=TRUE)
-      stop_time <- max(relevant_period$MidMa, na.rm=TRUE)
+      relevant_period <- which(age_df$Period %in% periods)
+      start_time <- min(age_df$MidMa[relevant_period], na.rm=TRUE)
+      stop_time <- max(age_df$MidMa[relevant_period], na.rm=TRUE)
       if(nrow(specimen_df_local)>0) {
-        specimen_df_local <- specimen_df_local[specimen_df_local$pbdb_data.max_ma<=relevant_period$MaxMa & specimen_df_local$pbdb_data.min_ma>=relevant_period$MinMa,]
+        specimen_df_local <- specimen_df_local[specimen_df_local$pbdb_data.max_ma<=age_df$MaxMa[relevant_period] & specimen_df_local$pbdb_data.min_ma>=age_df$MinMa[relevant_period],]
       }
     }
     if(nrow(specimen_df_local)>0) {
