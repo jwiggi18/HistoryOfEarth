@@ -243,7 +243,7 @@ GetAgeDF <- function() {
 
   MinMa <- c(485,444,419,359,299,252,201,145,66,23,2.58, 0)
 
-  MaxMa <- c(541,485,444,419,359,299,252,201,145,66,23,2.58)
+  MaxMa <- c(540,485,444,419,359,299,252,201,145,66,23,2.58)
 
   MidMa <- c(513,464,431,389,328,278,226,173,105,44,12, 1)
 
@@ -259,7 +259,7 @@ GetAgeDF <- function() {
 #' @return vector of names
 #' @export
 GetTaxa <- function() {
-  return(c("Acanthostega", "Aedes", "Anchiornis", "Anomalocaris", "Arandaspis", "Archaeopteryx", "Attercopus", "Cameroceras", "Caretta", "Cartorhynchus", "Climacograptus", "Crocodylus", "Dimetrodon", "Diplodocus", "Dunkleosteus", "Eldredgeops", "Enhydrocyon", "Eoraptor", "Estemmenosuchus", "Eudimorphodon", "Giraffatitan", "Gorilla", "Gracilisuchus", "Homo", "Hylonomus", "Ichthyosaurus", "Juramaia", "Mammuthus", "Megalonyx", "Meganeura", "Megazostrodon", "Nimravus", "Nyasasaurus", "Pelagiella", "Phidippus", "Plesiosaurus", "Quetzalcoatlus", "Redondasaurus", "Rhyniognatha", "Sahelanthropus", "Smilodon", "Solenopsis", "Stegosaurus", "Teleoceras", "Triceratops", "Tusoteuthis", "Tyrannosaurus", "Tyto"))
+  return(c("Acanthostega", "Aedes", "Anchiornis", "Anomalocaris", "Arandaspis", "Archaeopteryx", "Attercopus", "Cameroceras", "Caretta", "Cartorhynchus", "Climacograptus", "Crocodylus", "Dimetrodon", "Diplodocus", "Dunkleosteus", "Eldredgeops", "Enhydrocyon", "Estemmenosuchus", "Eudimorphodon", "Giraffatitan", "Gorilla", "Gracilisuchus", "Homo", "Hylonomus", "Ichthyosaurus", "Juramaia", "Mammuthus", "Megalonyx", "Meganeura", "Megazostrodon", "Nimravus", "Pelagiella", "Phidippus", "Plesiosaurus", "Quetzalcoatlus", "Redondasaurus", "Rhyniognatha", "Sahelanthropus", "Smilodon", "Camponotus", "Stegosaurus", "Teleoceras", "Triceratops", "Tusoteuthis", "Tyrannosaurus", "Tyto"))
 }
 
 
@@ -500,10 +500,10 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     specimen_df_local <- specimen_df
     if(!is.null(periods)) {
       relevant_period <- age_df[age_df$Period %in% periods,][1]
-      start_time <- min(relevant_periods$MidMa, na.rm=TRUE)
-      stop_time <- max(relevant_periods$MidMa, na.rm=TRUE)
+      start_time <- min(relevant_period$MidMa, na.rm=TRUE)
+      stop_time <- max(relevant_period$MidMa, na.rm=TRUE)
       if(nrow(specimen_df_local)>0) {
-        specimen_df_local <- specimen_df_local[specimen_df_local$pbdb_data.max_ma<=relevant_periods$MaxMa & specimen_df_local$pbdb_data.max_ma>=relevant_periods$MinMa,]
+        specimen_df_local <- specimen_df_local[specimen_df_local$pbdb_data.max_ma<=relevant_period$MaxMa & specimen_df_local$pbdb_data.min_ma>=relevant_period$MinMa,]
       }
     }
     if(nrow(specimen_df_local)>0) {

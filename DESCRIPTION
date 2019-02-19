@@ -21,7 +21,8 @@ Imports:
     plotrix,
     shinythemes,
     gplatesr,
-    paleotree
+    paleotree,
+    rgbif
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
