@@ -217,7 +217,7 @@ chosen_period <- reactive({input$period})
   })
 
   output$taxon_link <- renderUI({
-    tags$a(href=HistoryOfEarth::get_genuslink(input$genus), target="_blank", paste0("Learn about ", {input$genus}))
+    tags$a(paste0("Learn about ", {input$genus}), href=HistoryOfEarth::get_genuslink(input$genus), target="_blank")
   })
 
   #output$period_link <- renderUI({

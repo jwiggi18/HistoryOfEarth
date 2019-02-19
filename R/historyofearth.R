@@ -317,8 +317,8 @@ get_genuslink <- function(taxon) {
         return(taxa_links$Link[genus_index])
       }
     }
-  taxa_links <- system.file("extdata", "taxa_links.csv", package = "HistoryOfEarth", mustWork = TRUE)
-  usethis::use_data(taxa_links)
+  #taxa_links <- read.csv(system.file("extdata", "taxa_links.csv", package = "HistoryOfEarth", mustWork = TRUE))
+  #usethis::use_data(taxa_links, overwrite = TRUE)
 }
 
 
