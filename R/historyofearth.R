@@ -204,6 +204,26 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   }
 }
 
+#' Cache trees for website
+#'
+#' @param taxa Vector of taxa
+#' @param age_df From GetAgeDF
+#' @param height Height in pixels
+#' @param width Width in pixels
+#' @export
+CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=500) {
+  taxa <- c("all", taxa)
+  periods <- c("all", age_df$Period)
+  for (taxon_index in seq_along(taxa)) {
+    for (period_index in seq_along(periods)) {
+      jpeg(filename=paste0('/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/tree_', taxa[taxon_index], "_", periods[period_index],".jpg"), width=width, height=height)
+      HistoryOfEarth::get_pictree(focalTaxon=taxa[taxon_index])
+      HistoryOfEarth::AddAxis(lastPP, focalPeriod=periods[period_index])
+      dev.off()
+    }
+  }
+}
+
 #' Cache everything
 #'
 #' Just to save typing, run all the caching functions

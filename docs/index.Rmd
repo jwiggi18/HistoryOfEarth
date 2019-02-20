@@ -20,6 +20,7 @@ shiny::includeScript(path = "main.js")
 
 ```{r echo=FALSE}
 knitr::asis_output(htmltools::htmlPreserve('
+  <div class="container-fluid">
  <div class="row overview_vg">
       <div class="col-sm-12" style="background-color:#545353" align="center">
         <button id="overview_vg" type="button" class="btn btn-default action-button" align="center" onclick="window.open(&#39;https://quizlet.com/365498277/test&#39;, &#39;_blank&#39;)" style="padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353">Questions</button>
@@ -84,6 +85,7 @@ knitr::asis_output(htmltools::htmlPreserve('
       <div class="col-sm-1" style="background-color:#B15928" align="center">
         <button id="quaternary_button" type="button" class="btn btn-default action-button" onclick="window.open(&#39;https://www.nationalgeographic.com/science/prehistoric-world/quaternary/&#39;, &#39;_blank&#39;)" style="padding: 6px 0px; background-color:#B15928; border-color:#B15928">Quaternary</button>
       </div>
+</div>
 '))
 ```
 
@@ -108,6 +110,8 @@ a.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     alert(selected.val() + " " + selected.text());
     document.getElementById("organismphoto").src=selected.val();
+    document.getElementById("map").src="img/map_" + selected.text() + "_all.gif";
+
 });
 </script>
 '))

@@ -875,43 +875,12 @@ History of Earth
 <div class="contents col-xs-12 col-md-10">
 <div class="row">
 <!--html_preserve-->
-<script>// <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<pre><code>// &lt;script type=&quot;text/javascript&quot;&gt;
-// $( &quot;select&quot; )
-//   .change(function () {
-//     var str = &quot;&quot;;
-//     $( &quot;select option:selected&quot; ).each(function() {
-//       str += $( this ).text() + &quot; &quot;;
-//     });
-//   #  $( &quot;div&quot; ).text( str );
-//   alert(&quot;selected&quot;);
-//   })
-//   .change();
-//  &lt;/script&gt;</code></pre>
-//
-<script type="text/javascript">
- // $(document).ready(function() {
- //     $("select").change(function(){
- //       alert('value 0 (wich refers to Chef) got selected');
- //         if($(this).val() == "1")
- //             {
- //                 alert('value 1 (wich refers to Chef) got selected');
- //             }
- //         });
- // });
- // </script>
-//
-<script type="text/javascript">
- // var a = document.getElementById('genus');
- // a.addEventListener('change', function() {
- //   alert("yay");
- // }, false);
- // </script>
-</script>
+<script></script>
 <!--/html_preserve-->
 </div>
 <div class="row">
 <!--html_preserve-->
+<div class="container-fluid">
 <div class="row overview_vg">
 <pre><code>  &lt;div class=&quot;col-sm-12&quot; style=&quot;background-color:#545353&quot; align=&quot;center&quot;&gt;
     &lt;button id=&quot;overview_vg&quot; type=&quot;button&quot; class=&quot;btn btn-default action-button&quot; align=&quot;center&quot; onclick=&quot;window.open(&amp;#39;https://quizlet.com/365498277/test&amp;#39;, &amp;#39;_blank&amp;#39;)&quot; style=&quot;padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353&quot;&gt;Questions&lt;/button&gt;
@@ -976,6 +945,7 @@ History of Earth
   &lt;div class=&quot;col-sm-1&quot; style=&quot;background-color:#B15928&quot; align=&quot;center&quot;&gt;
     &lt;button id=&quot;quaternary_button&quot; type=&quot;button&quot; class=&quot;btn btn-default action-button&quot; onclick=&quot;window.open(&amp;#39;https://www.nationalgeographic.com/science/prehistoric-world/quaternary/&amp;#39;, &amp;#39;_blank&amp;#39;)&quot; style=&quot;padding: 6px 0px; background-color:#B15928; border-color:#B15928&quot;&gt;Quaternary&lt;/button&gt;
   &lt;/div&gt;</code></pre>
+</div>
 <!--/html_preserve-->
 </div>
 <div class="row">
@@ -1012,6 +982,8 @@ a.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     alert(selected.val() + " " + selected.text());
     document.getElementById("organismphoto").src=selected.val();
+    document.getElementById("map").src="img/map_" + selected.text() + "_all.gif";
+
 });
 </script>
 <!--/html_preserve-->
