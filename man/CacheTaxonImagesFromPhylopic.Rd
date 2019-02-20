@@ -4,7 +4,8 @@
 \alias{CacheTaxonImagesFromPhylopic}
 \title{Cache taxon images from phylopic}
 \usage{
-CacheTaxonImagesFromPhylopic(tree = chronogram, cacheDir = "docs/img")
+CacheTaxonImagesFromPhylopic(tree = chronogram,
+  cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img")
 }
 \arguments{
 \item{tree}{Tree from dateTaxonTreePBDB}
