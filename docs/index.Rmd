@@ -1,11 +1,20 @@
 ---
-title: "History Of Earth"
-output: html_document
+output:
+  knitrBootstrap::bootstrap_document:
+    title: "History of Earth"
+    theme: cyborg
+    highlight: sunburst
+    theme.chooser: TRUE
+    highlight.chooser: TRUE
 runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE}
+shiny::includeScript(path = "main.js")
 ```
 
 
@@ -79,13 +88,48 @@ knitr::asis_output(htmltools::htmlPreserve('
 ```
 
 ```{r selecttaxon, echo=FALSE}
+genus_choices <- c("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetWikipediaThumbnail)))
+names(genus_choices) <- c("all", HistoryOfEarth::GetTaxa())
 shiny::selectInput("genus", "Choose an organism:",
-    choices = c("all", HistoryOfEarth::GetTaxa()),
-    multiple = FALSE, selected="all")
+    choices = genus_choices,
+    multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE)
 
 shiny::selectInput("period", "Choose a period:",
                 choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
-                multiple = FALSE, selected="all")
+                multiple = FALSE, selected="all", selectize=FALSE)
+```
+
+```{r echo=FALSE}
+knitr::asis_output(htmltools::htmlPreserve('
+<script type="text/javascript">
+
+var a = document.getElementById("genus");
+a.addEventListener("change", function() {
+    var selected = $(this).find("option:selected");
+    alert(selected.val() + " " + selected.text());
+    document.getElementById("organismphoto").src=selected.val();
+});
+</script>
+'))
+```
+
+
+```{r echo=FALSE}
+knitr::asis_output(htmltools::htmlPreserve('
+
+<script>
+
+//var a = document.getElementById("genus");
+//a.addEventListener("change", function() {
+//  alert(this.text);
+//}, false);
+</script>
+
+<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg"/>
+
+<img id="map" src="img/map_all_all.gif"/>
+
+'))
 ```
 
 ## R Markdown
