@@ -34,7 +34,7 @@ knitr::asis_output(htmltools::htmlPreserve('
 
 <script type="text/javascript">
 var obj = JSON.parse(getElementById("taxalinksjson"));
-document.getElementById("demo").innerHTML = obj.common_name + ", " + obj.Genus;
+alert(obj);
 </script>
 '))
 ```
