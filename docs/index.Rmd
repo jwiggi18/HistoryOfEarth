@@ -1,6 +1,6 @@
 ---
+title: "History of Earth"
 output:
-  title: "History of Earth"
   knitrBootstrap::bootstrap_document:
     theme: cyborg
     highlight: sunburst
