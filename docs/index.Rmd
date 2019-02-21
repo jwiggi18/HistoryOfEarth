@@ -24,20 +24,11 @@ data(taxa_links, package="HistoryOfEarth")
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=TRUE)))
 
 knitr::asis_output(htmltools::htmlPreserve(');
-</script>
-'))
-```
-
-```{r echo=FALSE}
-knitr::asis_output(htmltools::htmlPreserve('
-<p id="demo">JSON HERE</p>
-
-<script type="text/javascript">
-var obj = JSON.parse(getElementById("taxalinksjson"));
 alert(obj);
 </script>
 '))
 ```
+
 
 ```{r echo=FALSE}
 shiny::fluidRow(class = "overview",
