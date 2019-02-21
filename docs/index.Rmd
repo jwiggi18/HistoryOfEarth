@@ -150,7 +150,7 @@ shiny::fluidRow(class = "overview",
 ```{r selecttaxon, echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
 genus_choices <- c('https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg', unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetPreselectedThumbnail)))
-names(genus_choices) <- c("all", HistoryOfEarth::GetTaxa())
+names(genus_choices) <- c(HistoryOfEarth::GetTaxa())
 
 
 shiny::fluidRow(
