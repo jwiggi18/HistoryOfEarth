@@ -14,7 +14,19 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r echo=FALSE}
+knitr::asis_output(htmltools::htmlPreserve('
+<script type="application/json">
+'))
 
+data(taxa_links, package="HistoryOfEarth")
+
+knitr::asis_output(htmltools::htmlPreserve(toJSON(taxa_links, pretty=TRUE)))
+
+knitr::asis_output(htmltools::htmlPreserve('
+</script>
+'))
+```
 
 ```{r echo=FALSE}
 shiny::fluidRow(class = "overview",
