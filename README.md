@@ -7,4 +7,4 @@ To update maps or tree, `CacheMaps()` or `CacheTree()`, then commit and push the
 
 To run the site, `HistoryOfEarth::runSite()`
 
-The other approach is to go to docs/index.Rmd, knit that, commit, and push, and deploy on github pages: index.html will work there.
+The other approach is to go to docs/index.Rmd, do `rmarkdown::render('index.Rmd')`, commit index.html, and push, and deploy on github pages: index.html will work there.

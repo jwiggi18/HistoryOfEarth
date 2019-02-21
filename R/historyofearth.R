@@ -308,17 +308,17 @@ latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
 }
 
 
-#' Get an image from Wikipedia
+#' Get a preselected image
 #'
 #' @param taxon Taxon to get
-#' @param size Size of larger dimension
 #' @return URL of the image
 #' @export
-GetWikipediaThumbnail <- function(taxon) {
+GetPreselectedThumbnail <- function(taxon) {
   if(taxon=="all") {
     return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   }
-  for (genus_index in seq_along(taxon_links$Genus)) {
+  data(taxa_links, package="HistoryOfEarth")
+  for (genus_index in seq_along(taxa_links$Genus)) {
       if(taxon==taxa_links$Genus[genus_index]) {
         return(taxa_links$pic_url[genus_index])
       }
@@ -328,6 +328,20 @@ GetWikipediaThumbnail <- function(taxon) {
 #  return(json$query$pages[[1]]$thumbnail$source)
 }
 
+#' Get an image from Wikipedia
+#'
+#' @param taxon Taxon to get
+#' @param size Size of larger dimension
+#' @return URL of the image
+#' @export
+GetWikipediaThumbnail <- function(taxon, size=200) {
+  if(taxon=="all") {
+    return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
+  }
+  url <- paste0('https://en.wikipedia.org/w/api.php?action=query&titles=', utils::URLencode(taxon), '&prop=pageimages&format=json&pithumbsize=', size)
+  json <- jsonlite::fromJSON(url)
+  return(json$query$pages[[1]]$thumbnail$source)
+}
 
 #' get link for each genus
 #'
