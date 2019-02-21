@@ -249,12 +249,9 @@ knitr::asis_output(htmltools::htmlPreserve('
 '))
 ```
 
-```
 Site created using R, javascript, and HTML; hosted on GitHub pages.
 <br />
 <br />
 <br />
 <br />
 <br />
-
-```
