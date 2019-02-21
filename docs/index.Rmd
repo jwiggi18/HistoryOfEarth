@@ -26,7 +26,6 @@ knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=F
 text = text.replace("<!--/html_preserve-->", "");
 var obj = JSON.parse(text);
 
-document.getElementById("demo").innerHTML = JSON.stringify(obj[2].Genus);
 </script>
 ')))
 ```
