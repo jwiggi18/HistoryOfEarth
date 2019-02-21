@@ -51,7 +51,7 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
         column(12, style = "background-color:#545353", align = "center",
           actionButton("overview_button", "Overview", align = "center",
                         onclick = "window.open('https://youtu.be/rWp5ZpJAIAE', '_blank')",
-                        style = "padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
+                        style = "size: 16px; padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
                       )
         ),
     fluidRow(class = "overview_vg",
@@ -65,17 +65,17 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
         column(6, style = "background-color:#FFFF99", align = "center",
             actionButton("paleozoic_button", "Paleozoic Era", #yellow
                           onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')",
-                          style = "padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
+                          style = "size: 16px; padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
         ),
         column(3, style = "background-color:#1F78B4", align = "center",
             actionButton("mesozoic_button", "Mesozoic Era", #blue
                           onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')",
-                          style = "padding: 1px; background-color:#1F78B4; border-color:#1F78B4")
+                          style = "size: 16px; padding: 1px; background-color:#1F78B4; border-color:#1F78B4")
         ),
         column(3, style = "background-color:#B2DF8A", align = "center",
             actionButton("cenozoic_button", "Cenozoic Era", #green
                           onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')",
-                          style = "padding: 1px; color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
+                          style = "size: 16px; padding: 1px; color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
         )
       ),
       fluidRow(class = "Veiwer_Guides",
