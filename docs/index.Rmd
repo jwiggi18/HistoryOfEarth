@@ -20,11 +20,11 @@ knitr::asis_output(htmltools::htmlPreserve('<p id="demo">demohere</p>'))
 
 knitr::asis_output(htmltools::htmlPreserve(paste0('
 <script type="text/javascript">
-var text = ',"'",
+var txt = ',"'",
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),"'",
 ';
-text = text.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "");
-var obj = JSON.parse(text);
+txt = text.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "");
+var obj = JSON.parse(txt);
 
 document.getElementById("demo").innerHTML = JSON.stringify(obj[2].Genus);
 </script>
