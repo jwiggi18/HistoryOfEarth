@@ -314,13 +314,18 @@ latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
 #' @param size Size of larger dimension
 #' @return URL of the image
 #' @export
-GetWikipediaThumbnail <- function(taxon, size=200) {
+GetWikipediaThumbnail <- function(taxon) {
   if(taxon=="all") {
     return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   }
-  url <- paste0('https://en.wikipedia.org/w/api.php?action=query&titles=', utils::URLencode(taxon), '&prop=pageimages&format=json&pithumbsize=', size)
-  json <- jsonlite::fromJSON(url)
-  return(json$query$pages[[1]]$thumbnail$source)
+  for (genus_index in seq_along(taxon_links$Genus)) {
+      if(taxon==taxa_links$Genus[genus_index]) {
+        return(taxa_links$pic_url[genus_index])
+      }
+  }
+#  url <- paste0('https://en.wikipedia.org/w/api.php?action=query&titles=', utils::URLencode(taxon), '&prop=pageimages&format=json&pithumbsize=', size)
+#  json <- jsonlite::fromJSON(url)
+#  return(json$query$pages[[1]]$thumbnail$source)
 }
 
 
@@ -331,7 +336,7 @@ GetWikipediaThumbnail <- function(taxon, size=200) {
 #' @export
 get_genuslink <- function(taxon) {
   if(taxon=="all") {
-    return("http://www.onezoom.org/life/@cellular_organisms=93302#x257,y533,w1.0764")
+    return("http://www.onezoom.org/life.html/@cellular_organisms=93302#x-16,y872,w1.6839")
   }
   for (genus_index in seq_along(taxa_links$Genus)) {
       if(taxon==taxa_links$Genus[genus_index]) {
