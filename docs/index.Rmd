@@ -150,7 +150,10 @@ shiny::fluidRow(class = "overview",
 ```{r selecttaxon, echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
 genus_choices <- taxa_links$Genus
-names(genus_choices) <- taxa_links$common_name
+names(genus_choices) <- paste0(taxa_links$common_name, " (",taxa_links$Genus,")")
+identical_names <- which(taxa_links$Genus == taxa_links$common_name)
+names(genus_choices)[identical_names] <- taxa_links$Genus[identical_names]
+
 
 
 shiny::fluidRow(
