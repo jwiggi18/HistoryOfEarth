@@ -6,7 +6,7 @@ output:
     theme: cyborg
     highlight: sunburst
     theme.chooser: TRUE
-    highlight.chooser: TRUE
+    highlight.chooser: FALSE
 runtime: shiny_prerendered
 ---
 

@@ -505,6 +505,11 @@ recolor_phylopic_for_map <- function (img, alpha = 0.2, color = NULL)
 #' @export
 AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL, step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=FALSE, use_phylopics=FALSE, point_color="red", gif_name=NULL, paleomaps_allages = NULL, single_frame=FALSE) {
   plotlist <- list()
+  if(!is.null(periods)) {
+    if("All" %in% periods) {
+      periods <- NULL # since it was probably passed in accidentally
+    }
+  }
   if(is.null(paleomaps_allages)) {
     paleomaps_allages <-CreateMapListAllTimes(start_age=ifelse(is.null(start_time),0,start_time), stop_age=ifelse(is.null(stop_time),0,stop_time), step_size=step_size)
   }
