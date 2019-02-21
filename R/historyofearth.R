@@ -498,10 +498,10 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     if(nrow(specimen_df)>0) {
       possible_start_time <- min(specimen_df$pbdb_data.min_ma, na.rm=TRUE)
       possible_stop_time <- max(specimen_df$pbdb_data.max_ma, na.rm=TRUE)
-      if(possible_stop_time - possible_start_time > 40) { #otherwise, not enough intervals
-        stop_time <- possible_stop_time
-        start_time <- possible_start_time
-      }
+      #if(possible_stop_time - possible_start_time > 40) { #otherwise, not enough intervals
+      #  stop_time <- possible_stop_time
+      #  start_time <- possible_start_time
+      #}
     }
   }
   if(!is.null(periods)) {
