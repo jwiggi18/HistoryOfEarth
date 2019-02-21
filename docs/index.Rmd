@@ -108,7 +108,7 @@ knitr::asis_output(htmltools::htmlPreserve('
 var a = document.getElementById("genus");
 a.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert(selected.val() + " " + selected.text());
+    //alert(selected.val() + " " + selected.text());
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_all.gif";
 

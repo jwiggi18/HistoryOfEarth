@@ -86,7 +86,7 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
 #' @param cacheDir Where to store trees
 #' @export
 CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img") {
-  paleotree::cachePhyloPicPNG(tree, cacheDir)
+  paleotree::cachePhyloPicPNG(tree=tree, cacheDir=cacheDir)
   print("Remember to add these using git")
 }
 
@@ -212,12 +212,13 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 #' @param width Width in pixels
 #' @export
 CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=500) {
+  CacheTaxonImagesFromPhylopic()
   taxa <- c("all", taxa)
   periods <- c("all", age_df$Period)
   for (taxon_index in seq_along(taxa)) {
     for (period_index in seq_along(periods)) {
       jpeg(filename=paste0('/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/tree_', taxa[taxon_index], "_", periods[period_index],".jpg"), width=width, height=height)
-      HistoryOfEarth::get_pictree(focalTaxon=taxa[taxon_index])
+      lastPP <- HistoryOfEarth::get_pictree(focalTaxon=taxa[taxon_index], cacheDir="/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/")
       HistoryOfEarth::AddAxis(lastPP, focalPeriod=periods[period_index])
       dev.off()
     }
