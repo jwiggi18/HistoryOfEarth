@@ -23,7 +23,7 @@ knitr::asis_output(htmltools::htmlPreserve(paste0('
 var txt = ',"'",
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),"'",
 ';
-txt = txt.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "");
+txt = txt.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "")replace("<!--html_preserve-->", "").replace("<!--html_preserve-->", "");
 var obj = JSON.parse(txt);
 
 document.getElementById("demo").innerHTML = JSON.stringify(obj[2].Genus);
