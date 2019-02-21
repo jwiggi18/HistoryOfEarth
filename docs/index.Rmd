@@ -133,7 +133,7 @@ shiny::fluidRow(class = "overview",
 
 ```{r selecttaxon, echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-genus_choices <- c('https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg', unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetWikipediaThumbnail)))
+genus_choices <- c('https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg', unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetPreselectedThumbnail)))
 names(genus_choices) <- c("all", HistoryOfEarth::GetTaxa())
 
 
@@ -173,27 +173,29 @@ shiny::fluidRow(
 ```{r echo=FALSE}
 knitr::asis_output(htmltools::htmlPreserve('
 <script type="text/javascript">
-var chosenperiod = document.getElementById("period");
-var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
+
 
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
+    var chosenperiod = document.getElementById("period");
+    var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
+    //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
 </script>
 
 <script type="text/javascript">
-var chosengenus = document.getElementById("genus");
-var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
 
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
+    var chosengenus = document.getElementById("genus");
+    var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
   //  alert(selected.val() + " " + selected.text() + str_chosengenus);
     document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
+    document.getElementById("tree").src="img/tree_" + str_chosengenus + "_" + selected.val() + ".jpg";
 });
 </script>
 '))
