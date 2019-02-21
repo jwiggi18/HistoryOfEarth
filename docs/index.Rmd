@@ -16,7 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-knitr::asis_output(htmltools::htmlPreserve('<p id="demo">demohere</p>'))
 
 knitr::asis_output(htmltools::htmlPreserve(paste0('
 <script type="text/javascript">
@@ -158,10 +157,12 @@ names(genus_choices)[identical_names] <- taxa_links$Genus[identical_names]
 
 shiny::fluidRow(
     column(4, align="center",
-    shiny::selectInput("genus", "Choose an organism:",
+      shiny::selectInput("genus", "Choose an organism:",
         choices = genus_choices,
-        multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE)
+        multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE),
+      htmltools::a("Get information on everything", href=taxa_links$Link[1], target="_blank", id="more_info")
     ),
+
     column(8, align="center",
     shiny::selectInput("period", "Choose a period:",
                     choices = c("All", HistoryOfEarth::GetAgeDF()$Period),
