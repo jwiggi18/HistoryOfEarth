@@ -46,6 +46,17 @@ NULL
 #' @format A data.frame with info on specimens
 NULL
 
+#' Taxa Links
+#'
+#' Selected taxa common names, scientific names, links to more info, links to picture
+#'
+#' @docType data
+#' @keywords datasets
+#' @name taxa_links
+#' @usage data(taxa_links)
+#' @format A data.frame with info on taxa
+NULL
+
 # #' Taxon Images
 # #'
 # #' Images of taxa from phylopic
