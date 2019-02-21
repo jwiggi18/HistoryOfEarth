@@ -198,7 +198,7 @@ g.addEventListener("change", function() {
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
-    alert(JSON.stringify(obj[document.getElementById("genus").selectedIndex].Genus));
+    alert(JSON.stringify(obj[selected.selectedIndex].Genus));
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
     document.getElementById("tree").src="img/tree_" + selected.text() + "_" + str_chosenperiod + ".jpg";
