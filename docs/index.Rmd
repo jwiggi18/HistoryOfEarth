@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE}
 knitr::asis_output(htmltools::htmlPreserve('
-<script type="application/json">
+<script type="application/json" id="taxalinksjson">
 '))
 
 data(taxa_links, package="HistoryOfEarth")
