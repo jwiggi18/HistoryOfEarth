@@ -131,6 +131,7 @@ shiny::fluidRow(class = "overview",
 ```
 
 ```{r selecttaxon, echo=FALSE}
+data(taxa_links, package="HistoryOfEarth")
 genus_choices <- c('https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg', unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetWikipediaThumbnail)))
 names(genus_choices) <- c("all", HistoryOfEarth::GetTaxa())
 
@@ -150,7 +151,7 @@ shiny::fluidRow(
 )
 shiny::fluidRow(
   column(4, align="center",
-    htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism")
+    htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism", width=200)
   ),
   column(8, align="center",
   htmltools::img(id="map", src="img/map_all_all.gif", alt="map of plates")
@@ -204,7 +205,7 @@ knitr::asis_output(htmltools::htmlPreserve('
 //}, false);
 </script>
 
-<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism"/>
+<img id="organismphoto2" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism"/>
 
 <img id="map" src="img/map_all_all.gif" alt="map of plates"/>
 

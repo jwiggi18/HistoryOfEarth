@@ -4,7 +4,7 @@
 \alias{GetWikipediaThumbnail}
 \title{Get an image from Wikipedia}
 \usage{
-GetWikipediaThumbnail(taxon)
+GetWikipediaThumbnail(taxon, size = 200)
 }
 \arguments{
 \item{taxon}{Taxon to get}
