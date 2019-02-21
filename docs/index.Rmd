@@ -159,8 +159,7 @@ shiny::fluidRow(
     column(4, align="center",
       shiny::selectInput("genus", "Choose an organism:",
         choices = genus_choices,
-        multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE),
-      htmltools::a("Get information on everything", href=taxa_links$Link[1], target="_blank", id="more_info")
+        multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE)
     ),
 
     column(8, align="center",
@@ -172,7 +171,8 @@ shiny::fluidRow(
 )
 shiny::fluidRow(
   column(4, align="center",
-    htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism", width=200)
+    htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism", width=200),
+    htmltools::a("Get information on everything", href=taxa_links$Link[1], target="_blank", id="more_info")
   ),
   column(8, align="center",
   htmltools::img(id="map", src="img/map_All_All.gif", alt="map of plates")
