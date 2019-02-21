@@ -24,7 +24,7 @@ knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=F
 ');
 alert(obj);
 </script>
-'))
+')))
 ```
 
 
