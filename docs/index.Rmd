@@ -17,14 +17,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
 
-knitr::asis_output(htmltools::htmlPreserve(paste0('
+knitr::asis_output(paste0('
 <script type="text/javascript">
-var obj = JSON.parse(',
+var obj = JSON.parse(',"'",
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),
-');
+"'", ');
 alert(obj);
 </script>
-')))
+'))
 ```
 
 
