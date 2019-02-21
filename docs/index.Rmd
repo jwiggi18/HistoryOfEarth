@@ -149,8 +149,8 @@ shiny::fluidRow(class = "overview",
 
 ```{r selecttaxon, echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-genus_choices <- c(unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetPreselectedThumbnail)))
-names(genus_choices) <- c(HistoryOfEarth::GetTaxa())
+genus_choices <- taxa_links$Genus
+names(genus_choices) <- taxa_links$common_name
 
 
 shiny::fluidRow(
