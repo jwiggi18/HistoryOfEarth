@@ -211,7 +211,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 #' @param height Height in pixels
 #' @param width Width in pixels
 #' @export
-CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=500) {
+CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=800) {
   CacheTaxonImagesFromPhylopic()
   taxa <- c("all", taxa)
   periods <- c("all", age_df$Period)

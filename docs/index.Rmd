@@ -105,12 +105,18 @@ shiny::selectInput("period", "Choose a period:",
 knitr::asis_output(htmltools::htmlPreserve('
 <script type="text/javascript">
 
-var a = document.getElementById("genus");
-a.addEventListener("change", function() {
+var g = document.getElementById("genus");
+g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     //alert(selected.val() + " " + selected.text());
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_all.gif";
+
+var p = document.getElementById("period");
+p.addEventListener("change", function() {
+        var selected = $(this).find("option:selected");
+        //alert(selected.val() + " " + selected.text());
+        document.getElementById("map").src="img/map_all" + selected.text() + ".gif";
 
 });
 </script>
@@ -129,29 +135,12 @@ knitr::asis_output(htmltools::htmlPreserve('
 //}, false);
 </script>
 
-<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg"/>
+<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="Picture of chosen organism"/>
 
-<img id="map" src="img/map_all_all.gif"/>
+<img id="map" src="img/map_all_all.gif" alt="Biogeographic map"/>
+
+<img id="tree" src="img/tree_all_all.jpg" alt="Phylogeny (evolutionary family tree)"/>
+
 
 '))
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
