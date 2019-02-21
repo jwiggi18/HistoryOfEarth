@@ -157,6 +157,11 @@ shiny::fluidRow(
   htmltools::img(id="map", src="img/map_all_all.gif", alt="map of plates")
   )
 )
+shiny::fluidRow(
+  column(12, align="center",
+    htmltools::img(id="tree", src="img/tree_all_all.jpg", alt="phylogeny of organisms")
+  )
+)
 
 
 
@@ -206,7 +211,6 @@ knitr::asis_output(htmltools::htmlPreserve('
 </script>
 
 
-<img id="tree" src="img/tree_all_all.jpg" alt="phylogeny of organisms"/>
 
 
 '))
