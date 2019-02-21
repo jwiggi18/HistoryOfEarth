@@ -14,7 +14,7 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE asis=TRUE}
 data(taxa_links, package="HistoryOfEarth")
 paste0('
 <script type="text/javascript">
