@@ -204,12 +204,12 @@ g.addEventListener("change", function() {
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
-    alert(JSON.stringify(taxoninfo[$("#genus").prop("selectedIndex")].Genus));
+    //alert(JSON.stringify(taxoninfo[$("#genus").prop("selectedIndex")].Genus));
     document.getElementById("organismphoto").src=taxoninfo[$("#genus").prop("selectedIndex")].pic_url;
     document.getElementById("map").src="img/map_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + str_chosenperiod + ".gif";
     document.getElementById("tree").src="img/tree_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + str_chosenperiod + ".jpg";
 
-document.getElementById("section-more_info").innerHTML = "cat";
+document.getElementById("section-more_info").innerHTML = "Learn more about " + taxoninfo[$("#genus").prop("selectedIndex")].Genus;
 
   //  document.getElementById("more_info").innerHTML = "<a href=" taxoninfo[$("#genus").prop("selectedIndex")].Link) + ">Learn more about taxoninfo[$("#genus").prop("selectedIndex")].Genus</a>";
 
