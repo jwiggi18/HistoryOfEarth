@@ -162,7 +162,7 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(
         column(4, align="center",
             selectInput("genus", "Choose an organism:",
-                choices = c("all", HistoryOfEarth::GetTaxa()),
+                choices = c("all", taxa_links$common_name),
                 multiple = FALSE, selected="all")
         ),
         column(8, align="center",
