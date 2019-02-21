@@ -16,15 +16,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-
-knitr::asis_output(paste0('
+paste0('
 <script type="text/javascript">
-var obj = JSON.parse(',"'",
+var text = ',"'",
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),
-"'", ');
+"'", ');')
+paste0('var obj = JSON.parse(text);')
+paste0('
 alert(obj);
 </script>
-'))
+')
 ```
 
 
