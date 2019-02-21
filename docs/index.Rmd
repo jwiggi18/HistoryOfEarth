@@ -5,6 +5,7 @@ output:
     highlight: sunburst
     theme.chooser: FALSE
     highlight.chooser: FALSE
+    pagetitle: "History of Earth"
 runtime: shiny_prerendered
 ---
 
