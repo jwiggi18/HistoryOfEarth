@@ -21,7 +21,7 @@ knitr::asis_output(htmltools::htmlPreserve('
 
 data(taxa_links, package="HistoryOfEarth")
 
-knitr::asis_output(htmltools::htmlPreserve(toJSON(taxa_links, pretty=TRUE)))
+knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=TRUE)))
 
 knitr::asis_output(htmltools::htmlPreserve('
 </script>
