@@ -13,9 +13,6 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE}
-shiny::includeScript(path = "main.js")
-```
 
 
 ```{r echo=FALSE}
@@ -104,20 +101,27 @@ shiny::selectInput("period", "Choose a period:",
 ```{r echo=FALSE}
 knitr::asis_output(htmltools::htmlPreserve('
 <script type="text/javascript">
+var chosenperiod = document.getElementById("period");
+var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
 
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    //alert(selected.val() + " " + selected.text());
+    alert(selected.val() + " " + selected.text() + str_chosenperiod);
     document.getElementById("organismphoto").src=selected.val();
-    document.getElementById("map").src="img/map_" + selected.text() + "_all.gif";
+    document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
+});
+</script>
+
+<script type="text/javascript">
+var chosengenus = document.getElementById("genus");
+var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
 
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
-        var selected = $(this).find("option:selected");
-        //alert(selected.val() + " " + selected.text());
-        document.getElementById("map").src="img/map_all" + selected.text() + ".gif";
-
+    var selected = $(this).find("option:selected");
+    alert(selected.val() + " " + selected.text() + str_chosengenus);
+    document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
 });
 </script>
 '))
@@ -135,11 +139,11 @@ knitr::asis_output(htmltools::htmlPreserve('
 //}, false);
 </script>
 
-<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="Picture of chosen organism"/>
+<img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism"/>
 
-<img id="map" src="img/map_all_all.gif" alt="Biogeographic map"/>
+<img id="map" src="img/map_all_all.gif" alt="map of plates"/>
 
-<img id="tree" src="img/tree_all_all.jpg" alt="Phylogeny (evolutionary family tree)"/>
+<img id="tree" src="img/tree_all_all.jpg" alt="phylogeny of organisms"/>
 
 
 '))

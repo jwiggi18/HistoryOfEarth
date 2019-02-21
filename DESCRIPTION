@@ -22,7 +22,8 @@ Imports:
     shinythemes,
     gplatesr,
     paleotree,
-    rgbif
+    rgbif,
+    knitrBootstrap
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
