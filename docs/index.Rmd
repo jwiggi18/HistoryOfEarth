@@ -8,6 +8,8 @@ output:
 runtime: shiny_prerendered
 ---
 
+<div class="container-fluid">
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -270,3 +272,4 @@ All materials are open for this: you can go to <a href="https://github.com/jwigg
 <br />
 <br />
 <br />
+</div>
