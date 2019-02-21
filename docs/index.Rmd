@@ -1,11 +1,11 @@
 ---
 output:
+  pagetitle: "History of Earth"
   knitrBootstrap::bootstrap_document:
     theme: cyborg
     highlight: sunburst
     theme.chooser: FALSE
     highlight.chooser: FALSE
-    pagetitle: "History of Earth"
 runtime: shiny_prerendered
 ---
 
