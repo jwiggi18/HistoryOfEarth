@@ -14,18 +14,17 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE, results="asis"}
+```{r echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-paste0('
+
+knitr::asis_output(htmltools::htmlPreserve(paste0('
 <script type="text/javascript">
-var text = ',"'",
+var obj = JSON.parse(',
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),
-"'", ');')
-paste0('var obj = JSON.parse(text);')
-paste0('
+');
 alert(obj);
 </script>
-')
+'))
 ```
 
 
