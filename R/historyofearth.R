@@ -555,8 +555,8 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
     if(nrow(specimen_df_local)>0) {
 
-      median_start <- median(specimen_df_local$MinMa, na.rm=TRUE)
-      median_stop <- median(specimen_df_local$MaxMa, na.rm=TRUE)
+      median_start <- median(specimen_df_local$pbdb_data.min_ma, na.rm=TRUE)
+      median_stop <- median(specimen_df_local$pbdb_data.max_ma, na.rm=TRUE)
       start_time <- median(c(0, rep(median(c(median_start, median_stop), na.rm=TRUE), 2)), na.rm=TRUE) # so that if there are no dates, it uses 0, otherwise, it uses the dates
       start_time <- round(start_time,0)
       stop_time <- start_time
@@ -648,7 +648,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
 #'@export
 add_points <- function(map, df) {
 #  map + ggplot2::geom_point(data = df, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat, colour=df$Color))
-map + ggplot2::geom_point(data = df, colour=df$Color, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
+map + ggplot2::geom_point(data = df, colour=df$Color, size=2, ggplot2::aes(x=pbdb_data.paleolng, y=pbdb_data.paleolat))
 }
 
 #' function to getPhyloPicIDNum axis to a tree plot
