@@ -30,9 +30,9 @@ knitr::asis_output(htmltools::htmlPreserve('
 
 ```{r echo=FALSE}
 knitr::asis_output(htmltools::htmlPreserve('
-<p id="demo"></p>
+<p id="demo">JSON HERE</p>
 
-<script>
+<script type="text/javascript">
 var obj = JSON.parse(getElementById("taxalinksjson"));
 document.getElementById("demo").innerHTML = obj.common_name + ", " + obj.Genus;
 </script>
