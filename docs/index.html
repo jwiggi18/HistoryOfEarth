@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>index.utf8</title>
+  <title>History of Earth</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -866,6 +866,9 @@
   </style>
 </head>
 <body>
+<div id="section-header">
+<h1 class="title">History of Earth</h1>
+</div>
 <title>
 History of Earth
 </title>
@@ -1052,7 +1055,7 @@ var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    //alert(selected.val() + " " + selected.text() + str_chosenperiod);
+    alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
