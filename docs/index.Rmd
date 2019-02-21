@@ -20,7 +20,7 @@ data(taxa_links, package="HistoryOfEarth")
 knitr::asis_output(htmltools::htmlPreserve(paste0('
 <script type="text/javascript">
 var obj = JSON.parse(',
-knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=TRUE))),
+knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),
 ');
 alert(obj);
 </script>
