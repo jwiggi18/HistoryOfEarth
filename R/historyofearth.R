@@ -318,7 +318,7 @@ GetWikipediaThumbnail <- function(taxon) {
   if(taxon=="all") {
     return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   }
-  for (genus_index in seq_along(taxon_links$Genus)) {
+  for (genus_index in seq_along(taxa_links$Genus)) {
       if(taxon==taxa_links$Genus[genus_index]) {
         return(taxa_links$pic_url[genus_index])
       }
