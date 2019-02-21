@@ -31,9 +31,8 @@ var taxoninfo = JSON.parse(txt);
 
 
 ```{r echo=FALSE}
-fluidPage(theme = shinythemes::shinytheme("cyborg"))
 shiny::fluidRow(class = "overview",
-    column(12, style = "background-color:#545353", align = "center",
+    column(20, style = "background-color:#545353", align = "center",
       shiny::actionButton("overview_button", "Overview", align = "center",
                     onclick = "window.open('https://youtu.be/rWp5ZpJAIAE', '_blank')",
                     style = "size: 16px; padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
