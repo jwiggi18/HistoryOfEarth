@@ -1,4 +1,5 @@
 ---
+title: "History of Earth"
 output:
   knitrBootstrap::bootstrap_document:
     title: "History of Earth"
@@ -178,7 +179,7 @@ var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    //alert(selected.val() + " " + selected.text() + str_chosenperiod);
+    alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
