@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
-knitr::asis_output(htmltools::htmlPreserve('<p id="demo"></p>')
+knitr::asis_output(htmltools::htmlPreserve('<p id="demo"></p>'))
 
 knitr::asis_output(htmltools::htmlPreserve(paste0('
 <script type="text/javascript">
@@ -26,6 +26,7 @@ knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=F
 text = text.replace("<!--/html_preserve-->", "");
 var obj = JSON.parse(text);
 
+document.getElementById("demo").innerHTML = JSON.stringify(obj[2].Genus);
 </script>
 ')))
 ```
