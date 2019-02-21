@@ -162,13 +162,13 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
     fluidRow(
         column(4, align="center",
             selectInput("genus", "Choose an organism:",
-                choices = c("all", taxa_links$Genus),
-                multiple = FALSE, selected="all")
+                choices = c("All", taxa_links$Genus),
+                multiple = FALSE, selected="All")
         ),
         column(8, align="center",
             selectInput("period", "Choose a period:",
-                choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
-                multiple = FALSE, selected="all")
+                choices = c("All", HistoryOfEarth::GetAgeDF()$Period),
+                multiple = FALSE, selected="All")
         )
     ),
     fluidRow(
@@ -222,7 +222,7 @@ chosen_period <- reactive({input$period})
                               paste('map_',input$genus,'_', input$period, '.gif', sep='')))
 
     # Return a list containing the filename
-    list(src = filename, alt="Animated map of plates moving", onerror='./www/map_none_all.gif')
+    list(src = filename, alt="Animated map of plates moving", onerror='./www/map_None_All.gif')
   }, deleteFile = FALSE)
 
   output$img <- renderUI({

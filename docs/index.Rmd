@@ -164,8 +164,8 @@ shiny::fluidRow(
     ),
     column(8, align="center",
     shiny::selectInput("period", "Choose a period:",
-                    choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
-                    multiple = FALSE, selected="all", selectize=FALSE)
+                    choices = c("All", HistoryOfEarth::GetAgeDF()$Period),
+                    multiple = FALSE, selected="All", selectize=FALSE)
 
     )
 )
@@ -174,12 +174,12 @@ shiny::fluidRow(
     htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism", width=200)
   ),
   column(8, align="center",
-  htmltools::img(id="map", src="img/map_all_all.gif", alt="map of plates")
+  htmltools::img(id="map", src="img/map_All_All.gif", alt="map of plates")
   )
 )
 shiny::fluidRow(
   column(12, align="center",
-    htmltools::img(id="tree", src="img/tree_all_all.jpg", alt="phylogeny of organisms")
+    htmltools::img(id="tree", src="img/tree_All_All.jpg", alt="phylogeny of organisms")
   )
 )
 
@@ -214,11 +214,11 @@ g.addEventListener("change", function() {
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    var chosengenus = document.getElementById("genus");
-    var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
+    // var chosengenus = document.getElementById("genus");
+    // var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
   //  alert(selected.val() + " " + selected.text() + str_chosengenus);
-    document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
-    document.getElementById("tree").src="img/tree_" + str_chosengenus + "_" + selected.val() + ".jpg";
+    document.getElementById("map").src="img/map_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + selected.val() + ".gif";
+    document.getElementById("tree").src="img/tree_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + selected.val() + ".jpg";
 });
 </script>
 '))

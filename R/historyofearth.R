@@ -139,8 +139,8 @@ CacheTaxonImagesByName <- function(taxa=GetTaxa()) {
 #' @export
 CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=GetTaxa(), step_size=1, age_df=GetAgeDF(), specimen_df=specimens, interval=0.5, use_cached_maps_only=TRUE, use_phylopics=FALSE, point_color="red", gif_name=NULL, single_frame=FALSE, MaximumAnimate=FALSE) {
   paleomaps_allages <-  CreateMapListAllTimes()
-  all_taxa <- c("all", "none", taxa)
-  all_periods <- c("all", age_df$Period)
+  all_taxa <- c("All", "None", taxa)
+  all_periods <- c("All", age_df$Period)
   all_periods_liststub <- vector("list",length(all_periods))
   names(all_periods_liststub) <- all_periods
   animatedmaps <- vector("list", length(all_taxa))
@@ -151,19 +151,19 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   #animatedmaps <- array(list(), c(2+length(taxa), 1+nrow(age_df)))
 
   #first do all taxa, all periods
-  animatedmaps[["all"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_all_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+  animatedmaps[["All"]][["All"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_All_All.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
 
 
   #second do no taxa, all periods
-  animatedmaps[["none"]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+  animatedmaps[["None"]][["All"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_None_All.gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
 
   # Now for backup copy this everywhere in case they don't generate elsewhere
   for (period_index in sequence(length(age_df$Period))) {
-      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_all_", age_df$Period[period_index], ".gif"))
-      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_", age_df$Period[period_index], ".gif"))
+      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_All.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_All_", age_df$Period[period_index], ".gif"))
+      system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_All.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_None_", age_df$Period[period_index], ".gif"))
       for (taxon_index in seq_along(taxa)) {
-        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_", taxa[taxon_index], "_", age_df$Period[period_index], ".gif"))
-        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_none_all.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_", taxa[taxon_index], "_all.gif"))
+        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_None_All.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_", taxa[taxon_index], "_", age_df$Period[period_index], ".gif"))
+        system(paste0("cp /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_None_All.gif /Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_", taxa[taxon_index], "_All.gif"))
       }
   }
 
@@ -171,21 +171,21 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period))) {
     print(paste("Making map for all taxa, ", age_df$Period[period_index]))
-    animatedmaps[["all"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_all_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+    animatedmaps[["All"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_All_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
   }
 
 
   # now loop over periods, all taxa
   for (period_index in sequence(length(age_df$Period))) {
     print(paste("Making map for no taxa, ", age_df$Period[period_index]))
-    animatedmaps[["none"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_all_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
+    animatedmaps[["None"]][[period_index+1]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=NULL, periods=age_df$Period[period_index], gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_All_", age_df$Period[period_index], ".gif")), paleomaps_allages=paleomaps_allages, single_frame=single_frame)
   }
 
   #third do single taxa, all periods
 
   for (taxon_index in seq_along(taxa)) {
     print(paste("Making map for taxon ",  taxa[taxon_index], " all periods"))
-    animatedmaps[[taxon_index+2]][["all"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_",taxa[taxon_index], "_all.gif")), paleomaps_allages=paleomaps_allages, single_frame=!MaximumAnimate)
+    animatedmaps[[taxon_index+2]][["All"]] <- AnimatePlot(use_phylopics=use_phylopics, interval=interval, point_color=point_color, step_size=step_size, age_df=age_df, use_cached_maps_only=use_cached_maps_only, taxa=taxa[taxon_index], periods=NULL, gif_name=gsub(" ", "_", paste0("/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/map_",taxa[taxon_index], "_All.gif")), paleomaps_allages=paleomaps_allages, single_frame=!MaximumAnimate)
     # now loop over periods, all taxa
     for (period_index in sequence(length(age_df$Period)-1)) {
       print(paste("Making map for taxon ",  taxa[taxon_index], ", period ", age_df$Period[period_index]))
@@ -213,8 +213,8 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 #' @export
 CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=800) {
   CacheTaxonImagesFromPhylopic()
-  taxa <- c("all", taxa)
-  periods <- c("all", age_df$Period)
+  taxa <- c("All", taxa)
+  periods <- c("All", age_df$Period)
   for (taxon_index in seq_along(taxa)) {
     for (period_index in seq_along(periods)) {
       jpeg(filename=paste0('/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img/tree_', taxa[taxon_index], "_", periods[period_index],".jpg"), width=width, height=height)
@@ -281,7 +281,7 @@ GetAgeDF <- function() {
 #' @export
 GetTaxa <- function() {
   data(taxa_links, package="HistoryOfEarth")
-  return(taxa_links$Genus[which(taxa_links$Genus != "all")])
+  return(taxa_links$Genus[which(taxa_links$Genus != "All")])
 #  return(c("Acanthostega", "Aedes", "Amphicyon", "Anchiornis", "Anomalocaris", "Arandaspis", "Archaeopteryx", "Attercopus", "Cameroceras", "Camponotus", "Caretta", "Cartorhynchus", "Climacograptus", "Crocodylus", "Dimetrodon", "Diplodocus", "Dunkleosteus", "Eldredgeops",  "Estemmenosuchus", "Eudimorphodon", "Giraffatitan", "Gorilla", "Homo", "Hylonomus", "Ichthyosaurus", "Juramaia", "Mammuthus", "Megalonyx", "Meganeura", "Megazostrodon", "Nimravus", "Pelagiella", "Phidippus", "Plesiosaurus", "Purussaurus", "Quetzalcoatlus", "Redondasaurus", "Rhyniognatha", "Sahelanthropus", "Smilodon", "Stegosaurus", "Teleoceras", "Triceratops", "Tusoteuthis", "Tyrannosaurus", "Tyto"))
 }
 
@@ -316,7 +316,7 @@ latlong_age <- function(taxa=GetTaxa(), age_df=GetAgeDF()){
 #' @return URL of the image
 #' @export
 GetPreselectedThumbnail <- function(taxon) {
-  if(taxon=="all") {
+  if(taxon=="All") {
     return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   }
   data(taxa_links, package="HistoryOfEarth")
@@ -337,7 +337,7 @@ GetPreselectedThumbnail <- function(taxon) {
 #' @return URL of the image
 #' @export
 GetWikipediaThumbnail <- function(taxon, size=200) {
-  if(taxon=="all") {
+  if(taxon=="All") {
     return("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg")
   }
   url <- paste0('https://en.wikipedia.org/w/api.php?action=query&titles=', utils::URLencode(taxon), '&prop=pageimages&format=json&pithumbsize=', size)
@@ -351,7 +351,7 @@ GetWikipediaThumbnail <- function(taxon, size=200) {
 #' @return URL
 #' @export
 get_genuslink <- function(taxon) {
-  if(taxon=="all") {
+  if(taxon=="All") {
     return("http://www.onezoom.org/life.html/@cellular_organisms=93302#x-16,y872,w1.6839")
   }
   for (genus_index in seq_along(taxa_links$Genus)) {
@@ -370,7 +370,7 @@ get_genuslink <- function(taxon) {
 #' @return URL
 #' @export
 get_periodlink <- function(period) {
-  if(period=="all") {
+  if(period=="All") {
     return("https://youtu.be/rWp5ZpJAIAE")
   }
   for (per_index in seq_along(period_links$Period)) {
@@ -659,7 +659,7 @@ AddAxis <- function(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv), foca
 #  lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
   focal_index <- 0
   if(!is.null(focalPeriod)) {
-    if(focalPeriod != "all") {
+    if(focalPeriod != "All") {
         focal_index <- which(age_df$Period==focalPeriod)
     }
   }
