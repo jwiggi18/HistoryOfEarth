@@ -87,15 +87,24 @@ knitr::asis_output(htmltools::htmlPreserve('
 ```
 
 ```{r selecttaxon, echo=FALSE}
+knitr::asis_output(htmltools::htmlPreserve('<div class="row">
+    <div class="form-group col-lg-6">
+    '))
 genus_choices <- c("https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", unname(sapply(HistoryOfEarth::GetTaxa(), HistoryOfEarth::GetWikipediaThumbnail)))
 names(genus_choices) <- c("all", HistoryOfEarth::GetTaxa())
 shiny::selectInput("genus", "Choose an organism:",
     choices = genus_choices,
     multiple = FALSE, selected=unname(genus_choices[1]), selectize=FALSE)
-
+knitr::asis_output(htmltools::htmlPreserve(' </div>
+    <div class="form-group col-lg-6">
+        '))
 shiny::selectInput("period", "Choose a period:",
                 choices = c("all", HistoryOfEarth::GetAgeDF()$Period),
                 multiple = FALSE, selected="all", selectize=FALSE)
+
+knitr::asis_output(htmltools::htmlPreserve(' </div>
+                    </div>
+                        '))
 ```
 
 ```{r echo=FALSE}
