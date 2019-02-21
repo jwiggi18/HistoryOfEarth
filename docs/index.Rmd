@@ -173,7 +173,7 @@ var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert(selected.val() + " " + selected.text() + str_chosenperiod);
+    //alert(selected.val() + " " + selected.text() + str_chosenperiod);
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
@@ -186,7 +186,7 @@ var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert(selected.val() + " " + selected.text() + str_chosengenus);
+  //  alert(selected.val() + " " + selected.text() + str_chosengenus);
     document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
 });
 </script>

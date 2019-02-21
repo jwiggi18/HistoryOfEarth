@@ -1028,7 +1028,7 @@ Quaternary
 <!--html_preserve-->
 <div class="row">
 <div class="col-sm-4" align="center">
-<p><img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism"/></p>
+<p><img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism" width="200"/></p>
 </div>
 <div class="col-sm-8" align="center">
 <p><img id="map" src="img/map_all_all.gif" alt="map of plates"/></p>
@@ -1045,7 +1045,7 @@ var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
 var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert(selected.val() + " " + selected.text() + str_chosenperiod);
+    //alert(selected.val() + " " + selected.text() + str_chosenperiod);
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
@@ -1057,7 +1057,7 @@ var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    alert(selected.val() + " " + selected.text() + str_chosengenus);
+  //  alert(selected.val() + " " + selected.text() + str_chosengenus);
     document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
 });
 </script>
