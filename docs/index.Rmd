@@ -173,7 +173,9 @@ shiny::fluidRow(
   column(4, align="center",
     htmltools::img(id="organismphoto", src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg", alt="picture of the selected organism", width=200),
     shiny::br(),
-    htmltools::a("Learn about All", href=taxa_links$Link[1], target="_blank", id="more_info")
+    htmltools::div(id="more_info",
+      htmltools::a("Learn about All", href=taxa_links$Link[1], target="_blank")
+    )
   ),
   column(8, align="center",
   htmltools::img(id="map", src="img/map_All_All.gif", alt="map of plates")
