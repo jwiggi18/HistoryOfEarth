@@ -205,9 +205,6 @@ knitr::asis_output(htmltools::htmlPreserve('
 //}, false);
 </script>
 
-<img id="organismphoto2" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism"/>
-
-<img id="map" src="img/map_all_all.gif" alt="map of plates"/>
 
 <img id="tree" src="img/tree_all_all.jpg" alt="phylogeny of organisms"/>
 
