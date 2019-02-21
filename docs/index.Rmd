@@ -24,9 +24,9 @@ var txt = ',"'",
 knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),"'",
 ';
 txt = txt.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "").replace("<!--html_preserve-->", "").replace("<!--html_preserve-->", "");
-var obj = JSON.parse(txt);
+var taxoninfo = JSON.parse(txt);
 
-document.getElementById("demo").innerHTML = JSON.stringify(obj[2].Genus);
+document.getElementById("demo").innerHTML = JSON.stringify(taxoninfo[2].Genus);
 </script>
 ')))
 ```
@@ -198,7 +198,7 @@ g.addEventListener("change", function() {
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
-    alert(JSON.stringify(obj[$("#genus").prop("selectedIndex")].Genus));
+    alert(JSON.stringify(taxoninfo[$("#genus").prop("selectedIndex")].Genus));
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
     document.getElementById("tree").src="img/tree_" + selected.text() + "_" + str_chosenperiod + ".jpg";
