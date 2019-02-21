@@ -180,21 +180,22 @@ g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     var chosenperiod = document.getElementById("period");
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
-    alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
+    //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
     document.getElementById("organismphoto").src=selected.val();
     document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
 });
 </script>
 
 <script type="text/javascript">
-var chosengenus = document.getElementById("genus");
-var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
 
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
+    var chosengenus = document.getElementById("genus");
+    var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
   //  alert(selected.val() + " " + selected.text() + str_chosengenus);
     document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
+    document.getElementById("tree").src="img/tree_" + str_chosengenus + "_" + selected.val() + ".gif";
 });
 </script>
 '))
