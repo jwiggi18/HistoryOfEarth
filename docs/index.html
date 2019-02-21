@@ -1031,7 +1031,7 @@ Quaternary
 <div class="form-group shiny-input-container">
 <label class="control-label" for="period">Choose a period:</label>
 <div>
-<p><select id="period" class="form-control"><option value="all" selected>all</option> <option value="Cambrian">Cambrian</option> <option value="Ordivician">Ordivician</option> <option value="Silurian">Silurian</option> <option value="Devonian">Devonian</option> <option value="Carboniferous">Carboniferous</option> <option value="Permian">Permian</option> <option value="Triassic">Triassic</option> <option value="Jurassic">Jurassic</option> <option value="Cretaceous">Cretaceous</option> <option value="Paleogene">Paleogene</option> <option value="Neogene">Neogene</option> <option value="Quaternary">Quaternary</option></select></p>
+<p><select id="period" class="form-control"><option value="All" selected>All</option> <option value="Cambrian">Cambrian</option> <option value="Ordivician">Ordivician</option> <option value="Silurian">Silurian</option> <option value="Devonian">Devonian</option> <option value="Carboniferous">Carboniferous</option> <option value="Permian">Permian</option> <option value="Triassic">Triassic</option> <option value="Jurassic">Jurassic</option> <option value="Cretaceous">Cretaceous</option> <option value="Paleogene">Paleogene</option> <option value="Neogene">Neogene</option> <option value="Quaternary">Quaternary</option></select></p>
 </div>
 </div>
 </div>
@@ -1043,14 +1043,14 @@ Quaternary
 <p><img id="organismphoto" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg" alt="picture of the selected organism" width="200"/></p>
 </div>
 <div class="col-sm-8" align="center">
-<p><img id="map" src="img/map_all_all.gif" alt="map of plates"/></p>
+<p><img id="map" src="img/map_All_All.gif" alt="map of plates"/></p>
 </div>
 </div>
 <!--/html_preserve-->
 <!--html_preserve-->
 <div class="row">
 <div class="col-sm-12" align="center">
-<p><img id="tree" src="img/tree_all_all.jpg" alt="phylogeny of organisms"/></p>
+<p><img id="tree" src="img/tree_All_All.jpg" alt="phylogeny of organisms"/></p>
 </div>
 </div>
 <!--/html_preserve-->
@@ -1079,11 +1079,11 @@ g.addEventListener("change", function() {
 var p = document.getElementById("period");
 p.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
-    var chosengenus = document.getElementById("genus");
-    var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
+    // var chosengenus = document.getElementById("genus");
+    // var str_chosengenus = chosengenus.options[chosengenus.selectedIndex].text;
   //  alert(selected.val() + " " + selected.text() + str_chosengenus);
-    document.getElementById("map").src="img/map_" + str_chosengenus + "_" + selected.val() + ".gif";
-    document.getElementById("tree").src="img/tree_" + str_chosengenus + "_" + selected.val() + ".jpg";
+    document.getElementById("map").src="img/map_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + selected.val() + ".gif";
+    document.getElementById("tree").src="img/tree_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + selected.val() + ".jpg";
 });
 </script>
 <!--/html_preserve-->
