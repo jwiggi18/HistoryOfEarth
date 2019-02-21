@@ -1068,9 +1068,9 @@ g.addEventListener("change", function() {
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
     alert(JSON.stringify(taxoninfo[$("#genus").prop("selectedIndex")].Genus));
-    document.getElementById("organismphoto").src=selected.val();
-    document.getElementById("map").src="img/map_" + selected.text() + "_" + str_chosenperiod + ".gif";
-    document.getElementById("tree").src="img/tree_" + selected.text() + "_" + str_chosenperiod + ".jpg";
+    document.getElementById("organismphoto").src=taxoninfo[$("#genus").prop("selectedIndex")].pic_url;
+    document.getElementById("map").src="img/map_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + str_chosenperiod + ".gif";
+    document.getElementById("tree").src="img/tree_" + taxoninfo[$("#genus").prop("selectedIndex")].Genus + "_" + str_chosenperiod + ".jpg";
 
 });
 </script>
