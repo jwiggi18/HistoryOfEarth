@@ -58,7 +58,7 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
         column(12, style = "background-color:#545353", align = "center",
           actionButton("overview_vg", "Questions", align = "center",
                         onclick = "window.open('https://quizlet.com/365498277/test', '_blank')",
-                        style = "padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
+                        style = "size: 12px; padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
                       )
         ),
     fluidRow(class = "Eras",
@@ -82,17 +82,17 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cyborg"),
           column(6, style = "background-color:#FFFF99", align = "center",
               actionButton("paleozoic_vg", "Questions", #yellow
                             onclick = "window.open('https://quizlet.com/365224880/test', '_blank')",
-                            style = "padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
+                            style = "size: 12px; padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
           ),
           column(3, style = "background-color:#1F78B4", align = "center",
               actionButton("mesozoic_vg", "Questions", #blue
                             onclick = "window.open('https://quizlet.com/365535631/test', '_blank')",
-                            style = "padding: 1px; background-color:#1F78B4; border-color:#1F78B4")
+                            style = "size: 12px; padding: 1px; background-color:#1F78B4; border-color:#1F78B4")
           ),
           column(3, style = "background-color:#B2DF8A", align = "center",
               actionButton("cenozoic_vg", "Questions", #green
                             onclick = "window.open('https://quizlet.com/365527235/test', '_blank')",
-                            style = "padding: 1px; color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
+                            style = "size: 12px; padding: 1px; color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
           )
         ),
     fluidRow(class = "Periods",
