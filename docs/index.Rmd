@@ -141,8 +141,10 @@ shiny::fluidRow(class = "overview",
               )
           )
           shiny::br()
-          shiny::br()
 ```
+
+Welcome to the History of Earth site! Here you can find information about how animals have evolved and how the continents have shifted through time. You can click on the names above of any of the time periods to open a web page with information on that period, or click on questions to open a page that can check your understanding. Below, pick an organism to examine in more detail, then see where it lives or lived on the planet and, below that, its placement on a family tree of animals.
+<br />
 
 ```{r selecttaxon, echo=FALSE}
 data(taxa_links, package="HistoryOfEarth")
