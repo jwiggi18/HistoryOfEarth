@@ -5,7 +5,7 @@
 \title{Cache trees for website}
 \usage{
 CacheIndividualTrees(taxa = GetTaxa(), age_df = GetAgeDF(),
-  height = 800, width = 800)
+  height = 800, width = 900)
 }
 \arguments{
 \item{taxa}{Vector of taxa}

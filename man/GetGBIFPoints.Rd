@@ -4,10 +4,12 @@
 \alias{GetGBIFPoints}
 \title{Get locations for modern species using GBIF}
 \usage{
-GetGBIFPoints(taxa = GetTaxa(), rank = "genus")
+GetGBIFPoints(taxa = GetTaxa(), rank = "genus", fossils = FALSE)
 }
 \arguments{
 \item{taxa}{vector of taxon names, default is GetTaxa()}
+
+\item{fossils}{If TRUE, include locations of fossils}
 
 \item{the}{rank to search at for each taxon}
 }

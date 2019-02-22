@@ -211,7 +211,7 @@ CacheAnimatedMaps <- function(start_time=NULL, stop_time=NULL, periods=NULL, tax
 #' @param height Height in pixels
 #' @param width Width in pixels
 #' @export
-CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=800) {
+CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, width=900) {
   CacheTaxonImagesFromPhylopic()
   taxa <- c("All", taxa)
   periods <- c("All", age_df$Period)
@@ -394,7 +394,7 @@ get_periodlink <- function(period) {
 #' @export
 CreateMapList <- function(age_df=GetAgeDF(), base_url='http://gws.gplates.org/') {
   #create map list
-  maplist <- lapply(age_df$MidMa, gplatesr::black_white(base_url=base_url))
+  maplist <- lapply(age_df$MidMa, gplatesr::land_sea(base_url=base_url))
 
   #name maplist according to period
   names(maplist) <- age_df$Period
@@ -421,7 +421,7 @@ CreateMapListAllTimes <- function(start_age=0, stop_age=540, step_size=10, age_d
   ages <- ages[ages<=540] # Cannot reconstruct that long ago
   maplist <- vector("list", length(ages))
   for (i in seq_along(ages)) {
-    maplist[[i]] <- gplatesr::black_white(mya=ages[i], base_url=base_url)
+    maplist[[i]] <- gplatesr::land_sea(mya=ages[i], base_url=base_url)
   }
 
   #name maplist according to age
@@ -576,7 +576,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
     }
     my_plot <- NULL
     if(!use_cached_maps_only) {
-      try(my_plot <- gplatesr::black_white(ages[i]))
+      try(my_plot <- gplatesr::land_sea(ages[i]))
     }
     if(is.null(my_plot)) { #as a backup, go to the cache
       matching_map_index <- which(paleomap_info==ages[i])
@@ -608,6 +608,13 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
               taxon_df$Color <- point_color
               my_plot <- add_points(my_plot, taxon_df)
               my_plot <- my_plot + ggplot2::theme(legend.position="none")
+            }
+            if(ages[i]==0) {
+              gbif_points <- GetGBIFPoints(taxa[taxon_index])
+              if(nrow(gbif_points)>0) {
+                my_plot <- add_points(my_plot, gbif_points)
+                my_plot <- my_plot + ggplot2::theme(legend.position="none")
+              }
             }
           }
         }
@@ -816,14 +823,18 @@ PutPointsOnMap <- function(taxa = GetTaxa(), specimen_df=specimens, age_df=GetAg
 #'
 #' @param taxa vector of taxon names, default is GetTaxa()
 #' @param the rank to search at for each taxon
+#' @param fossils If TRUE, include locations of fossils
 #' @return data frame with pbdb_data.paleolng and pbdb_data.paleolat columns reflecting points from gbif
 #' @export
-GetGBIFPoints <- function(taxa = GetTaxa(), rank="genus") {
-  points <- data.frame()
+GetGBIFPoints <- function(taxa = GetTaxa(), rank="genus", fossils=FALSE) {
+  location_points <- data.frame()
   for (taxon_index in seq_along(taxa)) {
     key <- rgbif::name_suggest(q=taxa[taxon_index], rank=rank)$key[1]
-    points <- rbind(points, rgbif::occ_search(taxonKey=key, hasCoordinate=TRUE))
+    location_points <- plyr::rbind.fill(location_points, rgbif::occ_search(taxonKey=key, hasCoordinate=TRUE)$data)
   }
-  final_points <- data.frame(pbdb_data.paleolng=points$decimalLongitude, pbdb_data.paleolat=points$decimalLatitude)
+  if(!fossils) {
+    location_points <- location_points[location_points$basisOfRecord != "FOSSIL_SPECIMEN",]
+  }
+  final_points <- data.frame(pbdb_data.paleolng=location_points$decimalLongitude, pbdb_data.paleolat=location_points$decimalLatitude)
   return(final_points)
 }

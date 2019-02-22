@@ -23,7 +23,8 @@ Imports:
     gplatesr,
     paleotree,
     rgbif,
-    knitrBootstrap
+    knitrBootstrap,
+    plyr
 Remotes:
     LunaSare/gplatesr,
     bomeara/paleotree@developmentBranch
