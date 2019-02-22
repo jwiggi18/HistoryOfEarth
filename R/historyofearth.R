@@ -809,3 +809,21 @@ PutPointsOnMap <- function(taxa = GetTaxa(), specimen_df=specimens, age_df=GetAg
   }
   return(points_maplist)
 }
+
+#' Get locations for modern species using GBIF
+#'
+#' Note that to make this work with the add_points function, needs odd output column names
+#'
+#' @param taxa vector of taxon names, default is GetTaxa()
+#' @param the rank to search at for each taxon
+#' @return data frame with pbdb_data.paleolng and pbdb_data.paleolat columns reflecting points from gbif
+#' @export
+GetGBIFPoints <- function(taxa = GetTaxa(), rank="genus") {
+  points <- data.frame()
+  for (taxon_index in seq_along(taxa)) {
+    key <- rgbif::name_suggest(q=taxa[taxon_index], rank=rank)$key[1]
+    points <- rbind(points, rgbif::occ_search(taxonKey=key, hasCoordinate=TRUE))
+  }
+  final_points <- data.frame(pbdb_data.paleolng=points$decimalLongitude, pbdb_data.paleolat=points$decimalLatitude)
+  return(final_points)
+}
