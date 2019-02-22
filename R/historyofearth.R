@@ -612,6 +612,7 @@ AnimatePlot <- function(start_time=NULL, stop_time=NULL, periods=NULL, taxa=NULL
             if(ages[i]==0) {
               gbif_points <- GetGBIFPoints(taxa[taxon_index])
               if(nrow(gbif_points)>0) {
+                gbif_points$Color <- '#B15928'
                 my_plot <- add_points(my_plot, gbif_points)
                 my_plot <- my_plot + ggplot2::theme(legend.position="none")
               }
