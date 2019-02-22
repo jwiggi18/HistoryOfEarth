@@ -1056,7 +1056,7 @@ var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     var chosenperiod = document.getElementById("period");
-    chosenperiod.selectedIndex = 1; // reset to all
+    chosenperiod.selectedIndex = 0; // reset to all
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
