@@ -202,7 +202,7 @@ var g = document.getElementById("genus");
 g.addEventListener("change", function() {
     var selected = $(this).find("option:selected");
     var chosenperiod = document.getElementById("period");
-    chosenperiod.selectedIndex = 0; 
+    chosenperiod.selectedIndex = 0;
     var str_chosenperiod = chosenperiod.options[chosenperiod.selectedIndex].value;
     //alert("img/map_" + selected.text() + "_" + str_chosenperiod + ".gif");
 
@@ -271,6 +271,14 @@ This project was developed by <a href="http://jodiewiggins.wixsite.com/mysite" t
 All materials are open for this: you can go to <a href="https://github.com/jwiggi18/HistoryOfEarth" target="_blank">https://github.com/jwiggi18/HistoryOfEarth</a> to see the code we use, list issues, and try modifying it yourself.
 <br />
 <br />
+If you want to support this project, some things you can do are:
+<br />
+<ul>
+<li>Use it! Number of visits helps us have an impact.</li>
+<li>Tell us about any problems or suggestions: <a href="https://github.com/jwiggi18/HistoryOfEarth/issues">https://github.com/jwiggi18/HistoryOfEarth/issues</a></li>
+<li>Pay US federal taxes (like a lot of science in the United States, taxpayer funds help support this project -- thank you!).</li>
+<li>Support open software: nearly all software used by this project is free to use and free to modify. But the people working on it need to eat. You can donate to <a href="http://phylopic.org/donate">PhyloPic</a>, <a href="https://ropensci.org/donate/">rOpenSci</a> (many of the R packages), and the <a href="https://www.r-project.org/foundation/donations.html">R foundation</a>. </li>
+</ul>
 <br />
 <br />
 <br />
