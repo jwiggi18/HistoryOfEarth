@@ -1,7 +1,7 @@
 ---
-title:: "History of Earth"
 output:
   knitrBootstrap::bootstrap_document:
+    title: "History of Earth"
     theme: cyborg
     highlight: sunburst
     theme.chooser: TRUE
