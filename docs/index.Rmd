@@ -1,10 +1,9 @@
 ---
+title: "History of Earth"
 output:
-  knitrBootstrap::bootstrap_document:
-    theme: cyborg
-    highlight: sunburst
-    theme.chooser: TRUE
-    highlight.chooser: FALSE
+  html_document:
+    toc: false
+    number_sections: false
 runtime: shiny_prerendered
 ---
 
