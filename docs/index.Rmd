@@ -87,7 +87,7 @@ shiny::fluidRow(class = "overview",
             column(1, style = "background-color:#1F78B4", align = "center",
                 shiny::actionButton("ordovician_button", "Ordovician",
                 onclick = "window.open('https://youtu.be/yQhlUqLFDxQ', '_blank')",
-                style = "padding: 6px 0px; background-color:#1F78B4; border-color:#1F78B4")
+                style = "padding: 0px 0px; background-color:#1F78B4; border-color:#1F78B4")
               ),
             column(1, style = "background-color:#B2DF8A", align = "center",
                 shiny::actionButton("silurian_button", "Silurian",
