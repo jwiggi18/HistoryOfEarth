@@ -8,7 +8,6 @@ output:
 runtime: shiny_prerendered
 params:
     set_title: "History of Earth"
-title: "`r params$set_title`"
 
 ---
 
