@@ -1,7 +1,9 @@
 ---
 title: "History of Earth"
 output:
-  html_document
+  html_document:
+    toc: true
+    number_sections: true
 runtime: shiny_prerendered
 ---
 
