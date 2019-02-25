@@ -6,9 +6,6 @@ output:
     theme.chooser: TRUE
     highlight.chooser: FALSE
 runtime: shiny_prerendered
-params:
-    set_title: "History of Earth"
-
 ---
 
 
