@@ -1,7 +1,7 @@
 ---
 output:
   html_document:
-    theme: darkly
+    theme: journal
 runtime: shiny_prerendered
 ---
 
