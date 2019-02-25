@@ -46,17 +46,17 @@ shiny::fluidRow(class = "overview",
         )
     shiny::fluidRow(class = "Eras",
         column(6, style = "background-color:#FFFF99", align = "center",
-            shiny::actionButton("paleozoic_button", "Paleozoic Era", #yellow
+            shiny::actionButton("paleozoic_button", shiny::h4("Paleozoic Era"), #yellow
                           onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')",
                           style = "size: 16px; padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
         ),
         column(3, style = "background-color:#1F78B4", align = "center",
-            shiny::actionButton("mesozoic_button", "Mesozoic Era", #blue
+            shiny::actionButton("mesozoic_button", shiny::h4("Mesozoic Era"), #blue
                           onclick = "window.open('https://youtu.be/ZoHO3fAj_78', '_blank')",
                           style = "size: 16px; padding: 1px; background-color:#1F78B4; border-color:#1F78B4")
         ),
         column(3, style = "background-color:#B2DF8A", align = "center",
-            actionButton("cenozoic_button", "Cenozoic Era", #green
+            actionButton("cenozoic_button", shiny::h4("Cenozoic Era"), #green
                           onclick = "window.open('https://youtu.be/2ofNufZVcMU', '_blank')",
                           style = "size: 16px; padding: 1px; color: #000000; background-color:#B2DF8A; border-color:#B2DF8A")
         )
