@@ -1,6 +1,6 @@
 ---
 output:
-  html:
+  html_document:
     theme: cyborg
     highlight: sunburst
     theme.chooser: TRUE
