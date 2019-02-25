@@ -1,6 +1,6 @@
 ---
 output:
-  knitrBootstrap::bootstrap_document:
+  html:
     theme: cyborg
     highlight: sunburst
     theme.chooser: TRUE
