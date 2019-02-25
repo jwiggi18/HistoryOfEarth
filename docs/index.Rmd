@@ -1,7 +1,10 @@
 ---
 output:
-  html_document:
-    css: styles.css
+  knitrBootstrap::bootstrap_document:
+    theme: cyborg
+    highlight: sunburst
+    theme.chooser: TRUE
+    highlight.chooser: FALSE
 runtime: shiny_prerendered
 ---
 
@@ -11,18 +14,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo=FALSE}
-# data(taxa_links, package="HistoryOfEarth")
-#
-# knitr::asis_output(htmltools::htmlPreserve(paste0('
-# <script type="text/javascript">
-# var txt = ',"'",
-# knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),"'",
-# ';
-# txt = txt.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "").replace("<!--html_preserve-->", "").replace("<!--html_preserve-->", "");
-# var taxoninfo = JSON.parse(txt);
-#
-# </script>
-# ')))
+data(taxa_links, package="HistoryOfEarth")
+
+knitr::asis_output(htmltools::htmlPreserve(paste0('
+<script type="text/javascript">
+var txt = ',"'",
+knitr::asis_output(htmltools::htmlPreserve(jsonlite::toJSON(taxa_links, pretty=FALSE))),"'",
+';
+txt = txt.replace("<!--/html_preserve-->", "").replace("<!--/html_preserve-->", "").replace("<!--html_preserve-->", "").replace("<!--html_preserve-->", "");
+var taxoninfo = JSON.parse(txt);
+
+</script>
+')))
 ```
 
 
