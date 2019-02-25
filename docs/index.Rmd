@@ -46,7 +46,7 @@ shiny::fluidRow(class = "overview",
         )
     shiny::fluidRow(class = "Eras",
         column(6, style = "background-color:#FFFF99", align = "center",
-            shiny::actionButton("paleozoic_button", shiny::h4("Paleozoic Era"), #yellow
+            shiny::actionButton("paleozoic_button", shiny::h4("Paleozoic Era", style="color:black"), #yellow
                           onclick = "window.open('https://youtu.be/RDQa0okkpf0', '_blank')",
                           style = "size: 16px; padding: 1px; color: #000000; background-color:#FFFF99; border-color:#FFFF99")
         ),
