@@ -84,7 +84,7 @@ shiny::fluidRow(class = "overview",
                 onclick = "window.open('https://www.nationalgeographic.com/science/prehistoric-world/cambrian/', '_blank')",
                 style = "padding: 6px 0px; color: #000000; background-color:#A6CEE3; border-color:#A6CEE3")
               ),
-            column(1, style = "background-color:#1F78B4", align = "center",
+            column(1, style = "background-color:#1F78B4", align = "left",
                 shiny::actionButton("ordovician_button", "Ordovician",
                 onclick = "window.open('https://youtu.be/yQhlUqLFDxQ', '_blank')",
                 style = "padding: 6px 0px; background-color:#1F78B4; border-color:#1F78B4")
