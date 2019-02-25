@@ -30,8 +30,6 @@ var taxoninfo = JSON.parse(txt);
 
 
 ```{r echo=FALSE}
-shiny::br()
-shiny::br()
 shiny::fluidRow(class = "overview",
     column(12, style = "background-color:#545353", align = "center",
       shiny::actionButton("overview_button", "Overview", align = "center",

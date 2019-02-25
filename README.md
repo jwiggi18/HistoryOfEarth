@@ -7,6 +7,6 @@ To update maps or tree, look at the Cache functions, then commit and push the ch
 
 To run the site, `HistoryOfEarth::runSite()`
 
-The other approach is to go to docs, do `Rscript -e "rmarkdown::render('index.Rmd')"; sed -i.bak 's/index.utf8/History Of Earth/g' index.html; rm index.bak; git commit -m"updating site" -a; git push`. The sed command is to fix an issue with the page title not rendering properly.
+The other approach is to go to docs, do `Rscript -e "rmarkdown::render('index.Rmd')"; sed -i.bak 's/index.utf8/History Of Earth/g' index.html; rm index.html.bak; git commit -m"updating site" -a; git push`. The sed command is to fix an issue with the page title not rendering properly.
 
 To see the website in action, go to https://jwiggi18.github.io/HistoryOfEarth/
