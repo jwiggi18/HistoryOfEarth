@@ -32,10 +32,10 @@ var taxoninfo = JSON.parse(txt);
 ```{r echo=FALSE}
 shiny::fluidRow(class = "overview",
     column(12, style = "background-color:#545353", align = "center",
-      shiny::actionButton("overview_button", "Overview", align = "center",
+      shiny::h2(shiny::actionButton("overview_button", "Overview", align = "center",
                     onclick = "window.open('https://youtu.be/rWp5ZpJAIAE', '_blank')",
                     style = "size: 16px; padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
-                  )
+                  ))
     )
     shiny::fluidRow(class = "overview_vg",
         column(12, style = "background-color:#545353", align = "center",
