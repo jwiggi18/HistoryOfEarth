@@ -1,7 +1,7 @@
 ---
 output:
   html_document:
-    theme: cyborg
+    theme: darkly
 runtime: shiny_prerendered
 ---
 
