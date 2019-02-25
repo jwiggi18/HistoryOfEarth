@@ -2,9 +2,6 @@
 output:
   html_document:
     theme: cyborg
-    highlight: sunburst
-    theme.chooser: TRUE
-    highlight.chooser: FALSE
 runtime: shiny_prerendered
 ---
 
