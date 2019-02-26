@@ -1,7 +1,7 @@
 ---
 output:
   knitrBootstrap::bootstrap_document:
-    theme: journal
+    theme: cyborg
     highlight: sunburst
     theme.chooser: TRUE
     highlight.chooser: FALSE
@@ -32,7 +32,7 @@ var taxoninfo = JSON.parse(txt);
 ```{r echo=FALSE}
 shiny::fluidRow(class = "overview",
     column(12, style = "background-color:#545353", align = "center",
-      shiny::actionButton("overview_button", shiny::h3("Overview"), align = "center",
+      shiny::actionButton("overview_button", shiny::h3("Overview", ), align = "center",
                     onclick = "window.open('https://youtu.be/rWp5ZpJAIAE', '_blank')",
                     style = "size: 16px; padding: 1px; color: #ffffff; background-color:#545353; border-color:#545353")
                   )
