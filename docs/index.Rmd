@@ -5,6 +5,8 @@ output:
     highlight: sunburst
     theme.chooser: TRUE
     highlight.chooser: FALSE
+    includes:
+       in_header: GA_Script.html
 runtime: shiny_prerendered
 ---
 
