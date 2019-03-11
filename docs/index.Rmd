@@ -3,7 +3,7 @@ output:
   knitrBootstrap::bootstrap_document:
     theme: journal
     highlight: sunburst
-    theme.chooser: TRUE
+    theme.chooser: FALSE
     highlight.chooser: FALSE
 runtime: shiny_prerendered
 ---
