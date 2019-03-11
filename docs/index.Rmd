@@ -5,11 +5,21 @@ output:
     highlight: sunburst
     theme.chooser: TRUE
     highlight.chooser: FALSE
-    includes:
-       in_header: GA_Script.html
 runtime: shiny_prerendered
 ---
 
+<!--html_preserve-->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-103450-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-103450-8');
+</script>
+
+<!--/html_preserve-->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
