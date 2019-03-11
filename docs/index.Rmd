@@ -5,7 +5,7 @@ output:
     highlight: sunburst
     theme.chooser: FALSE
     highlight.chooser: FALSE
-    bootstrap.menu: FALSE
+    menu: FALSE
 runtime: shiny_prerendered
 ---
 
