@@ -1,7 +1,7 @@
 ---
 output:
   knitrBootstrap::bootstrap_document:
-    theme: cyborg
+    theme: journal
     highlight: sunburst
     theme.chooser: TRUE
     highlight.chooser: FALSE
