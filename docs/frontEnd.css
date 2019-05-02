@@ -1,0 +1,42 @@
+
+body {
+  margin: 50px;
+}
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+#button {
+  background-color: #339b61;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+h1 {
+  text-align:center;
+  background-color:#339b61;
+  color:GhostWhite;
+  padding: 15px 25px;
+}
+h2 {
+  border: 1px solid #339b61;
+  padding: 15px 25px;
+  text-align:center;
+}
+p {
+  font-size: 18px;
+}
+img {
+  float: left;
+}
+#subhead {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
