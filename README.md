@@ -6,7 +6,7 @@ To change default taxa, modify taxa_links.csv, then store this as data (usethis:
 To update maps or tree, look at the Cache functions, then commit and push the changes (which are stored in the data directory)
 
 The other approach is to go to docs, do
-`Rscript -e "rmarkdown::render('index.Rmd')"; sed -i.bak 's/historyofearth.utf8/History Of Earth/g' historyofearth.html; rm historyofearth.html.bak; git commit -m"updating site" -a; git push`
+`Rscript -e "rmarkdown::render('index.Rmd')"; sed -i.bak 's/historyofearth.utf8/History Of Earth/g' index.html; rm index.html.bak; git commit -m"updating site" -a; git push`
 
 . The sed command is to fix an issue with the page title not rendering properly.
 
