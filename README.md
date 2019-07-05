@@ -10,4 +10,8 @@ The other approach is to go to docs, do
 
 . The sed command is to fix an issue with the page title not rendering properly.
 
-To see the website in action, go to https://jwiggi18.github.io/HistoryOfEarth/
+Brian O'Meara (bomeara) is the primary author of the map visualizations and code for the trees comes from Dave Bapst's (dwbapst) paleotree (https://github.com/dwbapst/paleotree).
+
+The site is currently undergoing an overhaul to make it more useful to our partner teachers. Among other improvements each period will have its own page and videos will be embedded.
+
+To see the website in action, go to historyofearth.net
