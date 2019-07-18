@@ -1,48 +1,83 @@
-common_name,Genus,Link,pic_url
-All,All,"http://www.onezoom.org/life.html/@cellular_organisms=93302#x-16,y872,w1.6839",https://upload.wikimedia.org/wikipedia/commons/c/c1/La_Brea_Tar_Pits.jpg
-Acanthostega,Acanthostega,https://www.newdinosaurs.com/acanthostega/,https://upload.wikimedia.org/wikipedia/commons/7/74/Acanthostega_gunnari.jpg
-Mosquito,Aedes,https://youtu.be/rD8SmacBUcU,https://upload.wikimedia.org/wikipedia/commons/3/3e/Aedes_aegypti_feeding.jpg
-Anchiornis,Anchiornis,https://kids.nationalgeographic.com/animals/anchiornis-huxleyi/#anchiornis-huxleyi.jpg,https://upload.wikimedia.org/wikipedia/commons/d/d4/Anchiornis_huxleyi_skel_hartman_2017.png
-Anomalocaris,Anomalocaris,https://www.youtube.com/watch?v=ice47loNmsc,https://upload.wikimedia.org/wikipedia/commons/7/7f/Anomalocaris_NT_small.jpg
-Jawless fish,Arandaspis,https://museumsvictoria.com.au/website/melbournemuseum/discoverycentre/600-million-years/timeline/ordovician/arandaspis/index.html,https://upload.wikimedia.org/wikipedia/commons/5/58/Arandaspis_NT.jpg
-Archaeopteryx,Archaeopteryx,https://youtu.be/GudBjmi3mII,https://upload.wikimedia.org/wikipedia/commons/9/9d/Archaeopteryx_lithographica_%28Berlin_specimen%29.jpg
-Attercopus,Attercopus,https://www.smithsonianmag.com/science-nature/spiders-are-not-as-old-as-we-thought-3312099/,https://upload.wikimedia.org/wikipedia/commons/c/c7/Attercopus_fimbriunguis.jpg
-Giant cephalopod,Cameroceras,https://youtu.be/Mx9S85Mzdws,https://upload.wikimedia.org/wikipedia/commons/4/44/Cameroceras_trentonese.jpg
-Loggerhead sea turtle,Caretta,https://youtu.be/rWyDvPZyfYo,https://upload.wikimedia.org/wikipedia/commons/8/8e/Loggerhead_sea_turtle.jpg
-Cartorhynchus,Cartorhynchus,http://www.sci-news.com/paleontology/science-amphibious-ichthyosaur-cartorhynchus-lenticarpus-02257.html,https://upload.wikimedia.org/wikipedia/commons/c/c1/Polydactylous_hupehsuchian.jpg
-Graptolite,Climacograptus,https://samnoblemuseum.ou.edu/common-fossils-of-oklahoma/invertebrate-fossils/graptolites/,https://upload.wikimedia.org/wikipedia/commons/9/9e/Climacograptus_wilsoni_Graptolite_Fossils_from_Dob%27s_Linn_Scotland.jpg
-Crocodyle ,Crocodylus,https://www.inaturalist.org/taxa/26042-Crocodylus,https://upload.wikimedia.org/wikipedia/commons/a/a3/Persiancrocodile.jpg
-Dimetrodon,Dimetrodon,https://youtu.be/SR3OOP9mImI,https://upload.wikimedia.org/wikipedia/commons/a/a3/Dimetrodon_incisivum_01.jpg
-Diplodocus,Diplodocus,http://www.nhm.ac.uk/discover/dino-directory/diplodocus.html,https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg
-Dunkleosteus,Dunkleosteus,https://youtu.be/xC3bIlaZu80,https://upload.wikimedia.org/wikipedia/commons/2/20/Dunkleosteus_%2815677042802%29.jpg
-Trilobite,Eldredgeops,https://youtu.be/-iXalNPd64E,https://upload.wikimedia.org/wikipedia/commons/b/b1/Eldredgeops_milleri%2C_Middle_Devonian%2C_Silica_Shale%2C_Sylvania%2C_Ohio%2C_USA_-_Houston_Museum_of_Natural_Science_-_DSC01523.JPG
-Bear dog,Amphicyon,https://www.newdinosaurs.com/amphicyon/,https://upload.wikimedia.org/wikipedia/commons/b/b1/Amphicyon_ingens_White_Background.jpg
-Estemmenosuchus,Estemmenosuchus,https://youtu.be/JkkD1y0VFrA,https://upload.wikimedia.org/wikipedia/commons/f/f1/Dinosaurium%2C_Estemmenosuchus_uralensis_2.jpg
-Pterosaurs,Eudimorphodon,https://youtu.be/Esu0v73ujNk,https://upload.wikimedia.org/wikipedia/commons/0/0d/Eudimorphodon_NT_small.jpg
-Giraffatitan,Giraffatitan,http://www.nhm.ac.uk/discover/dino-directory/giraffatitan.html,https://upload.wikimedia.org/wikipedia/commons/7/74/Museum_f%C3%BCr_Naturkunde_%2836556352434%29.jpg
-Gorilla,Gorilla,https://youtu.be/yb796sRnkm0,https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg
-Giant caiman,Purussaurus,https://www.newdinosaurs.com/purussaurus/,https://upload.wikimedia.org/wikipedia/commons/c/c2/Large_crocodyliformes.svg
-Hominid,Homo,http://humanorigins.si.edu/evidence/human-family-tree,https://upload.wikimedia.org/wikipedia/commons/e/ed/Homo_erectus_adult_female_-_head_model_-_Smithsonian_Museum_of_Natural_History_-_2012-05-17.jpg
-Hylonomus,Hylonomus,https://youtu.be/47Y-dfg2gjY,https://upload.wikimedia.org/wikipedia/commons/5/50/Hylonomus_lyelli_-_MUSE.jpg
-Ichthyosaurus,Ichthyosaurus,https://www.newdinosaurs.com/ichthyosaurus/,https://upload.wikimedia.org/wikipedia/commons/f/fc/Ichthyosaurus_communis_2.JPG
-Juramaia,Juramaia,https://youtu.be/3Sbf8gAU5JI,https://upload.wikimedia.org/wikipedia/commons/1/15/Juramaia_NT.jpg
-Mammoth,Mammuthus,https://youtu.be/n4SPTKkb5Yc,https://upload.wikimedia.org/wikipedia/commons/6/62/Columbian_mammoth.JPG
-Giant ground sloth,Megalonyx,https://statesymbolsusa.org/symbol/west-virginia/state-dinosaur-or-fossil/megalonyx-jeffersonii,https://upload.wikimedia.org/wikipedia/commons/e/ef/Megalonyx_wheatleyi_-_AMNH_-_DSC06327.JPG
-Meganeura,Meganeura,https://youtu.be/9kzorrSbaUA,https://upload.wikimedia.org/wikipedia/commons/6/68/Meganeura.jpg
-Megazostrodon,Megazostrodon,https://www.newdinosaurs.com/megazostrodon/,https://upload.wikimedia.org/wikipedia/commons/6/60/Megazostrodon_sp._Natural_History_Museum_-_London.jpg
-False saber-toothed cat,Nimravus,https://en.wikipedia.org/wiki/Nimravus,https://upload.wikimedia.org/wikipedia/commons/4/4b/Nimravus_gomphodus.jpg
-Marine molluscs,Pelagiella,https://en.wikipedia.org/wiki/Pelagiellidae,https://upload.wikimedia.org/wikipedia/commons/1/16/Pelagiella_atlantoides.jpg
-Jumping spider,Phidippus,https://youtu.be/hoBm_Hgjc6Y,https://upload.wikimedia.org/wikipedia/commons/c/c2/Phidippus_wikipedia.jpg
-Plesiosaurus,Plesiosaurus,https://www.bbcearth.com/walking-with-dinosaurs/modal/plesiosaurus/,https://upload.wikimedia.org/wikipedia/commons/3/32/Plesiosaurus_in_Japan.jpg
-Quetzalcoatlus,Quetzalcoatlus,https://www.newdinosaurs.com/quetzalcoatlus/,https://upload.wikimedia.org/wikipedia/commons/6/60/Gfp-quetzalcaotlus.jpg
-Phytosaurs,Redondasaurus,http://www.prehistoric-wildlife.com/species/r/redondasaurus.html,https://upload.wikimedia.org/wikipedia/commons/8/87/Redondasaurus_bermani_at_CMNH_04.jpg
-Rhyniognatha,Rhyniognatha,https://youtu.be/7QMcXEj7IT0,https://upload.wikimedia.org/wikipedia/commons/e/e2/Evolution_of_wing_of_insect-V2.png
-Sahelanthropus,Sahelanthropus,http://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis,https://upload.wikimedia.org/wikipedia/commons/f/fc/Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg
-Saber-toothed cat,Smilodon,https://youtu.be/hbjIhPHRZgc,https://upload.wikimedia.org/wikipedia/commons/7/78/Smilodon_californicus_mount.jpg
-Carpenter ant,Camponotus,http://bugoftheweek.com/blog/2016/1/13/carpenter-ants-here-and-there-icamponotusi-spp,https://upload.wikimedia.org/wikipedia/commons/f/fb/Carpenter_ant_Tanzania_crop.jpg
-Stegosaurus,Stegosaurus,http://www.nhm.ac.uk/discover/dino-directory/stegosaurus.html,https://upload.wikimedia.org/wikipedia/commons/b/bc/Journal.pone.0138352.g001A.jpg
-Extinct Rhinoceros,Teleoceras,https://v637g.app.goo.gl/zPQhd1rAiRfeoBkm7,https://upload.wikimedia.org/wikipedia/commons/a/a1/Natural_History_Museum_of_LA_Teleoceras.jpg
-Triceratops,Triceratops,https://youtu.be/CGvE1M95rtw,https://upload.wikimedia.org/wikipedia/commons/e/ec/LA-Triceratops_mount-2.jpg
-Giant Mollusc,Tusoteuthis,http://oceansofkansas.com/Tusoteuthis.html,https://upload.wikimedia.org/wikipedia/commons/c/cd/TusoteuthisDB2.jpg
-Tyrannosaurus,Tyrannosaurus,https://youtu.be/772GiBXnWoQ,https://upload.wikimedia.org/wikipedia/commons/9/94/Tyrannosaurus_Rex_Holotype.jpg
-Barn owl,Tyto,https://youtu.be/ohqEquNnzfU,https://upload.wikimedia.org/wikipedia/commons/6/66/Grass_Owl_adult.jpg
+era,period,common_name,Genus,Link,pic_url,bonus_material
+Paleozoic,Cambrian,Pelagiella,Pelagiella,https://en.wikipedia.org/wiki/Pelagiellidae,https://upload.wikimedia.org/wikipedia/commons/1/16/Pelagiella_atlantoides.jpg,
+Paleozoic,Cambrian,Naraoia ,Naraoia ,https://evolution.berkeley.edu/evolibrary/article/0_0_4/cambrian_19,https://upload.wikimedia.org/wikipedia/commons/7/7b/Naraoia_spinosa.jpg,
+Paleozoic,Cambrian,Hallucigenia ,Hallucigenia ,https://youtu.be/9-Z9Ssgb0Kg,https://upload.wikimedia.org/wikipedia/commons/a/ad/Hallucigenia_reconstructions.jpg,
+Paleozoic,Cambrian,Anomalocaris ,Anomalocaris ,https://www.youtube.com/watch?v=ice47loNmsc,https://upload.wikimedia.org/wikipedia/commons/7/7f/Anomalocaris_NT_small.jpg,
+Paleozoic,Cambrian,Pikaia ,Pikaia ,https://www.newdinosaurs.com/pikaia/,https://upload.wikimedia.org/wikipedia/commons/4/43/Pikaia_NT_small.jpg,
+Paleozoic,Cambrian,Haikouella ,Haikouella ,https://www.sciencemag.org/news/1999/12/new-glimpse-early-animal-history,https://upload.wikimedia.org/wikipedia/commons/7/78/Haikouella_lanceolata.jpg,
+Paleozoic,Ordivician,Jawless fish,Ostracoderms ,http://www.eartharchives.org/articles/ostracoderms-armored-fishes-without-jaws/,https://upload.wikimedia.org/wikipedia/commons/6/6e/Osteostraci_Janvier.gif,
+Paleozoic,Ordivician,Giant cephalopod,Cameroceras ,https://youtu.be/Mx9S85Mzdws,https://upload.wikimedia.org/wikipedia/commons/4/44/Cameroceras_trentonese.jpg,
+Paleozoic,Ordivician,Trilobites ,Trilobites ,https://youtu.be/Aji2VnQFUCs,https://upload.wikimedia.org/wikipedia/commons/2/21/Paradoxides_sp.jpg,
+Paleozoic,Ordivician,Tortotubus ,Tortotubus ,https://www.scientificamerican.com/article/first-life-on-land/?redirect=1,https://upload.wikimedia.org/wikipedia/commons/6/69/Sherwood-Pike_Gray_1985.jpg,
+Paleozoic,Ordivician,Eurypteridae ,Eurypteridae ,https://youtu.be/4dTiUHvIm0s,https://upload.wikimedia.org/wikipedia/commons/f/f6/Adelophthalmus_irinae.png,
+Paleozoic,Ordivician,Jawless fish,Arandapsis,https://museumsvictoria.com.au/website/melbournemuseum/discoverycentre/600-million-years/timeline/ordovician/arandaspis/index.html,https://upload.wikimedia.org/wikipedia/commons/5/58/Arandaspis_NT.jpg,
+Paleozoic,Ordivician,Climacograptus,Climacograptus,https://samnoblemuseum.ou.edu/common-fossils-of-oklahoma/invertebrate-fossils/graptolites/,https://upload.wikimedia.org/wikipedia/commons/9/9e/Climacograptus_wilsoni_Graptolite_Fossils_from_Dob%27s_Linn_Scotland.jpg,
+Paleozoic,Silurian,Conodonts,Conodonts,http://tolweb.org/Euconodonta/14832,https://upload.wikimedia.org/wikipedia/commons/3/33/Euconodonta.gif,
+Paleozoic,Silurian,Eurypterus,Eurypterus,https://blog.biodiversitylibrary.org/2013/10/national-fossil-day-eurypterus-remipes.html,https://upload.wikimedia.org/wikipedia/commons/3/3c/Eurypterus_Paleoart.jpg,
+Paleozoic,Silurian,Platyceras,Platyceras,http://eweb.furman.edu/~wworthen/bio440/evolweb/silurian/platyceras.htm,https://upload.wikimedia.org/wikipedia/commons/8/83/PlatycerasLoganOhio.jpg,
+Paleozoic,Silurian,Mixopterus,Mixopterus,http://www.lifebeforethedinosaurs.com/2011/08/mixopterus.html,https://upload.wikimedia.org/wikipedia/commons/2/29/Mixopterus_Size.svg,
+Paleozoic,Silurian,Graptolites,Graptolites,https://samnoblemuseum.ou.edu/common-fossils-of-oklahoma/invertebrate-fossils/graptolites/,https://upload.wikimedia.org/wikipedia/commons/9/9c/Graptolites-EncBrit.jpg,http://hwcdn.libsyn.com/p/d/a/a/daa4c23559f34dcf/Ep_71.mp3?c_id=13080834&cs_id=13080834&expiration=1561996498&hwt=34a92bf9c14b5c987db0cc57e0a46eb8
+Paleozoic,Devonian,Dunkleosteus,Dunkleosteus,https://youtu.be/xC3bIlaZu80,https://upload.wikimedia.org/wikipedia/commons/2/20/Dunkleosteus_%2815677042802%29.jpg,
+Paleozoic,Devonian,Rhyniognatha ,Rhyniognatha ,https://youtu.be/7QMcXEj7IT0,https://upload.wikimedia.org/wikipedia/commons/e/e2/Evolution_of_wing_of_insect-V2.png,
+Paleozoic,Devonian,Acanthostega ,Acanthostega ,https://www.newdinosaurs.com/acanthostega/,https://upload.wikimedia.org/wikipedia/commons/7/74/Acanthostega_gunnari.jpg,
+Paleozoic,Devonian,Attercopus,Attercopus,https://www.smithsonianmag.com/science-nature/spiders-are-not-as-old-as-we-thought-3312099/,https://upload.wikimedia.org/wikipedia/commons/c/c7/Attercopus_fimbriunguis.jpg,
+Paleozoic,Devonian,Eldredgeops,Eldredgeops,https://youtu.be/-iXalNPd64E,https://upload.wikimedia.org/wikipedia/commons/b/b1/Eldredgeops_milleri%2C_Middle_Devonian%2C_Silica_Shale%2C_Sylvania%2C_Ohio%2C_USA_-_Houston_Museum_of_Natural_Science_-_DSC01523.JPG,
+Paleozoic,Carboniferous,Arthropleura,Arthropleura,https://youtu.be/-wQLKMUWANg,https://upload.wikimedia.org/wikipedia/commons/c/ca/Arthropleura_NT_small.jpg,
+Paleozoic,Carboniferous,Nigerpeton,Nigerpeton,https://youtu.be/rGthtRZl8B0,https://upload.wikimedia.org/wikipedia/commons/c/c6/Nigerpeton.jpg,
+Paleozoic,Carboniferous,Hylonomus,Hylonomus,https://youtu.be/47Y-dfg2gjY,https://upload.wikimedia.org/wikipedia/commons/5/50/Hylonomus_lyelli_-_MUSE.jpg,
+Paleozoic,Carboniferous,Meganeura,Meganeura,https://youtu.be/9kzorrSbaUA,https://upload.wikimedia.org/wikipedia/commons/6/68/Meganeura.jpg,
+Paleozoic,Carboniferous,Gephyrostegus,Gephyrostegus,https://blogs.scientificamerican.com/tetrapod-zoology/what-sort-of-animal-is-gephyrostegus/,https://upload.wikimedia.org/wikipedia/commons/6/69/Gefyrostegus22DB.jpg,
+Paleozoic,Permian,Pareiasaurus,Pareiasaurus,https://www.revolvy.com/page/Pareiasaurus,https://upload.wikimedia.org/wikipedia/commons/5/58/Pareiasaurus_serridens.jpg,
+Paleozoic,Permian,Dimetrodon,Dimetrodon,https://youtu.be/SR3OOP9mImI,https://upload.wikimedia.org/wikipedia/commons/a/a3/Dimetrodon_incisivum_01.jpg,
+Paleozoic,Permian,Gorgonopsidae,Gorgonopsidae,https://eol.org/pages/4528293/articles,https://upload.wikimedia.org/wikipedia/commons/5/5e/Sauroctonus_parringtoni_01.jpg,
+Paleozoic,Permian,Estemmenosuchus,Estemmenosuchus,https://youtu.be/JkkD1y0VFrA,https://upload.wikimedia.org/wikipedia/commons/f/f1/Dinosaurium%2C_Estemmenosuchus_uralensis_2.jpg,
+Paleozoic,Permian,Thrinaxodon,Thrinaxodon,https://www.youtube.com/watch?v=w6YX8AWXrCA,https://upload.wikimedia.org/wikipedia/commons/0/02/Thrinaxodon_BW.jpg,
+Paleozoic,Permian,Cotylorhynchus,Cotylorhynchus,https://youtu.be/w6YX8AWXrCA,https://upload.wikimedia.org/wikipedia/commons/a/aa/Cotylorhynchus_NT_small.jpg,
+Mesozoic,Triassic,Cartorhynchus lenticarpus,Cartorhynchus lenticarpus,http://www.sci-news.com/paleontology/science-amphibious-ichthyosaur-cartorhynchus-lenticarpus-02257.html,https://upload.wikimedia.org/wikipedia/commons/c/c1/Polydactylous_hupehsuchian.jpg,
+Mesozoic,Triassic,Ichthyosaurus larkini,Ichthyosaurus larkini,https://www.newdinosaurs.com/ichthyosaurus/,https://upload.wikimedia.org/wikipedia/commons/f/fc/Ichthyosaurus_communis_2.JPG,
+Mesozoic,Triassic,Gracilisuchus,Gracilisuchus,https://en.wikipedia.org/wiki/Gracilisuchus,https://upload.wikimedia.org/wikipedia/commons/4/49/Gracilisuchus_BW.jpg,
+Mesozoic,Triassic,Nyasasaurus,Nyasasaurus,https://www.nature.com/news/earliest-known-dino-relative-found-1.11959,https://en.wikipedia.org/wiki/Nyasasaurus#/media/File:Nyasasaurus.jpg,
+Mesozoic,Triassic,Eoraptor,Eoraptor,https://www.thoughtco.com/things-to-know-eoraptor-1093808,https://upload.wikimedia.org/wikipedia/commons/4/49/Eoraptor_NT_small.jpg,
+Mesozoic,Triassic,Herrerasaurus,Herrerasaurus,https://www.newdinosaurs.com/herrerasaurus/,https://upload.wikimedia.org/wikipedia/commons/0/0f/Herrerasaurus_FMNH.jpg,
+Mesozoic,Triassic,Diplodocus,Diplodocus,https://youtu.be/D0fXMoHqhNg,https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg,
+Mesozoic,Triassic,Microraptor,Microraptor,https://youtu.be/-fyxUxGdrns,https://upload.wikimedia.org/wikipedia/commons/a/a1/Microraptor_Restoration.png,
+Mesozoic,Triassic,Eudimorphodon,Eudimorphodon,https://youtu.be/Esu0v73ujNk,https://upload.wikimedia.org/wikipedia/commons/0/0d/Eudimorphodon_NT_small.jpg,
+Mesozoic,Triassic,Plesiosaurus,Plesiosaurus,https://www.bbcearth.com/walking-with-dinosaurs/modal/plesiosaurus/,https://upload.wikimedia.org/wikipedia/commons/3/32/Plesiosaurus_in_Japan.jpg,
+Mesozoic,Jurassic,Lesothosaurus,Lesothosaurus,https://www.nhm.ac.uk/discover/dino-directory/lesothosaurus.html,https://upload.wikimedia.org/wikipedia/commons/a/a1/Lesothosaurus_diagnosticus.png,
+Mesozoic,Jurassic,Stegosaurus,Stegosaurus,http://www.nhm.ac.uk/discover/dino-directory/stegosaurus.html,https://upload.wikimedia.org/wikipedia/commons/b/bc/Journal.pone.0138352.g001A.jpg,
+Mesozoic,Jurassic,Kulindadromeus,Kulindadromeus,http://dinosaurpictures.org/Kulindadromeus-pictures,https://upload.wikimedia.org/wikipedia/commons/a/af/Kulindadromeus_NT_small.jpg,
+Mesozoic,Jurassic,Megazostrodon,Megazostrodon,https://www.newdinosaurs.com/megazostrodon/,https://upload.wikimedia.org/wikipedia/commons/6/60/Megazostrodon_sp._Natural_History_Museum_-_London.jpg,
+Mesozoic,Jurassic,Anchiornis,Anchiornis,https://kids.nationalgeographic.com/animals/anchiornis-huxleyi/#anchiornis-huxleyi.jpg,https://upload.wikimedia.org/wikipedia/commons/d/d4/Anchiornis_huxleyi_skel_hartman_2017.png,
+Mesozoic,Jurassic,Allosaurus,Allosaurus,https://kids.nationalgeographic.com/animals/allosaurus/#allosaurus.jpg,https://upload.wikimedia.org/wikipedia/commons/f/f5/Allosaurus_SDNHM_%281%29.jpg,
+Mesozoic,Jurassic,Giraffatitan,Giraffatitan,http://www.nhm.ac.uk/discover/dino-directory/giraffatitan.html,https://upload.wikimedia.org/wikipedia/commons/7/74/Museum_f%C3%BCr_Naturkunde_%2836556352434%29.jpg,
+Mesozoic,Jurassic,Archaeopteryx,Archaeopteryx,https://youtu.be/GudBjmi3mII,https://upload.wikimedia.org/wikipedia/commons/9/9d/Archaeopteryx_lithographica_%28Berlin_specimen%29.jpg,
+Mesozoic,Jurassic,Diplodocus,Diplodocus,http://www.nhm.ac.uk/discover/dino-directory/diplodocus.html,https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg,
+Mesozoic,Jurassic,Juramaia,Juramaia,https://youtu.be/3Sbf8gAU5JI,https://upload.wikimedia.org/wikipedia/commons/1/15/Juramaia_NT.jpg,
+Mesozoic,Jurassic,Redondasaurus,Redondasaurus,http://www.prehistoric-wildlife.com/species/r/redondasaurus.html,https://upload.wikimedia.org/wikipedia/commons/8/87/Redondasaurus_bermani_at_CMNH_04.jpg,
+Mesozoic,Cretaceous,Quetzalcoatlus,Quetzalcoatlus,https://www.newdinosaurs.com/quetzalcoatlus/,https://upload.wikimedia.org/wikipedia/commons/6/60/Gfp-quetzalcaotlus.jpg,
+Mesozoic,Cretaceous,Triceratops,Triceratops,https://youtu.be/CGvE1M95rtw,https://upload.wikimedia.org/wikipedia/commons/e/ec/LA-Triceratops_mount-2.jpg,
+Mesozoic,Cretaceous,Tusoteuthis,Tusoteuthis,http://oceansofkansas.com/Tusoteuthis.html,https://upload.wikimedia.org/wikipedia/commons/c/cd/TusoteuthisDB2.jpg,
+Mesozoic,Cretaceous,Tyrannosaurus,Tyrannosaurus,https://youtu.be/772GiBXnWoQ,https://upload.wikimedia.org/wikipedia/commons/9/94/Tyrannosaurus_Rex_Holotype.jpg,
+Mesozoic,Cretaceous,Mosasaurus,Mosasaurus,http://dinosaurpictures.org/Mosasaurus-pictures,https://upload.wikimedia.org/wikipedia/commons/a/a9/Mosasaurus_hoffmannii_-_skeleton.jpg,
+Cenozoic,Paleogene,False Saber tooth cat,Nimravus ,https://en.wikipedia.org/wiki/Nimravus,https://upload.wikimedia.org/wikipedia/commons/4/4b/Nimravus_gomphodus.jpg,
+Cenozoic,Paleogene,Spear tooth,Dorudon ,https://www.newdinosaurs.com/dorudon/,https://upload.wikimedia.org/wikipedia/commons/1/18/Dorudon_atrox_Senckenberg.jpg,
+Cenozoic,Paleogene,Mosquito,Aedes,https://youtu.be/rD8SmacBUcU,https://upload.wikimedia.org/wikipedia/commons/3/3e/Aedes_aegypti_feeding.jpg,
+Cenozoic,Paleogene,Terror bird,Titanis,https://www.floridamuseum.ufl.edu/florida-vertebrate-fossils/species/titanis-walleri/,https://upload.wikimedia.org/wikipedia/commons/d/dd/Phorusrhacid_skeleton.jpg,
+Cenozoic,Paleogene,Walking whale,Ambulocetus,https://www.amnh.org/explore/news-blogs/news-posts/walking-whale-ambulocetus,https://upload.wikimedia.org/wikipedia/commons/8/85/Ambulocetus_natans.jpg,
+Cenozoic,Paleogene,proto-primate,Purgatorius,https://news.nationalgeographic.com/news/2012/10/121024-purgatorius-earliest-primate-evolution-science-squirrel/,https://upload.wikimedia.org/wikipedia/commons/8/82/Purgatorius_BW.jpg,
+Cenozoic,Paleogene,flightless water bird,Waimanu,https://www.otago.ac.nz/geology/research/paleontology/waimanu.html,https://upload.wikimedia.org/wikipedia/commons/c/c7/Waimanu_BW.jpg,
+Cenozoic,Paleogene,monster snake,Titanoboa,https://www.smithsonianmag.com/science-nature/how-titanoboa-the-40-foot-long-snake-was-found-115791429/,https://upload.wikimedia.org/wikipedia/commons/5/5a/Titanoboa_1_%287684792594%29.jpg,
+Cenozoic,Neogene,Extinct Rhino,Teleoceras,https://v637g.app.goo.gl/zPQhd1rAiRfeoBkm7,https://upload.wikimedia.org/wikipedia/commons/a/a1/Natural_History_Museum_of_LA_Teleoceras.jpg,
+Cenozoic,Neogene,Primate,Sahelanthropus,http://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis,https://upload.wikimedia.org/wikipedia/commons/f/fc/Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg,
+Cenozoic,Neogene,Sea turtle,Caretta,https://youtu.be/rWyDvPZyfYo,https://upload.wikimedia.org/wikipedia/commons/8/8e/Loggerhead_sea_turtle.jpg,
+Cenozoic,Neogene,Crocodile,Crocodylus,https://www.inaturalist.org/taxa/26042-Crocodylus,https://upload.wikimedia.org/wikipedia/commons/a/a3/Persiancrocodile.jpg,
+Cenozoic,Neogene,Bear dog,Amphicyon,https://www.newdinosaurs.com/amphicyon/,https://upload.wikimedia.org/wikipedia/commons/b/b1/Amphicyon_ingens_White_Background.jpg,
+Cenozoic,Neogene,Giant caiman,Purussaurus,https://www.newdinosaurs.com/purussaurus/,https://upload.wikimedia.org/wikipedia/commons/c/c2/Large_crocodyliformes.svg,
+Cenozoic,Neogene,Jumping spider,Phidippus,https://youtu.be/hoBm_Hgjc6Y,https://upload.wikimedia.org/wikipedia/commons/c/c2/Phidippus_wikipedia.jpg,
+Cenozoic,Neogene,Carpenter ant,Camponotus,http://bugoftheweek.com/blog/2016/1/13/carpenter-ants-here-and-there-icamponotusi-spp,https://upload.wikimedia.org/wikipedia/commons/f/fb/Carpenter_ant_Tanzania_crop.jpg,
+Cenozoic,Neogene,Saber toothed cat,Smilodon,https://youtu.be/hbjIhPHRZgc,https://upload.wikimedia.org/wikipedia/commons/7/78/Smilodon_californicus_mount.jpg,
+Cenozoic,Quaternary,Gorilla,Gorilla,https://youtu.be/yb796sRnkm0,https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg,
+Cenozoic,Quaternary,Mammoth,Mammuthus,https://youtu.be/n4SPTKkb5Yc,https://upload.wikimedia.org/wikipedia/commons/6/62/Columbian_mammoth.JPG,
+Cenozoic,Quaternary,Ground Sloth,Megalonyx,https://statesymbolsusa.org/symbol/west-virginia/state-dinosaur-or-fossil/megalonyx-jeffersonii,https://upload.wikimedia.org/wikipedia/commons/e/ef/Megalonyx_wheatleyi_-_AMNH_-_DSC06327.JPG,
+Cenozoic,Quaternary,Human,Homo,http://humanorigins.si.edu/evidence/human-family-tree,https://upload.wikimedia.org/wikipedia/commons/e/ed/Homo_erectus_adult_female_-_head_model_-_Smithsonian_Museum_of_Natural_History_-_2012-05-17.jpg,
+Cenozoic,Quaternary,Barn Owl,Tyto,https://youtu.be/ohqEquNnzfU,https://upload.wikimedia.org/wikipedia/commons/6/66/Grass_Owl_adult.jpg,
