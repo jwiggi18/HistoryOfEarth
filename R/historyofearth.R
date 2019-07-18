@@ -708,11 +708,40 @@ AddAxis <- function(lastPP = get("last_plot.phylo", envir = .PlotPhyloEnv), foca
 GetTree <- function(taxa = GetTaxa(), rank="genus") {
   if(length(taxa)>1) {
     taxa <- unique(taxa)
-    taxa <- paste(taxa, collapse=",")
+    #taxa <- paste(taxa, collapse=",")
   }
-  data <-paleotree::getSpecificTaxaPBDB(taxa)
-
-  tree <- paleotree::makePBDBtaxonTree(data, rank = rank)
+  data <- data.frame()
+  for (taxon_index in seq_along(taxa)) {
+    data.local <-paleotree::getSpecificTaxaPBDB(utils::URLencode(taxa[taxon_index]))
+    if(nrow(data.local)>0) {
+      data <- plyr::rbind.fill(data, data.local)
+    }
+  }
+  data <- data[which(data$parent_no!=0),]
+  data <- data[which(data$taxon_no!=0),]
+  data <- data[which(data$orig_no!=0),]
+  data <- data[which(data$reference_no!=0),]
+  data <- data[which(data$n_occs!=0),]
+  tree <- NA
+  try(tree <- paleotree::makePBDBtaxonTree(data, rank = rank))
+  if(is.na(tree)) {
+    bad.matrix <- matrix(0, nrow=nrow(data), ncol=nrow(data))
+    for (i in sequence(nrow(data))) {
+      for (j in sequence(nrow(data))) {
+        if(i<j) {
+          tree <- NA
+          try(tree <- paleotree::makePBDBtaxonTree(data[c(i,j),], rank = rank))
+          if(is.na(tree)) {
+            bad.matrix[i,j] <- 1
+            bad.matrix[j,i] <- 1
+          }
+        }
+      }
+    }
+    badones <- which(apply(bad.matrix, 1, sum)>=(nrow(data)-1))
+    data <- data[-badones,]
+    tree <- paleotree::makePBDBtaxonTree(data[c(i,j),], rank = rank)
+  }
 
 #  tree <- amb(tree)
 #plotPhylopicTreePBDB(tree = tree)
