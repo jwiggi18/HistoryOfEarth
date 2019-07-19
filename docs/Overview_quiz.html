@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+  <meta charset="utf-8" />
+  <title>History of Earth Viewer Guides</title>
+
+  <script src="quiz.js"></script>
+  <link rel="stylesheet" href="quiz.css">
+
+</head>
+<h3>Select the Viewer Guide you would like to take</h3>
+<select id="group" onchange="taxonQuiz()">
+      <option value="select">Select</option>
+      <option value="overview">Overview Viewer Guide</option>
+      <option value="paleozoic">Paleozoic Viewer Guide</option>
+      <option value="mesozoic">Mesozoic Viewer Guide</option>
+      <option value="cenozoic">Cenozoic Viewer Guide</option>
+    </select>
+
+
+<!-- Quiz -->
+    <div class="w3-card-4 w3-margin w3-white">
+      <div class="w3-container">
+        <h3>Questions</h3>
+        <p id="error"></p>
+        <div id="quiz"></div>
+        <button id="submit">Get Results</button>
+        <div id="results"></div>
+      </div>
+    </div>
+<!-- End Quiz -->
