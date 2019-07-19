@@ -80,15 +80,49 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
   }
 }
 
-#' Cache taxon images from phylopic
-#'
-#' @param tree Tree from dateTaxonTreePBDB
-#' @param cacheDir Where to store trees
-#' @export
-CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img") {
-  paleotree::cachePhyloPicPNG(tree=tree, cacheDir=cacheDir)
-  print("Remember to add these using git")
-}
+# ## Cache phylopic images for a tree
+# ##
+# ## This function takes a tree and saves phylopic thumbnails locally,
+# ## in order to dramatically speed up later rendering.
+# ##
+# ## This used to be in paleotree, then it went away.
+# ##
+#
+# ## @param tree A phylogeny of class \code{phylo} which will be
+# ## plotted, with the terminal tip taxa replaced by silhouettes.
+# ## The tree will be plotted with edge lengths.
+#
+# ## @param taxaDataPBDB  A \code{data.frame} of taxonomic data from
+# ## the Paleobiology Database containing an \code{$image_no} variable,
+# ## as returned when \code{show = "img"} is used. See \emph{Details}.
+# ## @param cacheDir Where to save the output PNGs
+#
+# cachePhyloPicPNG <- function(
+# 		tree, taxaDataPBDB=tree$taxaDataPBDB,
+# 		cacheDir
+# 		){
+# 	#################
+# 	ids <- getPhyloPicIDNum(taxaData=taxaDataPBDB, tree=tree)
+# 	for(i in seq_along(ids)) {
+# 		picPNG <- getPhyloPicPNG(ids[i])
+# 		png::writePNG(picPNG,
+# 			target=file.path(cacheDir,
+# 				paste0(ids[i], ".png")
+# 				)
+# 			)
+# 	}
+# }
+
+
+# #' Cache taxon images from phylopic
+# #'
+# #' @param tree Tree from dateTaxonTreePBDB
+# #' @param cacheDir Where to store trees
+# #' @export
+# CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img") {
+#   cachePhyloPicPNG(tree=tree, cacheDir=cacheDir)
+#   print("Remember to add these using git")
+# }
 
 #' Cache taxon information
 #'
@@ -225,6 +259,9 @@ CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, 
   }
 }
 
+
+
+
 #' Cache everything
 #'
 #' Just to save typing, run all the caching functions
@@ -235,7 +272,10 @@ CacheIndividualTrees <- function(taxa=GetTaxa(), age_df=GetAgeDF(), height=800, 
 #' @export
 CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
   CacheSpecimenAges(taxa)
-#  CacheMaps(age_df)
+  CacheIndividualTrees(taxa, age_df)
+  CacheAnimatedMaps()
+  #CacheTaxonImagesByName(taxa)
+  #CacheMaps(age_df)
   CacheTree(taxa)
   #CacheTaxonImages(taxa)
 }
