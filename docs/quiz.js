@@ -280,29 +280,142 @@ function taxonQuiz () {
   ];
   var paleozoic = [
       {
-        question:"questions coming soon",
+        question:"What does paleozoic mean? (0.27)",
         answers: {
-                  a: '',
-                  b: ''
+                  a: 'Ancient life',
+                  b: 'Catchable illness'
               },
               correctAnswer: 'a'
       },
       {
-        question: "",
+        question: "The Paleozoic era spans from: (0.30)",
         answers: {
-                 a: '',
-                 b: ''
+                 a: '514 - 252 million years ago',
+                 b: '400 - 122 million years ago'
                },
                correctAnswer: 'a'
       },
       {
-        question: '',
+        question: "The Paleozoic Era’s first period __________________ lasted from 541 mya to 485.4 mya.",
         answers: {
-                  a: '',
-                  b: ''
+                 a: 'The Ordovician',
+                 b: 'The Cambrian'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "The paleozoic began with a burst of life called: (1:56)",
+        answers: {
+                 a: 'The Great Cambrian Event',
+                 b: 'The Cambrian Explosion'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "What organ, critical to your ability to view this video, first developed during the Paleozoic Era? (2:25)",
+        answers: {
+                 a: 'Eyes',
+                 b: 'Ears'
+               },
+               correctAnswer: 'a'
+      },
+      {
+        question: "The second period, the Ordovician, which lasted from 485.4 - 443.8 million years ago was ushered in by a large __________.",
+        answers: {
+                 a: 'Extinction',
+                 b: 'Evolution'
+               },
+               correctAnswer: 'a'
+      },
+      {
+        question: "Many pivotal events in the Paleozoic hinge on the amount of ______. (3.19)",
+        answers: {
+                 a: 'Nitrogen',
+                 b: 'Oxygen'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "The first true fish were covered in __________. (4.06)",
+        answers: {
+                 a: 'Poisonous spines',
+                 b: 'Bony plates'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "Period number three was called the ______________ and lasted from 443.8 - 419.2 mya. (11.57)",
+        answers: {
+                 a: 'Devonian',
+                 b: 'Silurian'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "The extinction at the end of the Ordovician period (beginning of the Silurian period) was likely due to which organisms flourishing? (4:50)",
+        answers: {
+                 a: 'fish',
+                 b: 'plants'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "The _______, which lasted from 419.2 - 358.9 mya period is called the Devonian",
+        answers: {
+                 a: 'Fourth',
+                 b: 'Third'
+               },
+               correctAnswer: 'a'
+      },
+      {
+        question: "Which group dominated the seas during the Devonian? (6:10)",
+        answers: {
+                 a: 'fish called Placoderms',
+                 b: 'Amphibians'
+               },
+               correctAnswer: 'a'
+      },
+      {
+        question: "How do scientists know when the first tetrapods appeared if there are no skeletal fossils? (6:57)",
+        answers: {
+                 a: 'they dont',
+                 b: 'fossilized footprints'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: 'The Carboniferous Period is the fifth of the Paleozoic periods and lasted from ________ to _________.',
+        answers: {
+                  a: '358.9 - 298.9 mya',
+                  b: '298.9 - 152.3 mya'
                 },
-                correctAnswer: 'b'
+                correctAnswer: 'a'
+      },
+      {
+        question: "The movement of the contents to form the supercontinent Pangea triggered the Carboniferous ____________ (8.40) ",
+        answers: {
+                 a: 'Rainforest Collapse',
+                 b: 'Plant growth explosion'
+               },
+               correctAnswer: 'a'
+      },
+      {
+        question: "What amniote adaptation allowed them to better survive in the hot dry climate that emerged as a product of the formation of Pangea (9.00)?",
+        answers: {
+                 a: 'legs',
+                 b: 'shelled eggs'
+               },
+               correctAnswer: 'b'
+      },
+      {
+        question: "The reptiles and synapsids spent the last period of the Paleozoic era, _______________, spreading across Pangea. This period extended from 298 - 251.902 mya. ",
+        answers: {
+                 a: 'The Permian',
+                 b: 'The Carboniferous'
+               },
+               correctAnswer: 'a'
       }
+
   ];
   var mesozoic = [
       {
