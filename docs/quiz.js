@@ -250,7 +250,7 @@ function taxonQuiz () {
                 a: 'The Cenezoic',
                 b: 'The Paleozoic'
                 },
-                correctAnswer: 'b'
+                correctAnswer: 'a'
       },
       {
         question: 'The Cenozoic Era is characterized by the rise of the (9.55)',
