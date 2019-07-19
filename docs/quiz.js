@@ -109,22 +109,6 @@ function taxonQuiz () {
                correctAnswer: 'a'
       },
       {
-        question:"The “tail of life on earth has been unfolding for about ________” years (0.08) ",
-        answers: {
-                  a: '4 thousand',
-                  b: '4 billion'
-              },
-              correctAnswer: 'b'
-      },
-      {
-        question: "The system that we use to “bind” the chapters of earth’s history together is called the _____________ (0.48)",
-        answers: {
-                 a: 'Geologic Time Scale',
-                 b: 'Strata'
-               },
-               correctAnswer: 'a'
-      },
-      {
         question: 'The layers of rock composing earth’s surface are called the _______ (1.10)',
         answers: {
                 a: 'Geologic Time Scale',
@@ -266,7 +250,7 @@ function taxonQuiz () {
                 a: 'The Cenezoic',
                 b: 'The Paleozoic'
                 },
-                correctAnswer: 'b'
+                correctAnswer: 'a'
       },
       {
         question: 'The Cenozoic Era is characterized by the rise of the (9.55)',
