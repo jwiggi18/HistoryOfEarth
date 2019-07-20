@@ -97,32 +97,32 @@ CacheSpecimenAges <- function(taxa=GetTaxa()) {
 # ## as returned when \code{show = "img"} is used. See \emph{Details}.
 # ## @param cacheDir Where to save the output PNGs
 #
-# cachePhyloPicPNG <- function(
-# 		tree, taxaDataPBDB=tree$taxaDataPBDB,
-# 		cacheDir
-# 		){
-# 	#################
-# 	ids <- getPhyloPicIDNum(taxaData=taxaDataPBDB, tree=tree)
-# 	for(i in seq_along(ids)) {
-# 		picPNG <- getPhyloPicPNG(ids[i])
-# 		png::writePNG(picPNG,
-# 			target=file.path(cacheDir,
-# 				paste0(ids[i], ".png")
-# 				)
-# 			)
-# 	}
-# }
+cachePhyloPicPNG <- function(
+		tree, taxaDataPBDB=tree$taxaDataPBDB,
+		cacheDir
+		){
+	#################
+	ids <- paleotree:::getPhyloPicIDNumFromPBDB(taxaData=taxaDataPBDB, tree=tree)
+	for(i in seq_along(ids)) {
+		picPNG <- paleotree:::getPhyloPicPNG(ids[i])
+		png::writePNG(picPNG,
+			target=file.path(cacheDir,
+				paste0(ids[i], ".png")
+				)
+			)
+	}
+}
 
 
-# #' Cache taxon images from phylopic
-# #'
-# #' @param tree Tree from dateTaxonTreePBDB
-# #' @param cacheDir Where to store trees
-# #' @export
-# CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img") {
-#   cachePhyloPicPNG(tree=tree, cacheDir=cacheDir)
-#   print("Remember to add these using git")
-# }
+#' Cache taxon images from phylopic
+#'
+#' @param tree Tree from dateTaxonTreePBDB
+#' @param cacheDir Where to store trees
+#' @export
+CacheTaxonImagesFromPhylopic <- function(tree=chronogram, cacheDir = "/Users/bomeara/Documents/MyDocuments/GitClones/HistoryOfEarth/docs/img") {
+  cachePhyloPicPNG(tree=tree, cacheDir=cacheDir)
+  print("Remember to add these using git")
+}
 
 #' Cache taxon information
 #'
@@ -274,7 +274,7 @@ CacheEverything <- function(taxa=GetTaxa(), age_df=GetAgeDF()) {
   CacheSpecimenAges(taxa)
   CacheIndividualTrees(taxa, age_df)
   CacheAnimatedMaps()
-  #CacheTaxonImagesByName(taxa)
+  CacheTaxonImagesByName(taxa)
   #CacheMaps(age_df)
   CacheTree(taxa)
   #CacheTaxonImages(taxa)
@@ -803,7 +803,7 @@ get_pictree <- function(tree = NULL, cacheDir='./www/', ...) {
     data(chronogram)
     tree <- chronogram
   }
-  paleotree::plotPhylopicTreePBDB(tree = tree, cacheDir=cacheDir, ...)
+  paleotree::plotPhyloPicTree(tree = tree, cacheDir=cacheDir, ...)
 }
 
 #' flips the direction of the tree at each node
